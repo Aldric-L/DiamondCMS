@@ -52,7 +52,7 @@
       //Pour ce connecter à la base de donnée
       function bddConnexion(){
         //On charge les identifiants d'un fichier config
-        $reader = new Load(ROOT . 'models/config_YAML/file/bdd.yml');
+        $reader = new Load(ROOT . 'models/config_YAML/files/bdd.yml');
         require_once(ROOT . 'models/bdd_connexion.php');
         //On crée une connexion PDO
         $bdd = new BDD($reader->GetContentYml());

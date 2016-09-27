@@ -31,20 +31,25 @@
       $param = explode('/',$_GET['p']);
   }
 
+  if ($param[0] == "uploads"){
+    require ('controllers/img.php');
+    die();
+  }
+
   //On récupère la page demandée
   if (isset($param[0])) {
-    if (empty($param[1])){
+    if (!isset($param[1])){
         //Si la page exsiste on appelle le controlleur, on en profite pour mettre en minuscule le param[0] avec la fonction mb_strtolower qui agit
         //aussi sur les caractère Polonais et spéciaux (contrairement à strtolower).
         if (is_file(ROOT . 'controllers/' . mb_strtolower($param[0], 'UTF-8') . '.php')){
           require(ROOT . 'controllers/'. $param[0] .'.php');
           //si l'URL ne contient rien, alors on charge l'accueil
         }else if ($param[0] == null){
-          //on charge la page accueil, avec la feuille CSS accueil et on nomme la page accueil
-          $controleur_def->loadView('pages/accueil', 'accueil', 'Accueil');
+          //$controleur_def->loadView('accueil', 'accueil');
+          require(ROOT . 'controllers/accueil.php');
           //Sinon on charge le controleur de l'erreur 404
         }else {
-          $controleur_def->loadview('pages/404', '404', 'Erreur 404');
+          require(ROOT . 'controllers/404.php');
         }
     }
     //Si il y a un deuxième paramètre dans l'url :

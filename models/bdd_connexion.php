@@ -15,7 +15,7 @@
     }
 
   /**
-   * getPDO - Fonction pour faire une connexion PDO pus stable
+   * getPDO - Fonction pour faire une connexion PDO plus stable
    * @author Aldric.L, Darth d'OpenClassroom
    * @copyright Copyright 2016-2017 Aldric L.
    * @access public

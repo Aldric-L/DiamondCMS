@@ -18,7 +18,7 @@ class Write{
 
 			$file = fopen($reading_file, 'a+');
 			ftruncate($file, 0);
-			fputs($file, '/!\Ce Fichier contient des informations essentielles au fonctionnement du site/!\ ' . $ymlFormat);
+			fputs($file, '#/!\Ce Fichier contient des informations essentielles au fonctionnement du site/!\ ' . $ymlFormat);
 		}
 }
 
@@ -29,7 +29,7 @@ class Write{
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
- 
+
 class Load{
 	private $recup;
 

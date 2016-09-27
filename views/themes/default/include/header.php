@@ -11,6 +11,8 @@ $title = $controleur_def->title;
   <meta charset="utf-8">
   <meta lang="fr">
   <meta name="author" content="DiamondCMS, par GougDEV pour <?= $Serveur_Config['Serveur_name']; ?>">
+  <link rel="icon" type="image/png" href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>.png" />
+
   <?php
   if (!empty($title)){?>
     <meta title="<?= $Serveur_Config['Serveur_name']; ?> - <?= $title; ?>">
@@ -18,13 +20,18 @@ $title = $controleur_def->title;
   <?php }else{?>
     <title><?= $Serveur_Config['Serveur_name']; ?></title>
   <?php } ?>
-  <link rel="icon" type="image/png" href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>.png" />
   <link rel="stylesheet" type="text/css" href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/sources.css"/>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+
   <script src="https://use.fontawesome.com/0a203004bc.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/bootstrap.min.js"></script>
   <!--<script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/jquery-3.1.0.min.js"></script>-->
-  <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" media="screen">
   <!--<link href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/statics.php" rel="stylesheet" type="text/css" media="all" />-->
   <?php
@@ -40,6 +47,17 @@ $title = $controleur_def->title;
       </script>
     <?php } ?>
 </head>
+<style>
+body {
+  /*font-family: 'Source Sans Pro', sans-serif;*/
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Bree Serif';
+}
+</style>
 <body>
   <?php if (!empty($_SESSION['pseudo'])){ ?>
   <div id="myModal" class="modal fade">

@@ -1,35 +1,37 @@
-<br /><br />
+
 <div class="container">
       <div id="firstpost">
         <div class="row">
+          <BR />
           <?php
             global $post;
-            echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
-            echo '<p>Le ' . $post['date_post'] .'</p></div>';
-            echo '<div><p>' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'. ';
+            echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><br /><p>' . $post['user'] . '</p>';
+            echo '<p>Le ' . $post['date_post'] .'</p><br /></div>';
+            echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p class="bold">' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'. ';
             echo 'Le ' . $post['date_post'] .'.</p>';
-            echo '<p class="content_post">' . $post['content_post'] .'</p></div>';
+            echo '<p class="content_post">' . $post['content_post'] .'<br /><br /></p></div>';
           ?>
         </div>
       </div>
-      <br /><br />
-      <div class="row">
+      <br />
       <?php
       global $coms;
-      global $post;
-      /*echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
-      echo '<p>Le ' . $post['date_post'] .'</p></div>';
-      echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p>' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'</p>';
-      echo '<p. Le ' . $post['date_post'] .'.</p>';
-      echo $post['content_post'] .'</p></div><br /><br /><br /><br /><br /><br /><br /><br /><br />';*/
+      if ($coms != null){ ?>
+        <div class="row"><?php
 
-      if ($coms != null){
+        global $post;
+        /*echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
+        echo '<p>Le ' . $post['date_post'] .'</p></div>';
+        echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p>' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'</p>';
+        echo '<p. Le ' . $post['date_post'] .'.</p>';
+        echo $post['content_post'] .'</p></div><br /><br /><br /><br /><br /><br /><br /><br /><br />';*/
+
         foreach ($coms as $com) {
           echo '<div class="col-xs-1 col-sm-1 col-lg-1"></div>';
           echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $com['user'] . '</p>';
           echo '<p>Le ' . $com['date_com'] .'</p></div>';
           echo '<div class="col-xs-8 col-sm-9 col-lg-8"><p>';
-          echo $com['content_com'] .'</p></div><br /><br /><br /><br /><br /><br /><br /><br /><br />';
+          echo $com['content_com'] .'</p></div><br /><br /><br />';
           /*echo '<div id="com">';
           echo '<table cellspacing="20">';
           echo '<tr><td><div id="user">' . $com['user'] . '</div>';
@@ -39,7 +41,6 @@
           echo '</div>';
           echo '<br /><br /><br /><br />';*/
         } ?>
-        <br /><br /><br /><br />
         <style>
          #com table{
            left: 10%;
@@ -47,16 +48,24 @@
          }
         </style> <?php
       }else {
-        echo "<p>Il n'y a aucune réponse à afficher !</p>";
+        echo "<h4>Il n'y a aucune réponse à afficher !</h4><br /><br /><br />";
       }
 
        ?>
     </div>
 </div>
 <style>
+h4 {
+  text-align: center;
+}
+.bold{
+    font-size: 16px;
+    font-weight: bold;
+}
 .content_post {
-  overflow: hidden;
-  width: 200px;
+  /*float: right;
+  overflow: hidden;*/
+  width: 95%;
   text-align: justify;
 }
 </style>

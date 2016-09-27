@@ -7,9 +7,13 @@ Ce service propose aux utilisateurs de pouvoir proposer des améliorations concr
 Ces améliorations peuvent être très légères comme très importantes.
 
 Cette License définit clairement :
+
     - Tout ajout au projet doit être gracieux.
+    
     - DiamondCMS se réserve le droit de refuser ces ajouts.
+    
     - Tous les ajouts sont l'entière propriété de DiamondCMS.
+    
     - Les ajouts peuvent être commercialisés par DiamondCMS sans aucun préavis ni versement.
     
 Cette License comme le projet est la propriété de GougDEV.

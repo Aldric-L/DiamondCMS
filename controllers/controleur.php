@@ -4,7 +4,7 @@
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
  */
-//Cette classe sert de base à tous les controllers
+//Cette classe sert de base à tous les controlleus
   class Controleur{
     private $Serveur_Config = array();
     public $css;

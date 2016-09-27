@@ -3,6 +3,7 @@
  * BDD - Class pour se connecter à une base de donnée via PDO
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
+ * @access public
  */
 //Cette class permet de créer une connexion en PDO
   class BDD {
@@ -14,9 +15,10 @@
     }
 
   /**
-   * BDD - Class pour se connecter à une base de donnée via PDO
+   * getPDO - Fonction pour faire une connexion PDO pus stable
    * @author Aldric.L, Darth d'OpenClassroom
    * @copyright Copyright 2016-2017 Aldric L.
+   * @access public
    */
     //Fonction pour récupéré un PDO
     function getPDO() {

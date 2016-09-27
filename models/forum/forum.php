@@ -1,0 +1,69 @@
+<?php
+/**
+ * getPosts - Fonction pour recupéré les derniers posts
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getPosts($db, $min, $limite){
+    $req = $db->prepare('SELECT id, titre_post, user, last_user, resolu, content_post, DATE_FORMAT(date_last_post, \'%d/%m/%Y à %Hh:%imin\') AS date_last_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post FROM d_forum ORDER BY date_last_post LIMIT :min, :limite ');
+
+    //On passe les paramètres
+    $req->bindParam(':min', $min, PDO::PARAM_INT);
+    $req->bindParam(':limite', $limite, PDO::PARAM_INT);
+
+    //On execute la requete
+    $req->execute();
+    //On récupère tout
+    $post = $req->fetchAll();
+    //On ferme la requete
+    $req->closeCursor();
+
+    return $post;
+}
+
+/**
+ * getPost - Fonction pour recupéré un post
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getPost($db, $id_post, $min, $limite){
+    $req = $db->prepare('SELECT id, titre_post, user, last_user, resolu, content_post, DATE_FORMAT(date_last_post, \'%d/%m/%Y à %Hh:%imin\') AS date_last_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post FROM d_forum WHERE id = :id_post ORDER BY date_last_post');
+
+    //On passe les paramètres
+    $req->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+
+    //On execute la requete
+    $req->execute();
+    //On récupère tout
+    $post = $req->fetchAll();
+    //On ferme la requete
+    $req->closeCursor();
+
+    return $post;
+}
+
+/**
+ * getComs - Fonction pour recupéré les commentaires par post
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getComs($db, $id_post, $min, $limite){
+    $req2 = $db->prepare('SELECT id, content_com, user, DATE_FORMAT(date_com, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_com LIMIT :min, :limite ');
+
+    //On passe les paramètres
+    $req2->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+    $req2->bindParam(':min', $min, PDO::PARAM_INT);
+    $req2->bindParam(':limite', $limite, PDO::PARAM_INT);
+
+    //On execute la requete
+    $req2->execute();
+    //On récupère tout
+    $com_post = $req2->fetchAll();
+    //On ferme la requete
+    $req2->closeCursor();
+
+    return $com_post;
+}

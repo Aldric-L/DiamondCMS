@@ -1,0 +1,166 @@
+body {
+  background: #f4f4f4;
+  margin: 0;
+  line-height: 1;
+  -ms-overflow-style: scrollbar;
+  /*font-family: "Trebuchet Ms";*/
+}
+
+#nav_bar_co {
+  position: absolute;
+  width: 100%;
+  background-color: grey;
+  height: 2.5em;
+  display: block;
+  margin: 0;
+  top: 0;
+}
+#nav_bar_co p{
+  font-family: 'Bree Serif', serif;
+  margin: 0.2%;
+}
+#nav_bar_co a{
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #36363F;
+}
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+#header-wrapper{
+	padding: 2em 0em;
+	background: #FFF;
+}
+
+#header_menu
+{
+	position: relative;
+	height: 60px;
+}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+#logo
+{
+	position: absolute;
+	top: 0.4em;
+	left: 7%;
+	width: 100%;
+}
+
+#logo h1
+{
+	display: inline-block;
+	font-size: 2.5em;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #2C383B;
+	padding-right: 0.50em;
+}
+
+#logo span
+{
+	position: absolute;
+	top: 1.4em;
+	display: inline-block;
+	padding-left: 1.50em;
+	letter-spacing: 0.10em;
+	text-transform: uppercase;
+	font-size: 0.90em;
+}
+
+#logo a
+{
+	text-decoration: none;
+	color: #197d62;
+}
+
+/*********************************************************************************/
+/* Menu                                                                          */
+/*********************************************************************************/
+
+#menu
+{
+	position: absolute;
+	right: 5%;
+	top: 1.1em;
+}
+
+#menu ul
+{
+	display: inline-block;
+}
+
+#menu li
+{
+	display: block;
+	float: left;
+	text-align: center;
+	line-height: 60px;
+}
+
+#menu li a, #menu li span
+{
+	display: inline-block;
+	margin-left: 1px;
+	padding: 0em 1.5em;
+	letter-spacing: 0.10em;
+	text-decoration: none;
+	font-size: 1em;
+	text-transform: uppercase;
+	outline: 0;
+	color: #212121;
+}
+
+#menu li:hover a, #menu li.active a, #menu li.active span
+{
+}
+
+#menu li.current_page_item a
+{
+	background: #197d62;
+	color: #FFF !important;
+}
+
+#menu .icon
+{
+}
+
+/*#bg {
+  /*left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: auto;
+  position: absolute;
+  display: block;
+  margin: auto;*//*
+  margin:0;
+  padding:0;
+  background: url("web_font.png") no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari
+  background-size: cover; /* version standardisée */
+  /*background-image: url("web_font.png");
+}*/
+
+footer{
+  font-family: 'Bree Serif', serif;
+  position: relative;
+  text-align: center;
+  display: block;
+  width: 100%;
+  background-color: white;
+  height: 50px;
+  padding-bottom: 0;
+  float:none;
+  clear:both;
+  margin: 0;
+  bottom: 0;
+}
+
+#bree-serif {
+  font-family: 'Bree Serif', serif;
+}

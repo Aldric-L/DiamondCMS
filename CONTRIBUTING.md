@@ -1,6 +1,7 @@
 Les contributions sont soumises à cette licence.
 
 ************************************************|- LICENCE (CONTRIBUTIONS) -|************************************************
+
 La présente licence s'applique uniquement aux "contributions" proposées par des services comme GitLab ou GitHub.
 Ce service propose aux utilisateurs de pouvoir proposer des améliorations concrètes à un projet.
 Ces améliorations peuvent être très légères comme très importantes.
@@ -13,4 +14,5 @@ Cette License définit clairement :
     
 Cette License comme le projet est la propriété de GougDEV.
 Dernière modification : 27/09/2016.
+
 ************************************************|- LICENCE (CONTRIBUTIONS) -|************************************************

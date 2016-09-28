@@ -3,8 +3,28 @@ body {
   margin: 0;
   line-height: 1;
   -ms-overflow-style: scrollbar;
+  display: flex;
+  flex-direction: column;
   /*font-family: "Trebuchet Ms";*/
 }
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/*FOOTER*/
+footer{
+  font-family: 'Bree Serif', serif;
+  text-align: center;
+  height: 60px;
+  margin-top: auto;
+  background: #fff;
+  padding: 15px;
+  font-size: 16px;
+}
+
+/*END FOOTER*/
 
 #nav_bar_co {
   position: absolute;
@@ -47,7 +67,7 @@ body {
 #logo
 {
 	position: absolute;
-	top: 0.4em;
+	top: 0.3em;
 	left: 7%;
 	width: 100%;
 }
@@ -65,7 +85,7 @@ body {
 #logo span
 {
 	position: absolute;
-	top: 1.4em;
+	top: 1em;
 	display: inline-block;
 	padding-left: 1.50em;
 	letter-spacing: 0.10em;
@@ -120,8 +140,8 @@ body {
 {
 }
 
-#menu li.current_page_item a
-{
+#menu li.current_page_item a{
+  border-radius: 10px;
 	background: #197d62;
 	color: #FFF !important;
 }
@@ -147,20 +167,6 @@ body {
   /*background-image: url("web_font.png");
 }*/
 
-footer{
-  font-family: 'Bree Serif', serif;
-  position: relative;
-  text-align: center;
-  display: block;
-  width: 100%;
-  background-color: white;
-  height: 50px;
-  padding-bottom: 0;
-  float:none;
-  clear:both;
-  margin: 0;
-  bottom: 0;
-}
 
 #bree-serif {
   font-family: 'Bree Serif', serif;

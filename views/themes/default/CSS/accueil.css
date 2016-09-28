@@ -57,7 +57,7 @@
   		#header.alt {
   			height: 30em;
   			min-height: 20em;
-  			min-height: 50vh;
+  			min-height: 54vh;
   		}
 
   			#header.alt:before {
@@ -96,7 +96,9 @@
   				transition: opacity 2s ease;
   				opacity: 1;
   			}
-
+        #header {
+  				background-attachment: scroll;
+  			}
   		@media screen and (max-width: 1280px) {
 
   			#header {

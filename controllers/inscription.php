@@ -35,7 +35,10 @@ if (!empty($_POST)){
     $erreur = "Vous devez préciser un pseudo !";
   }
 }
-echo $erreur;
+if (!empty($erreur)){
+  echo $erreur;
+}
+
 //================ CONNEXION ================
 //On fait toutes les vérifications nécessaires à l'inscription
 if (!empty($_POST)){
@@ -51,9 +54,9 @@ if (!empty($_POST)){
     $erreur = "Vous devez préciser un pseudo !";
   }
 }
-ob_start();
+//ob_start();
 $controleur_def->loadView('pages/inscription', "inscription");
-$test = ob_get_clean();
+//$test = ob_get_clean();
 $css = $controleur_def->css . '.css';
 //echo $css;
-echo $test;
+//echo $test;

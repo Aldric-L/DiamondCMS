@@ -1,8 +1,11 @@
 <?php global $Serveur_Config;?>
-    <footer>
-      <p>Site créé pour le serveur <?php echo $Serveur_Config['Serveur_name']; ?> avec <a href="http://www.diamondcms.fr">Diamond CMS</a>. Tous droits réservés, <a href="http://www.gougdev.com/">GougDev</a>.</p>
-    </footer>
   </div>
+    <footer>
+      <div class="principal">
+        <p>Site créé pour le serveur Happy-Cube avec <a href="http://www.diamondcms.fr/">DiamondCMS</a>. Tous droits réservés, <a href="http://www.diamondcms.fr/">GougDev</a>.</p>
+      </div>
+
+    </footer>
   </body>
 </html>
 <?php

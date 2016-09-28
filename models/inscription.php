@@ -12,7 +12,7 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
       $isMembre = isMembre($db, $pseudo);
       if ($isMembre == false){
         $cryptpsw = sha1($psw);
-        $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, news) VALUES(:pseudo, :email, :password, news)');
+        $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, news) VALUES(:pseudo, :email, :password, :news)');
         $req->execute(array(
           'pseudo' => $pseudo,
           'email' => $email,

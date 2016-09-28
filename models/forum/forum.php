@@ -67,3 +67,23 @@ function getComs($db, $id_post, $min, $limite){
 
     return $com_post;
 }
+/**
+ * newCom - Fonction pour poster un commentaire
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ */
+function newCom($db, $id_post, $pseudo, $content){
+  $req = $db->prepare('SELECT id, content_com, user, DATE_FORMAT(date_com, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_com LIMIT :min, :limite ');
+
+  //On passe les paramètres
+  $req->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+  $req->bindParam(':min', $min, PDO::PARAM_INT);
+  $req->bindParam(':limite', $limite, PDO::PARAM_INT);
+
+  //On execute la requete
+  $req->execute();
+  //On récupère tout
+  $com_post = $req2->fetchAll();
+  //On ferme la requete
+  $req2->closeCursor();
+}

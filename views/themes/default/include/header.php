@@ -149,7 +149,7 @@ h1, h2, h3, h4, h5{
       <div id="menu">
         <ul>
           <li class="current_page_item"><a href="http://<?= $Serveur_Config['host']; ?><?= WEBROOT ?>" accesskey="1" title="">Accueil</a></li>
-          <li><a href="forum" accesskey="2" title="">Forum</a></li>
+          <li><a href="http://<?= $Serveur_Config['host']; ?><?=WEBROOT; ?>forum" accesskey="2" title="">Forum</a></li>
           <li><a href="#" accesskey="3" title="">Boutique</a></li>
           <li><a href="#" accesskey="4" title="">Serveur</a></li>
           <li><a href="#" accesskey="3" title="" class="vote">Voter</a></li>
@@ -167,20 +167,3 @@ h1, h2, h3, h4, h5{
   });
   </script>
   <div id="bg">
-<style>
-  #JSONAPI {
-    width: 200px;
-    height: 100px;
-    display: block;
-    background-color: green;
-    position: fixed;
-    top: 3%;
-    right: 2%;
-    border: 3px black dashed;
-    border-radius: 10%;
-  }
-  #JSONAPI p {
-    text-align: center;
-    margin: 3px;
-  }
-</style>

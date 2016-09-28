@@ -13,7 +13,7 @@
       global $posts;
         foreach ($posts as $post) {
           //echo '<a href="forum/com/'. $post['id'] .'">';
-          echo '<a href="forum/com/'. $post['id'] .'"><div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
+          echo '<a href="forum/com/'. $post['id'] .'"><div class="col-xs-2 col-sm-2 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
           echo '<p>Le ' . $post['date_post'] .'</p></div>';
           echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p>' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'</p>';
           echo '<p. Le ' . $post['date_post'] .'.</p>';

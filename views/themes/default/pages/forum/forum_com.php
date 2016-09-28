@@ -55,17 +55,17 @@
     </div>
 </div>
 <style>
-h4 {
-  text-align: center;
-}
-.bold{
-    font-size: 16px;
-    font-weight: bold;
-}
-.content_post {
-  /*float: right;
-  overflow: hidden;*/
-  width: 95%;
-  text-align: justify;
-}
+  h4 {
+    text-align: center;
+  }
+  .bold{
+      font-size: 16px;
+      font-weight: bold;
+  }
+  .content_post {
+    /*float: right;
+    overflow: hidden;*/
+    width: 95%;
+    text-align: justify;
+  }
 </style>

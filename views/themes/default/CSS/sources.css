@@ -18,11 +18,12 @@ body {
 #nav_bar_co p{
   font-family: 'Bree Serif', serif;
   margin: 0.2%;
+    color: #197D62;
 }
 #nav_bar_co a{
   text-decoration: none;
   font-size: 1.2em;
-  color: #36363F;
+  color: #FFF;
 }
 /*********************************************************************************/
 /* Header                                                                        */

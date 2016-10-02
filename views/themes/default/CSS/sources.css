@@ -12,6 +12,18 @@ html, body {
   padding: 0;
   margin: 0;
 }
+.arr {
+  border-radius: 15px;
+}
+.acc {
+  border-color: #197d62;
+  background-color: #197d62;
+}
+.acc:hover {
+  border-color: #197d62;
+  background-color: #197d62;
+  opacity:0.8;
+}
 
 /*FOOTER*/
 footer{
@@ -23,7 +35,10 @@ footer{
   padding: 15px;
   font-size: 16px;
 }
-
+footer a {
+  color: #197d62;
+  font-weight: bold;
+}
 /*END FOOTER*/
 
 #nav_bar_co {

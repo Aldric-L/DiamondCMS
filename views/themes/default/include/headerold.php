@@ -1,5 +1,5 @@
 <?php
-//$_SESSION['pseudo'] = "t";
+$_SESSION['pseudo'] = "t";
 global $Serveur_Config;
 global $controleur_def;
 global $erreur_vote;
@@ -28,33 +28,24 @@ $title = $controleur_def->title;
   <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
 
   <script src="https://use.fontawesome.com/0a203004bc.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/bootstrap.min.js"></script>
-  <!--<script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/jquery-3.1.0.min.js"></script>-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!--<script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/bootstrap.min.js"></script>-->
+  <script src="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/jquery-3.1.0.min.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" media="screen">
   <!--<link href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/statics.php" rel="stylesheet" type="text/css" media="all" />-->
   <?php
     if (!empty($css)){?>
       <link rel="stylesheet" type="text/css" href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/<?= $css; ?>.css"/>
-    <?php }
-    if (!empty($erreur_vote)){
-      if ($erreur_vote == "advoter"){?>
-        <script type="text/javascript">
-        $(document).ready(function(){
-          $("#erreur_connexion").modal('show');
-          return true;
-        });
-        </script>
-      <?php }else { ?>
-        <script type="text/javascript">
-        $(document).ready(function(){
-          $("#erreur_vote_modal").modal('show');
-          return true;
-        });
-        </script>
-      <?php }
-    } ?>
+    <?php } ?>
+    <?php if (!empty($erreur_vote)){?>
+      <script type="text/javascript">
+      $(document).ready(function(){
+        $("#erreur_vote_modal").modal('show');
+        return true;
+      });
+      </script>
+    <?php } ?>
 </head>
 <style>
 body {
@@ -74,33 +65,13 @@ h1, h2, h3, h4, h5{
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h3 class="modal-title">Voter pour <?= $Serveur_Config['Serveur_name']; ?></h3>
+                  <h4 class="modal-title">Voter pour <?= $Serveur_Config['Serveur_name']; ?></h4>
               </div>
               <div class="modal-body">
                   <p>Vous pouvez voter pour nous sur notre page RPGParadize, chaque vote vous rapportera 1 <?= $Serveur_Config['Serveur_money']; ?>.</p>
                   <p>Celui-ci pourras être échanger dans la boutique.</p>
-                  <p class="text-danger">Attention, vous ne pouvez voter qu'une fois par jour.</p>
-                    <h4>Meilleurs voteurs :</h4>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Pseudo</th>
-                          <th>Nombre de vote</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                          global $voteurs;
-                          foreach ($voteurs as $voteur) {
-                            echo '<tr>';
-                            echo '<td><img src="https://minotar.net/avatar/' . $voteur['pseudo'] . '/26.png">     ' . $voteur['pseudo'] .'</td>';
-                            echo '<td>' . $voteur['votes'] .'</td>';
-                            echo '</tr>';
-                          }
-                         ?>
-                      </tbody>
-                    </table>
-                </div>
+                  <h5 class="text-danger">Attention, vous ne pouvez voter qu'une fois par jour.</h5>
+              </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                   <a href="http://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>vote"><button type="button" class="btn btn-primary">Voter !</button>
@@ -109,16 +80,15 @@ h1, h2, h3, h4, h5{
       </div>
   </div>
 <?php  }else { ?>
-  <div id="erreur_connexion" class="modal fade">
+  <div id="myModal" class="modal fade">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h3 class="modal-title">Erreur de connexion !</h3>
+                  <h4 class="modal-title">Erreur</h4>
               </div>
               <div class="modal-body">
-                  <h4 class="text-danger">Vous devez être connecté pour voter !</h4>
-                  <p>Connectez-vous en <a href="http://<?= $_SERVER['HTTP_HOST'] . WEBROOT; ?>connexion">cliquant ici !</a></p>
+                  <h5 class="text-danger">Vous devez être connecté pour voter !</h5>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -178,7 +148,7 @@ h1, h2, h3, h4, h5{
       </div>
       <div id="menu">
         <ul>
-          <li class="current_page_item"><a href="http://<?= $Serveur_Config['host']; ?><?= WEBROOT ?>" accesskey="1" title="">Accueil</a></li>
+          <li class="current_page_item acc arr"><a href="http://<?= $Serveur_Config['host']; ?><?= WEBROOT ?>" accesskey="1" title="">Accueil</a></li>
           <li><a href="http://<?= $Serveur_Config['host']; ?><?=WEBROOT; ?>forum" accesskey="2" title="">Forum</a></li>
           <li><a href="#" accesskey="3" title="">Boutique</a></li>
           <li><a href="#" accesskey="4" title="">Serveur</a></li>

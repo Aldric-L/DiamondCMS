@@ -62,3 +62,17 @@ function dateDiff($date1, $date2){
 
     return $retour;
 }
+
+/**
+ * bestVotes - Fonction pour récupéré les meilleurs voteurs
+ * @author Aldric.L
+ * @return array
+ * @copyright Copyright 2016-2017 Aldric L.
+ */
+function bestVotes($db){
+  //on récupère les 3 meilleurs voteurs
+  $select = $db->query('SELECT * FROM d_membre ORDER BY votes DESC LIMIT 3');
+  $rep = $select->fetchAll();
+
+  return $rep;
+}

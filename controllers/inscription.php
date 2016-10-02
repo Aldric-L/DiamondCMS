@@ -1,6 +1,13 @@
 <?php
 //On charge le controlleur
 $controleur_def = new Controleur($Serveur_Config);
+
+//On charge le model pour le vote...
+$controleur_def->loadModel('vote');
+
+//On récupère la connexion à la base de donnée pour la fonction de récupération des meilleurs voteurs
+$voteurs = bestVotes($controleur_def->bddConnexion());
+
 //On charge le model
 $controleur_def->loadModel('inscription');
 //================ INSCRIPTION ================

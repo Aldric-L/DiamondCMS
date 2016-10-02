@@ -1,8 +1,7 @@
-
 <div class="container">
       <div id="firstpost">
         <div class="row">
-          <BR />
+          <br />
           <?php
             global $post;
             echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><br /><p>' . $post['user'] . '</p>';
@@ -17,14 +16,9 @@
       <?php
       global $coms;
       if ($coms != null){ ?>
-        <div class="row"><?php
-
+        <div class="row">
+        <?php
         global $post;
-        /*echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><p>' . $post['user'] . '</p>';
-        echo '<p>Le ' . $post['date_post'] .'</p></div>';
-        echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p>' . $post['titre_post'] . ' ' . $post['last_user'] . $post['date_last_post'] .'</p>';
-        echo '<p. Le ' . $post['date_post'] .'.</p>';
-        echo $post['content_post'] .'</p></div><br /><br /><br /><br /><br /><br /><br /><br /><br />';*/
 
         foreach ($coms as $com) {
           echo '<div class="col-xs-1 col-sm-1 col-lg-1"></div>';
@@ -40,13 +34,7 @@
           echo '</table>';
           echo '</div>';
           echo '<br /><br /><br /><br />';*/
-        } ?>
-        <style>
-         #com table{
-           left: 10%;
-           position: absolute;
-         }
-        </style> <?php
+        }
       }else {
         echo "<h4>Il n'y a aucune réponse à afficher !</h4><br /><br /><br />";
       }

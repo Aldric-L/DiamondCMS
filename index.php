@@ -49,7 +49,8 @@
           require(ROOT . 'controllers/accueil.php');
           //Sinon on charge le controleur de l'erreur 404
         }else {
-          require(ROOT . 'controllers/404.php');
+          //On charge la vue, la fonction va charger 3 fichiers.
+          $controleur_def->loadView('pages/404', '404', 'Erreur 404');
         }
     }
     //Si il y a un deuxième paramètre dans l'url :

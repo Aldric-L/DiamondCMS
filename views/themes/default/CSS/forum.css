@@ -39,7 +39,16 @@
   margin-left: 30%;
   margin-right: 30%;
 }
+@media all and (max-width: 1024px){
 
+  #posts {
+    width: 35%;
+    margin-top: 2em;
+  }
+  #posts p{
+    font-size: 13px;
+  }
+}
 #posts h2{
   color: #197D62;
   text-align: center;
@@ -53,20 +62,6 @@
   color: black;
 }
 
-/*#user {
-  border-right: 3px solid #197D62;
-}*/
-
-table{
-  border-spacing: 5px 10px;
-  margin: auto;
-}
-
-/*td {
-  border: 1px solid #000;
-  padding: 5px;
-}*/
-
 #bordure{
   text-align: center;
   border-right: 2px solid #197D62;
@@ -74,8 +69,4 @@ table{
 
 .contentpost{
   padding: 10px;
-}
-
-tr{
-  cursor:pointer;
 }

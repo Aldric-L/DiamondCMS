@@ -1,6 +1,13 @@
 <?php
 //Ce fichier est appelé lors de la demande de l'affichage des réponses
 $controleur_def = new Controleur($Serveur_Config);
+
+//On charge le model pour le vote...
+$controleur_def->loadModel('vote');
+
+//On récupère la connexion à la base de donnée pour la fonction de récupération des meilleurs voteurs
+$voteurs = bestVotes($controleur_def->bddConnexion());
+
 $controleur_def->loadModel('forum/forum');
 
 //On parcourt récupère le post

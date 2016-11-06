@@ -1,0 +1,20 @@
+#erreur404content {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 30%;
+  margin-top: 8em;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+#erreur404content h1 {
+  font-size: 70px;
+  color: #197D62;
+  font-family: "Bree Serif";
+}
+
+#erreur404content a{
+  color: #197D62;
+  font-family: "Bree Serif";
+}

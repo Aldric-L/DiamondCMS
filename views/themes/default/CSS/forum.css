@@ -1,0 +1,72 @@
+#explicforum {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 50%;
+  margin-top: 3em;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+#firstpost {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 90%;
+  margin-top: 3em;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.explicp {
+  text-align: center;
+  font-family: "Bree Serif";
+}
+#red {
+  font-family: "Bree Serif";
+  font-size: 1.2em;
+}
+
+#explicforum h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+#posts {
+  width: 40%;
+  margin-top: 2em;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+@media all and (max-width: 1024px){
+
+  #posts {
+    width: 35%;
+    margin-top: 2em;
+  }
+  #posts p{
+    font-size: 13px;
+  }
+}
+#posts h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+#posts a{
+  /*font-family: "Trebuchet MS";*/
+  text-decoration: none;
+  font-size: 1.2em;
+  color: black;
+}
+
+#bordure{
+  text-align: center;
+  border-right: 2px solid #197D62;
+}
+
+.contentpost{
+  padding: 10px;
+}

@@ -22,6 +22,7 @@
   require_once(ROOT.'controllers/controleur.php');
   //Pour cela on définit la variable $controleur_def qui permettra d'utiliser les fonctions comme loadModel() ou encore d'utiliser la BDD avec bddConnexion()
   $controleur_def = new Controleur($Serveur_Config);
+  $controleur_def->isValid();
 
   //Si le site n'est pas installé, on charge le dossier installation
   if ($Serveur_Config['is_install'] != true){
@@ -49,7 +50,8 @@
   $voteurs = bestVotes($controleur_def->bddConnexion());
 
   //On charge JSONAPI
-  $controleur_def->loadModel('JSONAPI');
+  $controleur_def->loadModel('JsonAPI/jsonapi.class');
+  $jsonapi = new Jsonapi_control(1);
 
   //On récupère la page demandée
   if (isset($param[0])) {

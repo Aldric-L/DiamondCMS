@@ -2,7 +2,8 @@
   </div>
     <footer>
       <div class="principal">
-        <p>Site créé pour le serveur <?php echo $Serveur_Config['Serveur_name']; ?> avec <a href="http://www.diamondcms.fr/">DiamondCMS</a>. Tous droits réservés, <a href="http://www.diamondcms.fr/">GougDev</a>.</p>
+        <p>Site créé pour le serveur <?php echo $Serveur_Config['Serveur_name']; ?> avec <a href="http://www.diamondcms.fr/">DiamondCMS</a>. Tous droits réservés, <a href="http://www.diamondcms.fr/">GougDev</a>.
+        <br />Version gratuite (bêta) de DiamondCMS</p>
       </div>
 
     </footer>

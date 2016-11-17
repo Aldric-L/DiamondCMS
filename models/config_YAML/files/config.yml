@@ -1,7 +1,7 @@
 /!\Ce Fichier contient des informations essentielles au fonctionnement du site/!\ ---
 is_install: true
 theme: default
-Serveur_name: Happy-Cube
+Serveur_name: Demo-DiamondCMS
 logo: logo_default.bmp
 bg: web_font.png
 desc: Un serveur minecraft exclusif avec DiamondCMS
@@ -24,4 +24,4 @@ tw: foreach
 yt: tes
 en_analytics: false
 id_analytics: 58585858
-id_cms: 1
+id_cms: 356a192b7913b04c54574d18c28d46e6395428ab

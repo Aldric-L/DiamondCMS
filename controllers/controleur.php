@@ -1,6 +1,7 @@
 <?php
 /**
  * Controleur - Une class de "base" pour tous les controleurs
+ * ATTENTION, toute modification de ce fichier pourrait entraîner des bugs graes et/ou la suspention DEFINITIVE du CMS.
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
  */
@@ -38,7 +39,7 @@
           $this->title = $ltitle;
         }
 
-      //Si le fichier existe ...
+        //Si le fichier existe ...
         if (file_exists(ROOT . '/views/themes/'. $this->Serveur_Config['theme'] . '/' . $view . '.php')){
           //... on charge les vues "génériques" : header et footer et on charge la vue passée en paramètre
           require(ROOT . 'views/themes/' . $this->Serveur_Config['theme'] . '/include/header.php');
@@ -68,6 +69,12 @@
             //On le retourne pour le réutiliser dans le header
             return $css;
           }
+      }
+
+      function isValid(){
+        if (file_get_contents('http://api.diamondcms.fr/is_valid.php?id=' . $this->Serveur_Config['id_cms']) != 'true'){
+          header('Location: http://api.diamondcms.fr/valid.php');
+        }
       }
 
   }

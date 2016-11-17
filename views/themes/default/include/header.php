@@ -127,7 +127,7 @@ h1, h2, h3, h4, h5{
                           global $voteurs;
                           foreach ($voteurs as $voteur) {
                             echo '<tr>';
-                            echo '<td><img width=26 height=26 src="http://localhost:8080/API_diamond/face.php?id=1&u='. $voteur['pseudo'] . '&s=26">' . $voteur['pseudo'] .'</td>';
+                            echo '<td><img width=26 height=26 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $voteur['pseudo'] . '&s=26">' . $voteur['pseudo'] .'</td>';
                             echo '<td>' . $voteur['votes'] .'</td>';
                             echo '</tr>';
                           }
@@ -369,7 +369,7 @@ h1, h2, h3, h4, h5{
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Serveur <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="#">BanList</a></li>
+                        <li><a href="http://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>BanList">BanList</a></li>
                         <li><a href="http://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>CGU">CGU</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#" class="vote">Voter</a></li>

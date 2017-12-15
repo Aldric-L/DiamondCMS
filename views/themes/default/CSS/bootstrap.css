@@ -3,7 +3,7 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
+/*Adapté pour le theme par défaut de DiamondCMS.*/
 /*!
  * Generated using the Bootstrap Customizer (https://getbootstrap.com/customize/?id=053dd68c39eed257ac249e4becbe2250)
  * Config saved to config.json and https://gist.github.com/053dd68c39eed257ac249e4becbe2250
@@ -4595,7 +4595,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #ffffff;
+  color: black;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {
@@ -4612,8 +4612,12 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: #999999;
   color: #ffffff;
-  background-color: #080808;
+  border-radius: 1em;
+  height: 60px;
+  margin-top: 10px;
+  padding-top: 20px;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
@@ -4638,8 +4642,12 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: #080808;
+  background-color: #999999;
   color: #ffffff;
+  border-radius: 1em;
+  height: 60px;
+  margin-top: 10px;
+  padding-top: 0px;
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {

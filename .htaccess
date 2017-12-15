@@ -1,4 +1,6 @@
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !^/views/uploads/
 RewriteCond %{REQUEST_URI} !^/js/
-RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
+RewriteRule ^([a-zA-Z0-9\-\_\~\/]*)$ index.php?p=$1
+
+AddDefaultCharset UTF-8

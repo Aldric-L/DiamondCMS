@@ -11,10 +11,10 @@ function addVote($db, $pseudo){
   //On l'insert dans la bdd
   $db->exec('UPDATE d_membre SET date_last_vote ="' . $datetime . '" WHERE pseudo = "' . $pseudo . '"');
   //Comme la requete update se veut dissidente, je commence par faire un select pour récupéré le nombre de votes
-  $select = $db->query('SELECT votes FROM d_membre WHERE pseudo="' . $pseudo . '"');
+  $select = $db->query('SELECT votes, money FROM d_membre WHERE pseudo="' . $pseudo . '"');
   $rep = $select->fetch();
   //Ensuite je modifie le nombre de vote avec la valeur de select à laquelle j'ajoute 1
-  $db->exec('UPDATE d_membre SET votes =' . ($rep['votes']+1) .' WHERE pseudo ="'. $pseudo . '"');
+  $db->exec('UPDATE d_membre SET votes =' . ($rep['votes']+1) .', money = '. ($rep['money']+1) . ' WHERE pseudo ="'. $pseudo . '"');
 }
 
 /**
@@ -30,10 +30,25 @@ function hasVote($db, $pseudo){
   $rep = $select->fetch();
 
   if(!empty($rep['date_last_vote'])){
+    /*if (date('Y', strtotime($rep['date_last_vote'])) != date('Y')){
+      //$datetime = date("Y-m-d H:i:s", strtotime("-1 year"));
+    }else {
+      //$datetime = strtotime(date("Y-m-d H:i:s"));
+    }*/
     $datetime = strtotime(date("Y-m-d H:i:s"));
     $date2 = strtotime($rep['date_last_vote']);
-    $result = dateDiff($datetime, $date2);
-    if ($result['hour'] <= 24){
+    /*if ($datetime-$date2 <= 0){
+      //return false;
+    }
+    /*echo $datetime  . "<br />";
+    echo $date2. "<br />";*/
+    $diff = abs($datetime - $date2);
+    /*echo $diff. "<br />";
+    echo $diff/86400 . "<br />";
+    exit();*/
+    //$result = dateDiff($datetime, $date2);
+    //if ($result['hour'] <= 24){
+    if ($diff/86400 <= 1){
       return true;
     }else {
       return false;

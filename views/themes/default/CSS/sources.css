@@ -1,17 +1,73 @@
+/*
+ Feuille de Style générale, incluse dans toutes des pages
+ Exclusivement réservé à une utilisation normale de DiamondCMS
+ Copyright Aldric L. (GougDEV)
+*/
 body {
-  background: #f4f4f4;
-  margin: 0;
-  line-height: 1;
+  line-height: 1.6;
   -ms-overflow-style: scrollbar;
   display: flex;
   flex-direction: column;
-  /*font-family: "Trebuchet Ms";*/
-  background-color: #E6E6FA;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
 }
 html, body {
-  height: 100%;
   padding: 0;
   margin: 0;
+}
+
+/*Global*/
+#fh5co-page-title {
+  background-image: url('web_font-jump.png');
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+  margin-bottom: 4em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+#fh5co-page-title .overlay {
+  z-index: 8;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  /*background: #81c141;
+  background: -webkit-linear-gradient(legacy-direction(#41c19e), #81c141);
+  background: linear-gradient(#41c19e, #81c141);
+  opacity: 0.7;
+  filter: alpha(opacity=70);*/
+}
+#fh5co-page-title .text {
+  position: relative;
+  z-index: 9;
+  color: #ffffff !important;
+  padding-left: 10%;
+}
+#fh5co-page-title .text h1 {
+  color: #197d62 !important;
+  font-weight: bold;
+}
+.bree-serif {
+  font-family: 'Bree Serif', serif;
+  color: #197d62;
+}
+h1, h2, h3, h4, h5{
+  font-family: 'Bree Serif';
+}
+p {
+  color: black;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+}
+.bold {
+  color: #197d62;
+  font-weight: bold;
 }
 .arr {
   border-radius: 15px;
@@ -25,21 +81,34 @@ html, body {
   background-color: #197d62;
   opacity:0.8;
 }
+.no {
+  text-decoration: none;
+  color: white;
+}
+.no::hover {
+  text-decoration: none;
+  color: white;
+}
+.modal-header{
+  background-color: #E5E5E5;
+}
+/*End Global */
 
-/*FOOTER*/
-footer{
+/*Footer*/
+/*footer{
+  line-height: 1.2;
   text-align: center;
-  height: 60px;
+  height: 87px;
   margin-top: auto;
-  background-color: #222222;
-  padding: 9px;
-  font-size: 16px;
-  color: #9d9d9d;
-}
-footer a {
-  color: #197d62;
-  font-weight: bold;
-}
+  /*background-color: #222222;*/
+  /*background-color: #E5E5E5;
+  padding: 11px;
+  font-size: 16px;*/
+  /*color: #9d9d9d;*/
+/*}*/
+/*End footer*/
+
+/*Content Container, utiliser pour mettre en forme les pages */
 .content-container {
   margin-left: 9%;
   margin-right: 9%;
@@ -51,11 +120,36 @@ footer a {
   margin-top: 1%;
   margin-bottom: 2%;
 }
-.content-container p {
+.content-container > p  {
   margin-left: 4%;
   margin-right: 4%;
 }
-.content-container h1, h2, h3, h4, h5 {
+.content-container > span  {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+.content-container > table {
+  margin-left: 4%;
+  margin-right: 4%;
+  width: 92%;
+}
+.content-container h1 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h2 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h3 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h4 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h5 {
   margin-left: 2%;
   margin-right: 2%;
 }
@@ -80,187 +174,90 @@ footer a {
     height: 100%;
   }
 }
+/*END content-container */
 
-/*END FOOTER*/
-
-/*#content {
-  position: absolute;
-  left: 3%;
-  right: 3%;
-  width: 94%;
-}
-
-#nav_bar_co {
-  display: none;
-  position: absolute;
-  width: 100%;
-  background-color: #197d62;
-  height: 2em;
-  display: block;
-  margin: 0;
-  top: 0;
-}
-#nav_bar_co p{
-  font-size: 1em;
-  margin: 0.2%;
-  color: #F8F8FF;
-}
-#nav_bar_co a{
-  text-decoration: none;
-  font-size: 1em;
-  color: #F8F8FF;
-}*/
-/*********************************************************************************/
-/* Header                                                                        */
-/*********************************************************************************/
+/*NavBar */
 @media (max-width: 979px){
   .navbar-fixed-top, .navbar-fixed-bottom {
     position: fixed;
   }
 }
-.navbar-inner {
-  background: #fff;
+.navbar {
+  height: 90px;
+  background: #E5E5E5;
   background-image: none;
   background-repeat: repeat-x;
-  border-color: none;
+  border: none;
   filter: none;
 }
+.navbar-brand:hover {
+  color: black;
+}
+
 .navbar-inverse .brand, .navbar-inverse .nav > li > a {
-  color: #197d62;/* CHANGE COLOR HERE*/
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  /*font-family: "bree-serif";*/
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a:hover {
+  color: #197d62;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .navbar-inverse .navbar-brand {
-  color: #197d62;/* CHANGE COLOR HERE*/
+  color: #197d62;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   font-size: 2.5em;
 	text-transform: uppercase;
   font-family: "Bree Serif";
+  vertical-align: top;  
 }
-/*.navbar-brand {
-  color: #2C383B;
-  font-style: "bree-serif";
+.navbar-nav {
+  letter-spacing: 1px;
 }
-*/
-#header-wrapper{
-	padding: 0.8em 0em;
-	background: #FFF;
+li.dropdown.open > a.dropdown-toggle {
+  padding-top: 20px;
 }
-
-#header_menu
-{
-	position: relative;
-	height: 80px;
+li.dropdown.open > a.dropdown-toggle:hover {
+  padding-top: 20px;
 }
-
-/*********************************************************************************/
-/* Logo                                                                          */
-/*********************************************************************************/
-
-#logo
-{
-  position: absolute;
-	top: 0em;
-	left: 0;
-	width: 100%;
+li.dropdown.open.compte > a.dropdown-toggle {
+  padding-top: 0px;
 }
-
-#logo h1
-{
-  display: inline-block;
-	font-size: 2.5em;
-	text-transform: uppercase;
-	font-weight: 700;
-	color: #2C383B;
-	padding-right: 0.50em;
+li.dropdown.open.compte > a.dropdown-toggle:hover {
+  padding-top: 0px;
 }
-
-#logo span
-{
-  position: absolute;
-	top: 1.4em;
-	display: inline-block;
-	padding-left: 1.50em;
-	letter-spacing: 0.10em;
-	text-transform: uppercase;
-	font-size: 0.90em;
+li.dropdown.compte > a.dropdown-toggle {
+  padding-top: 10px;
+}
+@media (min-width: 1300px){
+  .navbar{
+    padding-left: 14%;
+    padding-right: 14%;
+  }
+}
+@media (max-width: 1300px){
+  .navbar{
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}
+@media (max-width: 1138px){
+  .navbar{
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}
+@media (max-width: 870px){
+  .navbar{
+    padding-left: 2%;
+    padding-right: 2%;
+  }
 }
 
-#logo a
-{
-	text-decoration: none;
-	color: #197d62;
+.navbar-nav > li > .compte {
+  margin-right: 9px;
 }
 
-/*********************************************************************************/
-/* Menu                                                                          */
-/*********************************************************************************/
-
-#menu
-{
-  position: absolute;
-	right: 0;
-	top: 0.65em;
+li.dropdown.open > a.server:focus {
+  padding-top: 20px;
 }
 
-#menu ul
-{
-	display: inline-block;
-}
-
-#menu li
-{
-	display: block;
-	float: left;
-	text-align: center;
-	line-height: 60px;
-}
-
-#menu li a, #menu li span
-{
-	display: inline-block;
-	margin-left: 1px;
-	padding: 0em 1.5em;
-	letter-spacing: 0.10em;
-	text-decoration: none;
-	font-size: 1em;
-	text-transform: uppercase;
-	outline: 0;
-	color: #212121;
-}
-
-#menu li:hover a, #menu li.active a, #menu li.active span
-{
-}
-
-#menu li.current_page_item a{
-  border-radius: 10px;
-	background: #197d62;
-	color: #FFF !important;
-}
-
-#menu .icon
-{
-}
-
-/*#bg {
-  /*left: 0;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  width: auto;
-  position: absolute;
-  display: block;
-  margin: auto;*//*
-  margin:0;
-  padding:0;
-  background: url("web_font.png") no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari
-  background-size: cover; /* version standardisée */
-  /*background-image: url("web_font.png");
-}*/
-
-
-#bree-serif {
-  font-family: 'Bree Serif', serif;
-}
+/* END navbar */

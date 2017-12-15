@@ -1,81 +1,150 @@
-<script>
-  $(document).ready(function(){
-    $("#err").hide();
-    return true;
-  });
-</script>
-<div class="container">
-    <div id="firstpost">
-        <div class="row">
-          <br />
-          <?php
-            global $post;
-            echo '<div class="col-xs-4 col-sm-3 col-lg-2" id="bordure"><br /><p>' . $post['user'] . '</p>';
-            echo '<p>Le ' . $post['date_post'] .'</p><br /></div>';
-            echo '<div class="col-xs-8 col-sm-9 col-lg-10"><p class="bold">' . $post['titre_post'] . '</p>';
-            echo '<p class="content_post">' . $post['content_post'] .'<br /><br /></p></div>';
-          ?>
-        </div>
-      </div>
-      <br />
-      <?php
-      global $coms;
-      global $erreurcom;
-      global $param;
-      if ($coms != null){ ?>
-        <?php
-
-        foreach ($coms as $com) {
-          echo '<div class="row">';
-          echo '<div class="col-xs-2 col-sm-2 col-lg-2"></div>';
-          echo '<div class="col-xs-2 col-sm-2 col-lg-2" id="bordure"><p>' . $com['user'] . '</p>';
-          echo '<p>Le ' . $com['date_com'] .'</p></div>';
-          echo '<div class="col-xs-8 col-sm-8 col-lg-8"><p>';
-          echo $com['content_com'] .'</p></div></div><br /><br /><br />';
-        }
-      }else {
-        echo "<h4>Il n'y a aucune réponse à afficher !</h4>";
-      }
-      global $resolu;
-      
-      if (isset($_SESSION['pseudo']) && !empty($_SESSION['pseudo']) && $resolu != true){
-        if (!empty($erreurcom)){
-          echo '<div id="err">';
-          echo '<h4>' . $erreurcom . '</h4>';
-          echo '</div>';
-
-        }
-        ?>
-        <br /><br />
-        <div class="rows"><div class="col-xs-2 col-sm-2 col-lg-2"></div>
-        <div class="col-xs-8 col-sm-8 col-lg-8"><form method="post" action="">
-          <label for="form-control col-sm-2">Répondre à ce sujet :</label>
-          <textarea class="form-control" cols="25" rows="6" name="comment"></textarea><br />
-          <button type="submit" class="btn pull-right btn-danger sub">Valider</button>
-        </form></div></div>
-        <?php
-      }else if ($resolu == true){
-        echo '<p class="text-right"><em>Vous ne pouvez plus répondre car le sujet est résolu.</em></p>';
-      }else {
-        echo '<p class="text-center"><em>Pour répondre <a href="http://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'inscription"><i class="fa fa-key" aria-hidden="true"></i> Connectez-vous !</a></em><p>';
-      }?>
-
-</div>
+<?php global $post, $posts, $coms, $sous_cat, $resolu, $cat;?>
 <style>
-  h4 {
-    text-align: center;
+@media (min-width: 1400px){
+  .content-container-forum {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    /*border: 1.8px dotted #197d62;
+    /*border-radius: 20px;*/
+    height: 100%;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
-  .bold{
-      font-size: 16px;
-      font-weight: bold;
+}
+@media (max-width: 1200px){
+  .content-container-forum {
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    /*border: 1.8px dotted #197d62;
+    /*border-radius: 20px;*/
+    height: 100%;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
-  .content_post {
-    width: 95%;
-    text-align: justify;
+}
+@media (max-width: 1000px){
+  .content-container-forum {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    /*border: 1.8px dotted #197d62;
+    /*border-radius: 20px;*/
+    height: 100%;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
+}
+@media (max-width: 800px){
+  .content-container-forum {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    /*border: 1.8px dotted #197d62;
+    /*border-radius: 20px;*/
+    height: 100%;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
 </style>
+<div id="fh5co-page-title">
+  <div class="overlay"></div>
+  <div class="text">
+    <h1>Forum -> <a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/'; ?>"><?php echo $cat['titre']; ?></a> -> <a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/' . str_replace(' ', '-', $sous_cat[0]['titre']) . '/';?>"><?php echo $sous_cat[0]['titre']; ?> </a>-> <?php echo $post['titre_post']; ?></h1>
+  </div>
+</div>
+<div class="content-container-forum">
+  <div id="f_cat"><h3><?php echo $post['titre_post'] . ' par <a style="text-decoration: underline;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' .$post['user'] . '">' . $post['user'] .  '</a> le '. $post['date_post']; ?></h3></div>
+  <table class="table table-forum">
+    <tr>
+      <td class='border'><img width=100 height=100 src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'] . '&u='. $post['user']; ?>&s=100"></td>
+      <td class="text-justify"><?php echo $post['content_post']; ?><br /><?php
+      if ($resolu) {?>
+        <span class="bold" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i>Resolu</span>
+      <?php }else if (isset($_SESSION['pseudo']) && !$resolu && ($post['user'] == $_SESSION['pseudo']) || (isset($_SESSION['admin']) && $_SESSION['admin'])){?>
+        <a id="sr_<?php echo $post['id']; ?>" href="" class="bold" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i>Resolu ?</a>
+        <script>
+        $("#sr_<?php echo $post['id']; ?>").click(function(){
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/solved/' . $post['id']; ?>');
+          xhr.send(null);
+        });
+        </script>
+      <?php } //var_dump($_SESSION);
+      if (isset($_SESSION['admin']) && $_SESSION['admin']) {?>
+        <br /><span class="bold" style="float: right; color: red;"><a class="bold" style="color: red;" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/del/' . $post['id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer le sujet </a></span>
+      <?php } ?>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <?php $i =1; foreach ($coms as $key => $com) {?>
+    <div id="f_com" class="<?php echo $i; ?>"><h3>En réponse à <?php echo $post['titre_post'] . ' par <a style="text-decoration: underline;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' . $com['user'] . '">' . $com['user'] . '</a> le '. $com['date_com']; ?></h3></div>
+    <table class="table table-forum-com <?php echo $i; ?>">
+      <tr>
+        <td class='border'><img width=90 height=90 src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'] . '&u='. $com['user']; ?>&s=90"></td>
+        <td class="text-justify"><?php echo $com['content_com']; ?><?php
+        if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $com['user'])) {?>
+          <br /><span class="bold" style="float: right; color: red;"><a id="dl_<?php echo $com['id']; ?>" class="bold" style="color: red;" href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+        <?php } ?><br />
+        </td>
+      </tr>
+    </table>
+    <br class="<?php echo $i; ?>" />
+    <?php if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $com['user'])) {?>
+    <script>
+    $("#dl_<?php echo $com['id']; ?>").click(function(){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/del/com/' . $com['id']; ?>');
+      xhr.send(null);
+    });
+    </script>
+  <?php } $i++; } if ($i >= 11){ ?>
+  <button class="hider btn pull-right btn-danger acc sub">Voir les réponses cachées...</button><br /><br/>
+  <?php } ?>
+  <?php if (isset($_SESSION['pseudo']) && !empty($_SESSION['pseudo']) && !$resolu){ ?>
+    <form method="post" action=""style="padding-left: 8%;">
+      <label for="form-control col-sm-2">Répondre à ce sujet :</label>
+      <textarea class="form-control" cols="25" rows="6" name="comment"></textarea><br />
+      <button type="submit" class="acc btn pull-right btn-danger sub">Valider</button>
+    </form>
+  <?php }else if ($resolu) {
+    echo '<p class="text-right"><em>Vous ne pouvez plus répondre car le sujet est résolu.</em></p>';
+  }else {
+    echo '<p class="text-center"><em>Pour répondre <a class="no" href="'. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'connexion"><i class="fa fa-key" aria-hidden="true"></i> Connectez-vous !</a></em><p>';
+  } ?>
+</div>
 <script>
-  $(".sub").click(function(){
-    $("#err").show();
+  var nb_element_de_class;
+  nb_element_de_class=$(".table-forum-com").length;
+  for (var i = 1;nb_element_de_class>=i;i++){
+    if (i >= 11){
+      $("." + i).hide();
+    }
+  }
+  var hide = true;
+  $(".hider").click(function(){
+    if (hide){
+      for (var i = 1;nb_element_de_class>=i;i++){
+        if (i >= 11){
+          $("." + i).show();
+        }
+      }
+      hide = false;
+    }else {
+      for (var i = 1;nb_element_de_class>=i;i++){
+        if (i >= 11){
+          $("." + i).hide();
+        }
+      }
+      hide = true;
+    }
+    
   });
 </script>

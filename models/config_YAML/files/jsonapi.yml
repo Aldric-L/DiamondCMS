@@ -1,6 +1,0 @@
-1:
-  host: localhost
-  port: 20059
-  username: admin
-  password: changeme
-  salt: salt

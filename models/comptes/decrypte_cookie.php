@@ -11,13 +11,18 @@
    if (isset($cookie) && !empty($cookie)){
      //On appelle la foncion getMembreCrypte
      $membres = getMembreCrypte($db, $cookie);
-     //On parcours le tableau
-     foreach ($membres as $key => $membre) {
-       //Si on trouve un pseudo dans le tableau égal à celui du cookie
-       if(sha1($membres[$key]['pseudo']) == $cookie){
-         //On définis la session
-         $_SESSION['pseudo'] = $membres[$key]['pseudo'];
+     //Si on trouve bien un membre
+     if (!empty($membres)){
+       //On parcours le tableau
+       foreach ($membres as $key => $membre) {
+         //Si on trouve un pseudo dans le tableau égal à celui du cookie
+         if(sha1($membres[$key]['pseudo']) == $cookie){
+           //On définis la session
+           $_SESSION['pseudo'] = $membres[$key]['pseudo'];
+         }
        }
+     }else {
+       return false;
      }
    }
  }
@@ -30,7 +35,7 @@
   * @access private
   */
  function getMembreCrypte($db, $pseudo){
-   //On récupère tous les membres ayant le ce pseudo
+   //On récupère tous les membres
    $req = $db->query("SELECT pseudo FROM d_membre");
    $rep = $req->fetchAll();
    //On ferme la requete

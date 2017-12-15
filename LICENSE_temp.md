@@ -1,0 +1,9 @@
+Dans cette licence, projet désigne le CMS* DiamondCMS, propriété de GougDEV.
+Jusqu'à la sortie officielle (publique), il est strictement interdit de :
+    - Distribuer sans accod préalable le projet.
+    - D'utiliser commercialement le projet.
+    - De modifier le projet.
+Cette License comme le projet est la propriété de GougDEV.
+
+Cette licence prends effet le 28/09/2016 jusqu'à la publication officielle de DiamondCMS par GougDEV.
+*CMS = Content System Manager : Logiciel permettant de créer un site web préconfiguré.

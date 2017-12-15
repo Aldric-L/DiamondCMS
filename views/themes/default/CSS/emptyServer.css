@@ -1,3 +1,9 @@
+/*
+ Feuille de Style utilisée quand une page nécessitant une connexion au Serveur Minecraft ne fonctionne pas
+ (Utilisation plus générale quand une erreur fatale se produit)
+ Exclusivement réservé à une utilisation normale de DiamondCMS
+ Copyright Aldric L. (GougDEV)
+*/
 #emptyServer {
   text-align: center;
   border: 3px solid;

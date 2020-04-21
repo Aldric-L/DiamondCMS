@@ -27,7 +27,6 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "delete" && isset($par
       die('Error');
 }
 
-//var_dump($_FILES);
 //Si une image est uploadée
 if (isset($_FILES['img']) && $_FILES['img']['size'] != 0){
     //Si le fichier est bien une image

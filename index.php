@@ -19,7 +19,7 @@
   require_once(ROOT.'controllers/user.php');
 
   //On démarre les sessions pour avoir les variables superglobal sur le joueur.
-  session_start();
+  session_start(); 
   /* ====DEBUG==== */
   //echo ROOT;
   //echo WEBROOT;

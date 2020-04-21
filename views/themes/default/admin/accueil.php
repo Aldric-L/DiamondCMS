@@ -118,12 +118,20 @@
                             Status du CMS
                         </div>
                         <div class="panel-body">
+                            <?php if (isset($infos_cms) && !empty($infos_cms) && $infos_cms["allow"] == true) { ?>
                             <p><strong>Numéro d'identification du CMS :</strong> <?php echo $infos_cms["id_cms"]; ?><br />
                             <strong>Version du CMS :</strong> <?php echo $infos_cms["type_cms"]; ?><br :>
                             <strong>Enregistré le : </strong><?php echo $infos_cms["date_buy"]; ?> au près de Diamondcms.fr. <br />
                             <strong>Autorisé à utiliser le service : </strong><?php if ($infos_cms["allow"]){ echo '<span style="color: green;"><strong>Oui</strong></span>'; }else { echo "Non"; } ?><br />
                             <strong>Nombre de connexions aux serveurs de GougDev :</strong> <?php echo $infos_cms["actions"]; ?><br />
                             <strong>License delivrée pour l'url :</strong> <?php echo $infos_cms["url"]; ?></p>
+                            <?php } else if (isset($infos_cms) && !empty($infos_cms) && $infos_cms["allow"] != true){ ?>
+                            <p><strong><span style="color: red;"><strong>Erreur lors de l'installation du CMS</strong></span><br />
+                            <strong>Merci de contacter DiamondCMS pour rétablir tous les services du CMS. La version en cours d'utilisation n'est pas une version officielle du CMS ou a été altérée.<br> Pour palier le problème, vous pouvez initier une réinstallation rapide du service.</strong></p>
+                            <?php } else { ?>
+                            <p><strong><span style="color: red;"><strong>Impossible de contacter l'API du CMS</strong></span><br />
+                            <strong>Merci de contacter DiamondCMS pour rétablir tous les services du CMS</strong></p>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="panel panel-default">

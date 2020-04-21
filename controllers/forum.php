@@ -48,7 +48,7 @@ if (!isset($param[1]) || empty($param[1])){
       //Si l'id correspond
       if ($idposts[$key]['id'] == $param[2]){
         //On verifie que l'user est bien un admin
-        if (isset($_SESSION['admin']) && $_SESSION['admin'] == true){
+        if (isset($_SESSION['user']) && $_SESSION['user']->getLevel() >= 3){
           //On appelle la fonction pour supprimer un sujet
           $del_post = delSubject($controleur_def->bddConnexion(), $test);
         }
@@ -68,7 +68,9 @@ if (!isset($param[1]) || empty($param[1])){
       //Si l'id correspond
       if ($idposts[$key]['id'] == $param[2]){
         //On verifie que l'user est bien un admin
-        if ((isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $idposts[$key]['user']) || (isset($_SESSION['admin']) && $_SESSION['admin'] == true)){
+        $membre = simplifySQL\select($controleur_def->bddconnexion(), true, "d_membre", 'pseudo', array(array("id", "=", $idposts[$key]['user'])));
+        $pseudo = $membre['pseudo'];
+        if ((isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $pseudo) || (isset($_SESSION['user']) && $_SESSION['user']->getLevel())){
           set_solved($controleur_def->bddConnexion(), $intvalparam2);
         }
       }
@@ -103,24 +105,33 @@ if (!isset($param[1]) || empty($param[1])){
     $posts = getPosts($controleur_def->bddConnexion(), $sous_cat['id'], 0, 10);
   }
 
-  //On parcourt le tableau retourner par getPosts
+  //On parcourt le tableau retourné par getPosts
   foreach ($posts as $key => $post) {
-    //On les mets en forme
+    //On les met en forme
     $posts[$key]['id'] = $post['id'];
     $posts[$key]['titre_post'] = $post['titre_post'];
     $posts[$key]['content_post'] = substr($post['content_post'], 0, 70) . '...';
+    $membre = simplifySQL\select($controleur_def->bddconnexion(), true, "d_membre", 'pseudo, profile_img', array(array("id", "=", $posts[$key]['user'])));
+    $pseudo = $membre['pseudo'];
+    if (empty($pseudo)){
+      $posts[$key]['user'] = "Utilisateur inconnu";
+      $posts[$key]['profile_img'] = "no_profile.png";
+    }else {
+      $posts[$key]['user'] = $pseudo;
+      $posts[$key]['profile_img'] = $membre['profile_img'];
+    }
   }
 }
 
 
 //Si on reçoit des informations dans la variable $_POST
-if (isset($_POST) && !empty($_POST)){
+if (isset($_POST) && !empty($_POST) && isset($_SESSION['user'])){
   //Si le formulaire a bien été rempli entierement
   if (isset($_POST['titre_post']) && !empty($_POST['titre_post']) && isset($_POST['content_post']) && !empty($_POST['content_post']) && isset($_POST['scat']) && !empty($_POST['scat'])){
     //On appelle la fonction pour créer un sujet
-    $content = $_POST['comment'];
+    $content = $_POST['content_post'];
 
-    $new_post = newPost($controleur_def->bddConnexion(), $_POST['titre_post'], $_SESSION['pseudo'], $content, $_POST['scat']);
+    $new_post = newPost($controleur_def->bddConnexion(), $_POST['titre_post'], $_SESSION['user']->getId(), $content, $_POST['scat']);
     header("Location: ".$_SERVER['HTTP_REFERER']."");
   }else {
     //On créé une variable qui sera affichée dans la vue si il nous manque une info

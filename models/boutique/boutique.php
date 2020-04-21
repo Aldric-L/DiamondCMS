@@ -146,7 +146,7 @@ class panier {
     }
 
     function addArticle($id_article){
-        $a = select($this->db, true, "d_boutique_articles", "*", array("id", "=", $id_article));
+        $a = simplifySQL\select($this->db, true, "d_boutique_articles", "*", array("id", "=", $id_article));
         array_push($this->articles, $a);
         $this->total_price = $this->total_price+$a['prix'];
 

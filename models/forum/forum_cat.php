@@ -1,4 +1,12 @@
 <?php
+/**
+ *
+ * Ces fonctions sont quasiment toutes dépréciées :
+ * Désormais, il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
+ * @deprecated 
+ * Elles seront donc supprimées d'ici une prochaine mise à jour. (Dernière édition - avril 2020)
+ */
+
 
 function getCategories($db){
   $req = $db->prepare('SELECT id, titre FROM d_forum_cat ORDER BY id');

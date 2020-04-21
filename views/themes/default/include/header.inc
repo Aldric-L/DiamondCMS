@@ -185,12 +185,12 @@
                               <input type="checkbox" class="form-check-input" name="news">   S'abonner à la news-letter
                             </label>
                           </div>
-                          <div class="form-check">
+                          <!--<div class="form-check">
                             <label class="souvenir">
                               <input class="form-check-input" type="checkbox" value="" id="souvenir" name="souvenir">
                               Se souvenir de moi
                             </label>
-                          </div>
+                          </div>-->
                           <input type="hidden" value="<?php echo str_replace(WEBROOT, '', $_SERVER['REQUEST_URI']); ?>" name="page">
                           <button type="submit" class="btn btn-success align-right center-block acc">Valider et s'inscrire</button>
                         </form>
@@ -289,7 +289,6 @@
                     </div>
                     <div class="modal-body">
                         <p><?= $Serveur_Config['text_jouer_menu']; ?></p>
-                        <p class="text-info">Adresse du serveur : <?= $Serveur_Config['ip_serveur']; ?></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
@@ -302,9 +301,9 @@
           <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
+                </button>-->
                 <?php if ($Serveur_Config['logo_img']){ ?>
                   <img class="img-responsive img-brand navbar-brand" style="padding: 0; margin: 0; margin-top: 4px;" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['name_logo']; ?>" alt="">
                 <?php }else { ?>
@@ -312,7 +311,6 @@
                 <?php } ?>
             </div>
 
-              <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="navbar-collapse" style="margin-top: 4px;">
                   <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>"><i class="fa fa-home fa-2" aria-hidden="true"></i> Accueil</a></li>
@@ -321,8 +319,6 @@
                     <li id="serveur" class="dropdown">
                       <a href="#" class="dropdown-toggle server" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Serveurs <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>BanList"><i class="fa fa-ban" aria-hidden="true"></i> BanList</a></li>
-                        <?php if ($Serveur_Config['en_d_warns']){ echo '<li><a href="' . $Serveur_Config['protocol']. '://'. $_SERVER['HTTP_HOST'] . WEBROOT .'warns"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Warn(s)</a></li>'; } ?>
                         <?php if ($Serveur_Config['en_faq']){ echo '<li><a href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT .'faq"><i class="fa fa-question-circle" aria-hidden="true"></i> F.A.Q.(s)</a></li>'; } ?>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>CGU"><i class="fa fa-bars" aria-hidden="true"></i> CGU</a></li>
@@ -340,11 +336,12 @@
                     <?php if (isset($_SESSION['pseudo']) && !empty($_SESSION['pseudo'])){?>
                       <li class="dropdown compte">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-bottom: 0px;">
-                          <img width="60" height="60" src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'];?>&amp;u=<?php echo $_SESSION['pseudo']; ?>&amp;s=64"> Mon Compte</a>
+                        <img width="60" height="60" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $_SESSION['user']->getPseudo(); ?>/60"> Mon Compte</a>
+    
                       <ul class="dropdown-menu compte">
                         <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/">Mon Compte</a></li>
                         <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/">Support</a></li>
-                        <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && $_SESSION['admin']){?>
+                        <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->isAdmin()){?>
                             <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/">Panel Admin</a></li>
                         <?php } ?>
                         <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/deconnexion/">Deconnexion</a></li>
@@ -355,9 +352,53 @@
                     <?php } ?>
                   </ul>
               </div>
-              <!-- /.navbar-collapse -->
+
+<!--
+              <div class="collapse navbar-collapse mini-navbar" id="navbar-collapse-mini" style="margin-top: 4px;">
+                  <ul class="nav navbar-nav navbar-right mini-navbar">
+                    <li id="menu" class="dropdown">
+                      <a href="#" class="dropdown-toggle menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"> Menu  <span class="caret"></span></a>
+                      <ul class="dropdown-menu menu">
+                        <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>"><i class="fa fa-home fa-2" aria-hidden="true"></i> Accueil</a></li>
+                        <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>forum" accesskey="2" title=""><i class="fa fa-comments-o" aria-hidden="true"></i> Forum</a></li>
+                        <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>boutique"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Boutique</a></li>
+                        <li role="separator" class="divider"></li>
+                        <?php if ($Serveur_Config['en_faq']){ echo '<li><a href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT .'faq"><i class="fa fa-question-circle" aria-hidden="true"></i> F.A.Q.(s)</a></li>'; } ?>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>CGU"><i class="fa fa-bars" aria-hidden="true"></i> CGU</a></li>
+                        <?php if ($Serveur_Config['en_reglement']){ echo '<li><a href="'. $Serveur_Config['protocol']. '://'. $_SERVER['HTTP_HOST'] . WEBROOT .'reglement"><i class="fa fa-shield" aria-hidden="true"></i> Reglement</a></li>'; } ?>
+                        <?php  if ($Serveur_Config['en_vote'] || $Serveur_Config['en_jouer']){ ?>
+                        <li role="separator" class="divider"></li>
+                        <?php }  if ($Serveur_Config['en_vote']){ ?>
+                        <li><a href="#" class="vote"><i class="fa fa-commenting-o" aria-hidden="true"></i> Voter</a></li>
+                        <?php } ?>
+                        <?php  if ($Serveur_Config['en_jouer']){ ?>
+                        <li><a href="#" class="jouer"><i class="fa fa-server" aria-hidden="true"></i> Jouer !</a></li>
+                        <?php } ?>
+                      </ul>
+                    </li>
+                    <?php if (isset($_SESSION['pseudo']) && !empty($_SESSION['pseudo'])){?>
+                      <li class="dropdown compte mini-navbar">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-bottom: 0px;">
+                          <img width="60" height="60" src="<?php echo $Serveur_Config['api_url']; ?>face.php?id=<?php echo $Serveur_Config['id_cms'];?>&amp;u=<?php echo $_SESSION['pseudo']; ?>&amp;s=64"> Mon Compte</a>
+                          <ul class="dropdown-menu compte">
+                            <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/">Mon Compte</a></li>
+                            <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/">Support</a></li>
+                            <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && $_SESSION['admin']){?>
+                                <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/">Panel Admin</a></li>
+                            <?php } ?>
+                            <li><a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/deconnexion/">Deconnexion</a></li>
+                          </ul>
+                        </li>
+                    <?php }else {?>
+                      <li><a class="connexion" href="#"><i class="fa fa-key" aria-hidden="true"></i> Connexion</a></li>
+                      <li><a class="inscription" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Inscription</a></li>
+                    <?php } ?>
+                  </ul>
+              </div>
+-->
+
           </div>
-          <!-- /.container-fluid -->
       </nav>
 
 <?php if (!empty($controleur_def->getErrors())){ ?>
@@ -416,6 +457,7 @@ $(".err").click(function(){
                   <table class="table table-striped">
                     <thead>
                       <tr>
+                        <th>#</th>
                         <th>Pseudo</th>
                         <th>Nombre de vote</th>
                       </tr>
@@ -425,7 +467,7 @@ $(".err").click(function(){
                         global $voteurs;
                         foreach ($voteurs as $voteur) {
                           echo '<tr>';
-                          echo '<td><img width=26 height=26 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $voteur['pseudo'] . '&s=26">' . $voteur['pseudo'] .'</td>';
+                          echo '<td><img width=26 height=26 src="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'getprofileimg/'. $voteur['pseudo'] . '/26"></td><td>' . $voteur['pseudo'] .'</td>';
                           echo '<td>' . $voteur['votes'] .'</td>';
                           echo '</tr>';
                         }

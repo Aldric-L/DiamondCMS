@@ -1,10 +1,16 @@
 h1{
-  font-family: "ChunkFive";
+  font-family: "BreeSerif";
   text-align: center;
 }
 @font-face {
-  font-family:'ChunkFive';
-  src: url('fonts/ChunkFive.otf') format('truetype')
+  font-family:'BreeSerif';
+  src: url('BreeSerif-Regular.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+@font-face {
+  font-family:'Raleway-Light';
+  src: url('Raleway-Light.ttf') format('truetype');
   font-weight:normal;
   font-style:normal
 }

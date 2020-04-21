@@ -30,7 +30,7 @@ function createTicket($db, $pseudo, $titre, $content, $role=0){
 }
 
 function getTickets($db, $min, $limite){
-  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\ à %Hh:%imin\') AS date_ticket FROM d_support_tickets ORDER BY date_ticket DESC LIMIT :min, :limite ');
+  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets ORDER BY date_ticket DESC LIMIT :min, :limite ');
 
   //On passe les paramètres
   $req2->bindParam(':min', $min, PDO::PARAM_INT);
@@ -47,7 +47,7 @@ function getTickets($db, $min, $limite){
 }
 
 function getTicketById($db, $id){
-  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\ à %Hh:%imin\') AS date_ticket FROM d_support_tickets WHERE id = :id ORDER BY date_ticket DESC');
+  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets WHERE id = :id ORDER BY date_ticket ');
 
   //On passe les paramètres
   $req2->bindParam(':id', $id, PDO::PARAM_INT);
@@ -89,7 +89,7 @@ function getNumberTicketsByName($db, $pseudo){
 }
 
 function getTicketsByName($db, $pseudo, $min, $limite){
-  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\ à %Hh:%imin\') AS date_ticket FROM d_support_tickets WHERE pseudo = :pseudo ORDER BY date_ticket DESC LIMIT :min, :limite ');
+  $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets WHERE pseudo = :pseudo ORDER BY date_ticket DESC LIMIT :min, :limite ');
 
   //On passe les paramètres
   $req2->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
@@ -107,7 +107,7 @@ function getTicketsByName($db, $pseudo, $min, $limite){
 }
 
 function getTicketsReponses($db, $id_ticket){
-  $req2 = $db->prepare('SELECT id, contenu_reponse, role, pseudo, DATE_FORMAT(date_reponse, \'%d/%m/%Y\ à %Hh:%imin\') AS date_reponse, id_ticket FROM d_support_rep WHERE id_ticket = :id_ticket ORDER BY date_reponse');
+  $req2 = $db->prepare('SELECT id, contenu_reponse, role, pseudo, DATE_FORMAT(date_reponse, \'%d/%m/%Y\') AS date_rep, id_ticket FROM d_support_rep WHERE id_ticket = :id_ticket ORDER BY date_reponse DESC');
 
   //On passe les paramètres
   $req2->bindParam(':id_ticket', $id_ticket, PDO::PARAM_INT);
@@ -130,7 +130,7 @@ function delReponse($db, $id_rep, $pseudo=FALSE){
     //continuer normallement.
     $valide = false;
 
-    $reps = select($db, false, "d_support_rep", "id", array(array("pseudo", "=", $pseudo)));
+    $reps = simplifySQL\select($db, false, "d_support_rep", "id", array(array("pseudo", "=", $pseudo)));
 
     //Si aucun ticket n'a été trouver, on retourne valide (false).
     if (empty($reps)){
@@ -173,7 +173,7 @@ function CloseTicket($db, $id, $pseudo=FALSE){
     //continuer normallement.
     $valide = false;
 
-    $tickets = select($db, false, "d_support_tickets", "id", array(array("pseudo", "=", $pseudo)));
+    $tickets = simplifySQL\select($db, false, "d_support_tickets", "id", array(array("pseudo", "=", $pseudo)));
 
     //Si aucun ticket n'a été trouver, on retourne valide (false).
     if (empty($tickets)){

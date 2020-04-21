@@ -1,17 +1,5 @@
-<?php
-$content = " 
 <center>
-    <h4>
-        Pour vos mentions légales, nous vous conseillons l'excellent génerateur <a href=\"http://www.subdelirium.com/generateur-de-mentions-legales/\">SubDelirium</a>.
-    </h4>
-    <h2>
-        <span style=\"color: red\">Malheureusement, GougDev et DiamondCMS n'ont pas été autorisés à vous proposer un outils automatique, inclus dans le CMS, basé sur le leur.</span> 
-    </h2>
-    <h3>
-        <br />Nous en sommes desolé, nous esperons qu'ils accepteront d'ici une nouvelle mise à jour :). </h3>
-    </h3>
+<h4>Pour vos mentions l&eacute;gales, nous vous conseillons l'excellent g&eacute;nerateur <a href="\&quot;http:/www.subdelirium.com/generateur-de-mentions-legales/\&quot;">SubDelirium</a>.</h4>
+<h2>Malheureusement, DiamondCMS n'a pas &eacute;t&eacute; autoris&eacute; &agrave; vous proposer un outil automatique, inclu dans le CMS, bas&eacute; sur le leur.</h2>
+<h3><br />Nous en sommes desol&eacute;, nous &eacute;sp&egrave;rons qu'ils accepteront d'ici une nouvelle mise &agrave; jour.</h3>
 </center>
-"; 
-
-echo $content;
-?>

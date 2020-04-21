@@ -1,23 +1,34 @@
 <?php
 class User {
   private $pseudo;
+  private $id;
   private $infos = array();
   private $role = array();
 
   function __construct($pseudo, $db){
       $this->pseudo = $pseudo;
       $this->infos = $this->getInfos($db);
+      $this->id = $this->infos['id'];
       $this->role['id'] = $this->infos['role'];
       $this->getRoleLevel($db);
       $this->getRoleName($db);
   }
 
+
+  public function reload($db){
+    $this->infos = $this->getInfosFromId($db);
+    $this->pseudo = $this->infos['pseudo'];
+    $this->role['id'] = $this->infos['role'];
+    $this->getRoleLevel($db);
+    $this->getRoleName($db);
+  }
+
   /**
-  * Fonction utilisée par le constructeur pour récuperé les informations
+  * Fonction utilisée par le constructeur pour récupérer les informations
   * @access private
   **/
-  function getInfos($db){
-    $req = $db->prepare('SELECT id, pseudo, email, password, role, money, DATE_FORMAT(date_last_vote, \'%d/%m/%Y à %Hh:%imin\') AS date_last_vote, votes, DATE_FORMAT(date_inscription, \'%d/%m/%Y à %Hh:%imin\') AS date_inscription, admin FROM d_membre WHERE pseudo = "' . $this->pseudo . '"');
+  private function getInfos($db){
+    $req = $db->prepare('SELECT id, pseudo, email, password, role, money, profile_img, DATE_FORMAT(date_last_vote, \'%d/%m/%Y à %Hh:%imin\') AS date_last_vote, votes, DATE_FORMAT(date_inscription, \'%d/%m/%Y à %Hh:%imin\') AS date_inscription FROM d_membre WHERE pseudo = "' . $this->pseudo . '"');
 
     //On execute la requete
     $req->execute();
@@ -30,7 +41,16 @@ class User {
   }
 
   /**
-  * Fonctions utilisées par n'importe qui pour récuperé les informations précedemment récupérée par le constructeur
+  * Fonction utilisée par le constructeur pour récupérer les informations
+  * @access private
+  **/
+  private function getInfosFromId($db){
+    //$req = $db->prepare('SELECT id, pseudo, email, password, role, money, profile_img, DATE_FORMAT(date_last_vote, \'%d/%m/%Y à %Hh:%imin\') AS date_last_vote, votes, DATE_FORMAT(date_inscription, \'%d/%m/%Y à %Hh:%imin\') AS date_inscription FROM d_membre WHERE pseudo = "' . $this->pseudo . '"');
+    return simplifySQL\select($db, true, "d_membre", array("id", "pseudo", "email", "password", "role", "money", "profile_img", array("date_last_vote", "%d/%m/%Y à %Hh:%imin", "date_last_vote"), "votes", array("date_inscription", "%d/%m/%Y à %Hh:%imin", "date_inscription")), array(array("id", "=", $this->id)));
+  }
+
+  /**
+  * Fonctions utilisées par n'importe qui pour récupérer les informations précedemment récupérées par le constructeur
   * @access public
   **/
   function getInfo(){
@@ -38,11 +58,23 @@ class User {
   }
 
   function isAdmin(){
-    return $this->infos['admin'];
+    if ($this->role['level'] >= 4){
+      return true;
+    }else {
+      return false;
+    }
   }
 
   function getPseudo(){
     return $this->pseudo;
+  }
+
+  function getImg(){
+    return $this->infos['profile_img'];
+  }
+  
+  function getId(){
+    return $this->infos['id'];
   }
 
   function getArrayRole(){

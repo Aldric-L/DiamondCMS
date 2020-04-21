@@ -1,11 +1,14 @@
 <?php global $tickets, $ntickets; ?>
-
+<!--Titre de la page -->
 <div id="fh5co-page-title">
   <div class="overlay"></div>
   <div class="text">
-    <h1>Support <?php if ($_SESSION['user']->getRoleLevel($controleur_def->bddConnexion()) >= 2){?>- Version <?php echo $_SESSION['user']->getRoleName($controleur_def->bddConnexion()); }?></h1>
+    <h1>Support <?php if ($_SESSION['user']->getLevel() >= 2){?>- Version <?php echo $_SESSION['user']->getRoleName($controleur_def->bddConnexion()); }?></h1>
   </div>
 </div>
+<!-- Fin titre -->
+
+<!-- Modal de création de Tickets -->
 <div id="create_ticket" class="modal fade">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -30,6 +33,8 @@
               <textarea class="form-control" rows="10" type="text-area" id="content" name="content"></textarea>
               <small id="contentHelp" class="form-text text-muted">Elle doit être détaillée, la plus soignée possible, et ne pourra être modifiée.</small>
             </div>
+            
+            <input type="hidden" class="hidden_url_nt" id="hidden_url_nt" value="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_t/"/>
             <br />
             <h4 class="text-center text-danger">Attention, une fois votre ticket envoyé,<br/> il sera impossible à supprimer.</h4><br/>
             <button type="submit" class="btn btn-success align-right center-block acc">Créer le ticket</button>
@@ -41,13 +46,20 @@
       </div>
   </div>
 </div>
-<?php if ($_SESSION['user']->getRoleLevel($controleur_def->bddConnexion()) >= 2){?>
+<!-- FIN Modal de création de Tickets -->
+
+<?php 
+// PAGE ADMIN ----------------------------------------------------------------------------------------------------------------------------------------------
+if ($_SESSION['user']->getLevel() >= 2){?>
+
 <div class="content-container container">
   <h1 class="text-center">Derniers tickets créés</h1>
   <br />
+  <!-- Affichage des tickets -->
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>#</th>
         <th>Pseudo</th>
         <th>Titre</th>
         <th>Date</th>
@@ -59,12 +71,15 @@
     <tbody>
       <?php foreach ($tickets as $key => $ticket) {
         echo "<tr>";
-        echo '<td><img width=26 height=26 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $tickets[$key]['pseudo'] . '&s=26"> ' . $tickets[$key]['pseudo'] . "</td>";
+        
+        echo '<td><img width=26 height=26 src="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'getprofileimg/'. $tickets[$key]['pseudo'] . '/26"></td><td> ' . $tickets[$key]['pseudo'] . "</td>";
+        
+        
         echo "<td>" . $tickets[$key]['titre_ticket'] . "</td>";
-        echo "<td>" . $tickets[$key]['date_ticket'] . "</td>";
+        echo "<td>" . $tickets[$key]['date_t'] . "</td>";
         echo "<td>" . $tickets[$key]['status_l'] . "</td>";
         echo '<td id="n_'. $ticket['id'] . '">' . sizeof($tickets[$key]['rep']) . "</td>";
-        echo '<td class="td_view_del_'. $tickets[$key]['id'] . '"><a class="v_'. $tickets[$key]['id'] . ' bold" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Voir </a>';
+        echo '<td class="td_view_del_'. $tickets[$key]['id'] . '"><a class="v bold" data="'. $tickets[$key]['id'] . '" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Voir </a>';
         if ($tickets[$key]['status'] != 2 ){
           echo '| <span class="d_' . $tickets[$key]['id']. '_text"><a class="d_'. $tickets[$key]['id'] . ' bold" style="color: red;" href="#"><i class="fa fa-times" aria-hidden="true"></i>  Fermer le ticket</a></span></td>';
         }else {
@@ -74,6 +89,9 @@
      } //End Foreach?>
     </tbody>
   </table>
+  <!-- FIN Affichage des tickets -->
+  
+  <!-- Création d'un modal par ticket -->
   <?php foreach ($tickets as $key => $ticket) {?>
   <div id="modal_ticket_<?php echo $tickets[$key]['id']; ?>" class="modal fade">
       <div class="modal-dialog">
@@ -83,7 +101,8 @@
                   <h4 class="modal-title">#<?php echo $tickets[$key]['id']; ?> - <?php echo $tickets[$key]['titre_ticket']; ?> par <?php echo $tickets[$key]['pseudo']; ?></h4>
               </div>
               <div class="modal-body">
-                <h3><?php echo $tickets[$key]['titre_ticket'] . ' par ' . '<img width=28 height=28 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $tickets[$key]['pseudo'] . '&s=28"> ' . $tickets[$key]['pseudo'] . ' le '. $tickets[$key]['date_ticket']; ?></h3>
+                  <h3><?php echo $tickets[$key]['titre_ticket'] . ' par ' . '<img width=28 height=28 src="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'getprofileimg/'. $tickets[$key]['pseudo'] . '/26"> ' . $tickets[$key]['pseudo'] . ' le '. $tickets[$key]['date_t']; ?></h3>
+                
                 <hr style="margin-left: 2.3%;width: 95%;margin-top: 5px;margin-bottom: 10px;">
                 <div class="content_ticket">
                 <p>
@@ -96,11 +115,11 @@
                   <?php foreach($tickets[$key]['rep'] as $rep){ ?>
                     <div id="r_c_<?php echo $rep['id'];?>">
                       <h4 style="margin-left: 2.3%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;"><?php if ($rep['role'] != 0){?><span class="bold"><?php echo $controleur_def->getRoleNameById($controleur_def->bddConnexion(), $rep['role']);?> : </span><?php }?>
-                      <?php echo $rep['pseudo'];?>, le <?php echo $rep['date_reponse'];?></h4>
+                      <?php echo $rep['pseudo'];?>, le <?php echo $rep['date_rep'];?></h4>
                       <hr style="margin-left: 5%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;">
                       <span style="margin-left: 5%;width: 92,5%;margin-top: 5px;"><?php echo $rep['contenu_reponse'];?></span><br/><br />
                       <?php 
-                      if ($_SESSION['user']->getRoleLevel($controleur_def->bddConnexion()) >= $controleur_def->getRoleLevel($controleur_def->bddConnexion(), $rep['role'])){?> 
+                      if ($_SESSION['user']->getLevel() >= $controleur_def->getRoleLevel($controleur_def->bddConnexion(), $rep['role'])){?> 
                         <p class="text-right bold" style="margin-left: 5%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;"><em><a href="#" id="d_r_<?php echo $rep['id'];?>" class="bold">Supprimer cette réponse.</a></em></p>
                       <?php } ?>
                     </div>
@@ -109,14 +128,16 @@
                 </div>
                 <div id="r_<?php echo $tickets[$key]['id']; ?>" class="response" <?php if ($tickets[$key]['status'] == 2){?>style="display: none;"<?php } ?>>
                   <hr style="margin-top: 20px">
-                    <a href="#" class="bold rep_<?php echo $tickets[$key]['id']; ?>"><h4 class="text-center bold">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></a>
+                    <a href="#" class="bold rep" id="rep_<?php echo $tickets[$key]['id']; ?>" data="<?php echo $tickets[$key]['id']; ?>"><h4 class="text-center bold">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></a>
                   <hr style="margin-bottom: 5px;">
                   <div class="center" id="rep_div_<?php echo $tickets[$key]['id']; ?>" style="display: none;">
                       <br />
                       <form method="post" action="" class="form_reponse">
                       <label for="form-control col-sm-2">Votre réponse :</label>
-                      <textarea class="form-control t_r" cols="25" rows="6" name="content_post"></textarea><br />
+                      <textarea class="form-control t_r" cols="25" rows="6" name="content_post" id="<?php echo $tickets[$key]['id']; ?>"></textarea><br />
                       <input type="hidden" class="hidden_id" value="<?php echo $tickets[$key]['id']; ?>"/>
+                      <input type="hidden" class="hidden_url" id="hidden_url_<?php echo $tickets[$key]['id']; ?>" value="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_r/<?php echo $tickets[$key]['id']; ?>"/>
+                      <input type="hidden" class="hidden_pseudo" id="hidden_pseudo_<?php echo $tickets[$key]['id']; ?>" value="<?php echo$_SESSION['pseudo']; ?>"/>
                       <button type="submit" class="btn pull-right btn-danger sub acc">Valider</button>
                     </form>
                     <br /><br />
@@ -139,28 +160,11 @@
           </div>
       </div>
   </div>
-  <script>
-    //MODAL View ticket
-    $(".v_<?php echo $tickets[$key]['id']; ?>").click(function(){
-      $("#modal_ticket_<?php echo $tickets[$key]['id']; ?>").modal('show');
-    });
-    //END modal
-    //REPONSE DANS MODAL TICKET
-    $(".rep_<?php echo $tickets[$key]['id']; ?>").click(function(){
-      if ($('#rep_div_<?php echo $tickets[$key]['id']; ?>').is(":hidden")){
-        $('.rep_<?php echo $tickets[$key]['id']; ?>').html('<h4 class="text-center">Répondre... <i class="fa fa-arrow-up" aria-hidden="true"></i></h4>');
-        $('#rep_div_<?php echo $tickets[$key]['id']; ?>').show();
-      }else {
-        $('.rep_<?php echo $tickets[$key]['id']; ?>').html('<h4 class="text-center">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4>');
-        $('#rep_div_<?php echo $tickets[$key]['id']; ?>').hide();
-      }
-    });
-    //END REPONSE
-  </script>
+  <!-- FIN Création d'un modal par ticket -->
 
   <?php 
   //Systeme de fermeture de tickets
-    if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $tickets[$key]['pseudo'])) {?>
+    if ((isset($_SESSION['user']) && $_SESSION['user'] && $_SESSION['user']->getLevel() >= 2) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $tickets[$key]['pseudo'])) {?>
           <script>
           $(".d_<?php echo $tickets[$key]['id']; ?>").click(function(){
               $.ajax({
@@ -169,6 +173,7 @@
                  success: function (data_rep) {
                     if (data_rep != "Success"){
                       alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
+                      console.log(data_rep);
                     }else {                   
                       $(".d_<?php echo $tickets[$key]['id'];?>_text").html('<i class="fa fa-times" aria-hidden="true"></i>  Le ticket est déjà fermé');
                       $("#r_<?php echo $tickets[$key]['id']; ?>").hide();
@@ -183,7 +188,7 @@
     <?php }
     //Systeme de suppression des reponses par ticket
     foreach($tickets[$key]['rep'] as $rep){  
-      if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $rep['pseudo'])) {?>
+      if ((isset($_SESSION['user']) && $_SESSION['user'] && $_SESSION['user']->getLevel() >= 2) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $rep['pseudo'])) {?>
             <script>
             $("#d_r_<?php echo $rep['id']; ?>").click(function(){
                 $.ajax({
@@ -207,6 +212,7 @@
       <?php } 
     } //End Foreach (reponses)
    } //End Foreach (modal)
+
    //Systeme de pages (max tickets par pages)
    if (isset($param[1]) && sizeof($ntickets)-($param[1]*10) >= 10){
     if (!isset($param[1])){?>
@@ -221,46 +227,28 @@
     <?php }
   //END Systeme de pages ?> 
 </div>
-<script>
-//Ajout d'une réponse
-$('.form_reponse').submit(function(e){
-  e.preventDefault();
-  tinyMCE.triggerSave(true, true);
-  if($('textarea', this).val() != "" && $('textarea', this).val() != "<br>"){
-    $.ajax({
-          url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_r/' + $('input[class="hidden_id"]', this).val(),
-          type : 'POST',
-          data : 'pseudo=<?php echo $_SESSION['pseudo']; ?>&content=' + $('textarea', this).val(),
-          dataType : 'html',
-          success: function (data_rep){
-            if (data_rep != "Success"){
-              alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-              debugger;
-            }else {
-              location.reload(true);
-            }
-          },
-          error: function (data_rep) {
-            alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-          }     
-      });
-  }
-});
-//END ADD         
-</script>
-<?php }else { ?>
+
+<?php 
+// PAGE UTILISATEUR ------------------------------------------------------------------------------------------------------------------------------------------
+}else { ?>
+
+<!-- Explication du Support -->
 <div id="explicsupport">
-  <h2>Le serveur <?php echo $Serveur_Config['Serveur_name']; ?> met à votre disposition un support.</h2>
+  <h2><?php echo $Serveur_Config['Serveur_name']; ?> met à votre disposition un support.</h2>
   <p class="explicp">Ce support vous permet de contacter gratuitement notre équipe. Les tickets ne sont lisibles que par vous et nous. 
     Nous vous répondons dans les délais les plus courts possibles. N'hésitez pas à verifier sur le forum si votre question n'a pas été déjà traitée.
   </p>
-  <p id="red" class="text-danger"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Attention, tout comportement inaproprié pourra entrainer des sonctions graves.  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></p>
+  <p id="red" class="text-danger"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Attention, tout comportement inaproprié pourra entrainer des sanctions.  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></p>
 </div>
+<!-- FIN Explication du Support -->
+
 <br />
 <div class="content-container container">
   <div class="rows">
+  <!-- col-lg-3 -->
     <div class="col-lg-3">
-    <br />
+      <br />
+      <!-- Actions possibles -->
       <div class="actions">
         <div class="actions_top">
           <h4 class="text-center">Action(s) :</h4>
@@ -271,7 +259,9 @@ $('.form_reponse').submit(function(e){
             <h5 class="text-center"><button class="btn btn-success acc" style="border-color: #197d62;background-color: #197d62;"><a class="no" style="text-decoration: none;color: white;" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT; ?>forum">Retourner sur le forum...</a></button></h5>
         </div>
       </div>
+      <!-- FIN Actions possibles -->
     </div>
+  <!-- FIN col-lg-3 -->
     <div class="col-lg-9">
       <h3 class="text-center">Vos derniers tickets créés</h3>
       <br />
@@ -290,10 +280,10 @@ $('.form_reponse').submit(function(e){
             echo "<tr>";
             //echo '<td><img width=26 height=26 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $tickets[$key]['pseudo'] . '&s=26"> ' . $tickets[$key]['pseudo'] . "</td>";
             echo "<td>" . $tickets[$key]['titre_ticket'] . "</td>";
-            echo "<td>" . $tickets[$key]['date_ticket'] . "</td>";
+            echo "<td>" . $tickets[$key]['date_t'] . "</td>";
             echo "<td>" . $tickets[$key]['status_l'] . "</td>";
             echo '<td id="n_'. $ticket['id'] . '">' . sizeof($tickets[$key]['rep']) . "</td>";
-            echo '<td class="td_view_del_'. $tickets[$key]['id'] . '"><a class="v_'. $tickets[$key]['id'] . ' bold" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Voir </a>';
+            echo '<td class="td_view_del_'. $tickets[$key]['id'] . '"><a class="v bold" data="'. $tickets[$key]['id'] . '" href="#"><i class="fa fa-eye" aria-hidden="true"></i> Voir </a>';
             if ($tickets[$key]['status'] != 2 ){
               echo '| <span class="d_' . $tickets[$key]['id']. '_text"><a class="d_'. $tickets[$key]['id'] . ' bold" style="color: red;" href="#"><i class="fa fa-times" aria-hidden="true"></i>  Fermer le ticket</a></span></td>';
             }else {
@@ -319,9 +309,14 @@ $('.form_reponse').submit(function(e){
     <?php }else if (isset($param[1]) && $param[1] >= 2){?>
       <span class="text-left bold" style="float: left;"><a class="bold" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT; ?>support/<?php echo $param[1]-1;?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Page précedente</a></span>
     <?php } //END Systeme de pages ?> 
-    </div>
+    </div> 
+    <!-- FIN col-lg-9 -->
   </div>
+  <!-- FIN rows -->
 </div>
+<!-- FIN container-->
+
+
 <?php foreach ($tickets as $key => $ticket) { ?>
 <div id="modal_ticket_<?php echo $tickets[$key]['id']; ?>" class="modal fade">
       <div class="modal-dialog">
@@ -331,7 +326,8 @@ $('.form_reponse').submit(function(e){
                   <h4 class="modal-title">#<?php echo $tickets[$key]['id']; ?> - <?php echo $tickets[$key]['titre_ticket']; ?> par <?php echo $tickets[$key]['pseudo']; ?></h4>
               </div>
               <div class="modal-body">
-                <h3><?php echo $tickets[$key]['titre_ticket'] . ' par ' . '<img width=28 height=28 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $tickets[$key]['pseudo'] . '&s=28"> ' . $tickets[$key]['pseudo'] . ' le '. $tickets[$key]['date_ticket']; ?></h3>
+                  <h3><?php echo $tickets[$key]['titre_ticket'] . ' par ' . '<img width=28 height=28 src="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'getprofileimg/'. $tickets[$key]['pseudo'] . '/26"> ' . $tickets[$key]['pseudo'] . ' le '. $tickets[$key]['date_t']; ?></h3>
+                
                 <hr style="margin-left: 2.3%;width: 95%;margin-top: 5px;margin-bottom: 10px;">
                 <div class="content_ticket">
                 <p>
@@ -344,11 +340,11 @@ $('.form_reponse').submit(function(e){
                   <?php foreach($tickets[$key]['rep'] as $rep){ ?>
                     <div id="r_c_<?php echo $rep['id'];?>">
                       <h4 style="margin-left: 2.3%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;"><?php if ($rep['role'] != 0){?><span class="bold"><?php echo $controleur_def->getRoleNameById($controleur_def->bddConnexion(), $rep['role']);?> : </span><?php }?>
-                      <?php echo $rep['pseudo'];?>, le <?php echo $rep['date_reponse'];?></h4>
+                      <?php echo $rep['pseudo'];?>, le <?php echo $rep['date_rep'];?></h4>
                       <hr style="margin-left: 5%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;">
                       <span style="margin-left: 5%;width: 92,5%;margin-top: 5px;"><?php echo $rep['contenu_reponse'];?></span><br/><br />
                       <?php 
-                      if ($_SESSION['user']->getRoleLevel($controleur_def->bddConnexion()) >= $controleur_def->getRoleLevel($controleur_def->bddConnexion(), $rep['role'])){?> 
+                      if ($_SESSION['user']->getLevel() >= $controleur_def->getRoleLevel($controleur_def->bddConnexion(), $rep['role'])){?> 
                         <p class="text-right bold" style="margin-left: 5%;width: 92,5%;margin-top: 5px;margin-bottom: 10px;"><em><a href="#" id="d_r_<?php echo $rep['id'];?>" class="bold">Supprimer cette réponse.</a></em></p>
                       <?php } ?>
                     </div>
@@ -357,14 +353,16 @@ $('.form_reponse').submit(function(e){
                 </div>
                 <div id="r_<?php echo $tickets[$key]['id']; ?>" class="response" <?php if ($tickets[$key]['status'] == 2){?>style="display: none;"<?php } ?>>
                   <hr style="margin-top: 20px">
-                    <a href="#" class="bold rep_<?php echo $tickets[$key]['id']; ?>"><h4 class="text-center bold">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></a>
+                    <a href="#" class="bold rep" id="rep_<?php echo $tickets[$key]['id']; ?>" data="<?php echo $tickets[$key]['id']; ?>"><h4 class="text-center bold">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></a>
                   <hr style="margin-bottom: 5px;">
                   <div class="center" id="rep_div_<?php echo $tickets[$key]['id']; ?>" style="display: none;">
                       <br />
                       <form method="post" action="" class="form_reponse">
                       <label for="form-control col-sm-2">Votre réponse :</label>
-                      <textarea class="form-control t_r" cols="25" rows="6" name="content_post"></textarea><br />
+                      <textarea class="form-control t_r" cols="25" rows="6" name="content_post"  id="<?php echo $tickets[$key]['id']; ?>"></textarea><br />
                       <input type="hidden" class="hidden_id" value="<?php echo $tickets[$key]['id']; ?>"/>
+                      <input type="hidden" class="hidden_url" id="hidden_url_<?php echo $tickets[$key]['id']; ?>" value="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_r/<?php echo $tickets[$key]['id']; ?>"/>
+                      <input type="hidden" class="hidden_pseudo" id="hidden_pseudo_<?php echo $tickets[$key]['id']; ?>" value="<?php echo$_SESSION['pseudo']; ?>"/>
                       <button type="submit" class="btn pull-right btn-danger sub acc">Valider</button>
                     </form>
                     <br /><br />
@@ -387,28 +385,10 @@ $('.form_reponse').submit(function(e){
           </div>
       </div>
   </div>
-  <script>
-    //MODAL View ticket
-    $(".v_<?php echo $tickets[$key]['id']; ?>").click(function(){
-      $("#modal_ticket_<?php echo $tickets[$key]['id']; ?>").modal('show');
-    });
-    //END modal
-    //REPONSE DANS MODAL TICKET
-    $(".rep_<?php echo $tickets[$key]['id']; ?>").click(function(){
-      if ($('#rep_div_<?php echo $tickets[$key]['id']; ?>').is(":hidden")){
-        $('.rep_<?php echo $tickets[$key]['id']; ?>').html('<h4 class="text-center">Répondre... <i class="fa fa-arrow-up" aria-hidden="true"></i></h4>');
-        $('#rep_div_<?php echo $tickets[$key]['id']; ?>').show();
-      }else {
-        $('.rep_<?php echo $tickets[$key]['id']; ?>').html('<h4 class="text-center">Répondre... <i class="fa fa-arrow-down" aria-hidden="true"></i></h4>');
-        $('#rep_div_<?php echo $tickets[$key]['id']; ?>').hide();
-      }
-    });
-    //END REPONSE
-  </script>
 
   <?php 
   //Systeme de fermeture de tickets
-    if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $tickets[$key]['pseudo'])) {?>
+    if ((isset($_SESSION['user']) && $_SESSION['user'] && $_SESSION['user']->getLevel() >= 2) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $tickets[$key]['pseudo'])) {?>
           <script>
           $(".d_<?php echo $tickets[$key]['id']; ?>").click(function(){
               $.ajax({
@@ -417,6 +397,7 @@ $('.form_reponse').submit(function(e){
                  success: function (data_rep) {
                     if (data_rep != "Success"){
                       alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
+                      console.log(data_rep);
                     }else {                   
                       $(".d_<?php echo $tickets[$key]['id'];?>_text").html('<i class="fa fa-times" aria-hidden="true"></i>  Le ticket est déjà fermé');
                       $("#r_<?php echo $tickets[$key]['id']; ?>").hide();
@@ -431,7 +412,7 @@ $('.form_reponse').submit(function(e){
     <?php }
     //Systeme de suppression des reponses par ticket
     foreach($tickets[$key]['rep'] as $rep){  
-      if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $rep['pseudo'])) {?>
+      if ((isset($_SESSION['user']) && $_SESSION['user'] && $_SESSION['user']->getLevel() >= 2) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $rep['pseudo'])) {?>
             <script>
             $("#d_r_<?php echo $rep['id']; ?>").click(function(){
                 $.ajax({
@@ -456,57 +437,4 @@ $('.form_reponse').submit(function(e){
     } //End Foreach (reponses)
    } //End Foreach (modal)?> 
 </div>
-<script>
-//Ajout d'une réponse
-$('.form_reponse').submit(function(e){
-  e.preventDefault();
-  $.ajax({
-      url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_r/' + $('input[class="hidden_id"]', this).val(),
-      type : 'POST',
-      data : 'pseudo=<?php echo $_SESSION['pseudo']; ?>&content=' + $('textarea[name="content_post"]', this).val(),
-      dataType : 'html',
-      success: function (data_rep){
-        if (data_rep != "Success"){
-          debugger;
-          alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-        }else {
-          debugger;
-          location.reload(true);
-        }
-      },
-      error: function (data_rep) {
-        alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-      }     
-  });
-});
-//END ADD         
-</script>
 <?php } ?>
-<script>
-  $('.addTicket').click(function(){
-    $('#create_ticket').modal('show');
-  });
-  $('#newticket_form').submit(function(e){
-    e.preventDefault();
-    if ($("#title").val() == "" || $("#content").val() == ""){
-      $("#champs_newticket").css("display", "block");
-    }else {
-      $.ajax({
-        url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>support/a/a_t/',
-        type : 'POST',
-        data : 'title=' + $('input[name="title"]', this).val() + '&content=' + $('textarea[name="content"]', this).val(),
-        dataType : 'html',
-        success: function (data_rep){
-          if (data_rep != "Success"){
-            alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-          }else {
-            location.reload(true);
-          }
-        },
-        error: function (data_rep) {
-          alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-        }     
-    });
-    }
-  });
-</script>

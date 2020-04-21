@@ -8,7 +8,10 @@ class ini
 	var $ini;
 	var $filename;
  
-	public function ini ($filename, $commentaire = false) {
+	function __construct($filename, $commentaire = false){
+		$this->ini($filename, $commentaire = false);
+	}
+	private function ini ($filename, $commentaire = false) {
 		$this->filename = $filename;
 		$this->ini = (!$commentaire) ? ' ' : ';'.$commentaire;
 	}

@@ -1,7 +1,7 @@
 <?php
-global $infos, $lastactions, $pseudo, $not_user, $can_ban;
-
-if (empty($infos)){?>
+global $infos, $lastactions, $pseudo, $not_user, $can_ban, $not_found, $Serveur_Config;
+ 
+if (empty($infos) || $not_found){?>
     <div id="emptyServer">
     <br />
     <h1>Erreur !</h1>
@@ -25,8 +25,10 @@ if (empty($infos)){?>
   <h1 class="text-center">Informations sur le compte de <?php echo $pseudo; ?></h1>
   <br /><br />
   <div class="row">
-    <div class="col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2">
-        <img class="img-responsive img-rounded" src="http://api.diamondcms.fr/skin.php?id=<?php echo $Serveur_Config['id_cms']; ?>&u=<?php echo $pseudo; ?>&s=500">
+    <div class="col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2"><!--
+        <img class="img-responsive img-rounded" src="<?php echo $Serveur_Config['api_url']; ?>skin.php?id=<?php echo $Serveur_Config['id_cms']; ?>&u=<?php echo $pseudo; ?>&s=500">
+        -->
+        <p style="text-align: right;"><br><img class="" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $pseudo; ?>/200"></p>
     </div>
     <div class="col-sm-4 col-lg-4">
         <h2>Infos : </h2>
@@ -37,13 +39,13 @@ if (empty($infos)){?>
           <?php if (!$not_user){ ?>
            <strong>Email :</strong> <?php echo $infos[0]['email'];?><br/>
           <?php }else { ?>
-           <strong>Email :</strong> Nous ne divulgons pas les emails de nos memebres.<br/>
+           <strong>Email :</strong> Nous ne divulguons pas les emails de nos membres.<br/>
           <?php } ?>
            <strong>Nombre de votes :</strong> <?php echo $infos[0]['votes'];?><br/>
            <strong>Argent en ligne :</strong> <?php echo $infos[0]['money'];?> <?php echo $Serveur_Config['Serveur_money'];?>(s)<br/>
            <strong>Pseudo :</strong> <?php echo $infos[0]['pseudo'];?><br/>
            <strong>Inscrit le :</strong> <?php echo $infos[0]['date_inscription'];?><br/>
-           <strong>Admin :</strong> <?php if ($infos[0]['admin'] == 1){ echo "Oui"; }else { echo "Non"; }?><br/>
+           <strong>Rang :</strong> <?php echo $infos[0]['grade']; ?><br/>
            <?php if (!$not_user){ ?>
               <strong><a href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT; ?>compte/deconnexion/" class="bold">Se déconnecter...</a></strong><br/>
            <?php } ?>
@@ -53,24 +55,55 @@ if (empty($infos)){?>
   <?php if ($can_ban){?>
     <hr>
     <p class="text-center"><a class="ban" href="#" style="text-decoration: none; color: black;"><i class="fa fa-ban text-danger" aria-hidden="true"></i> Bannir cet utilisateur</a> - 
-    <a class="supp" href="#" style="text-decoration: none; color: black;"><i class="fa fa-trash-o fa-lg"></i> Supprimer toutes ses interventions</a></p>
+    <a class="supp" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/supp/<?php echo $infos[0]['pseudo']; ?>/" href="#" style="text-decoration: none; color: black;"><i class="fa fa-trash-o fa-lg"></i> Supprimer toutes ses interventions</a></p>
     <?php if (!$not_user){?>
-      <p class="text-center text-danger">Se bannir sois-même est une idée comme une autre.</p>
+      <p class="text-center text-danger">Se bannir soi-même est une idée comme une autre.</p>
     <?php } ?>
   <?php }else {?>
     <p class="text-center text-danger">Vous n'avez pas l'autorisation de bannir ce compte.</p>
   <?php } ?>
-  <?php if ($can_ban && $not_user){ ?>
-    <script>
-        $(".ban").click(function(){
-           $("#ban_modal").modal('show');
-        });
-        $(".supp").click(function(){
-           $("#supp_modal").modal('show');
-        });
-    </script>
-  <?php } // $can_ban && not_user ?>
   <hr>
+  <?php 
+  //Affichage de l'interface pour modifier le compte
+  if (!$not_user){ ?>
+    <div class="container">
+      <div class="rows">
+            <h3 class="text-center">Modifier votre profil :</h1><br>
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+            <div class="col-lg-8">
+              <form method="POST" action="" enctype="multipart/form-data" class="" id="modify_profil">
+                <div class="form-group row">
+                  <label for="pseudo" class="col-sm-2 col-form-label">Pseudo</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="pseudo" id="pseudo" value="<?= $infos[0]['pseudo']; ?>">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="email" name="email" value="<?= $infos[0]['email']; ?>">
+                  </div>
+                </div>
+                <?php if (!$Serveur_Config['en_minecraft_profile']){ ?>
+                  <div class="form-group row">
+                    <label for="img" class="col-sm-2 col-form-label">Photo de profil</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control-file" placeholder="file" name="img" id="img">
+                      <small id="imgHelpBlock" class="form-text text-muted">
+                        Vous pouvez renvoyer ce formulaire sans impacter votre photo de profil en laissant ce champ vide.<br>
+                        <span style="color: red;">Attention ! Votre photo de profil doit <strong>impérativement être un carré</strong> et être un png ou un jpeg</span>
+                      </small>
+                    </div>
+                  </div>
+                  <p style="text-align: right;"><button type="submit" id="submit-all" class="btn btn-success btn-md">Envoyer</button></P>
+                <?php } ?>
+              </form>
+            </div><!-- ./col-lg-8 -->
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+      </div><!-- ./rows -->
+    </div><!-- ./container -->
+    <hr>
+  <?php } ?>
   <?php if (!$not_user){ ?>
     <h2 class="text-center">Vos dernières interventions :</h1>
   <?php }else { ?>
@@ -99,6 +132,8 @@ if (empty($infos)){?>
   margin: auto;
 }
 </style>
+<?php if ($can_ban && $not_user){ ?>
+<!-- Ban modal -->
 <div id="ban_modal" class="modal fade">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -115,54 +150,14 @@ if (empty($infos)){?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default">Fermer</button>
-          <!--<a href="#" id="ban_button">--><button type="button" class="btn btn-danger" id="ban_button">Valider</button><!--</a> -->
+          <button type="button" class="btn btn-danger" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/ban/<?php echo $infos[0]['pseudo']; ?>/" id="ban_button">Valider</button>
         </div>
       </div>
   </div>
 </div>
+<!-- END Ban modal -->
+<?php } // $can_ban && not_user ?>
 
-<script>
-$("#ban_button").click(function(){
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/ban/<?php echo $infos[0]['pseudo']; ?>/',
-    type : 'POST',
-    data : 'reason=' + $('#reason').val(),
-    dataType : 'html',
-    success: function (data_rep) {
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }else {    
-        $(".content-page").hide();               
-        $(".ban_user").show();
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-  $("#ban_modal").modal('hide');
-  $('#emptyServer').show();
-  $('.content-page').hide();
-});
-$(".supp").click(function(){
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>compte/supp/<?php echo $infos[0]['pseudo']; ?>/',
-    type : 'GET',
-    dataType : 'html',
-    success: function (data_rep) {
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }else {    
-        alert("Utilisateur purgé, actualisation de la page...");
-        location.reload();
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-});
-</script>
 <?php if ($can_ban && $not_user) { ?>
   <div id="emptyServer" style="display: none;">
       <br />

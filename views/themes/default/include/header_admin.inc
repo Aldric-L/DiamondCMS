@@ -191,7 +191,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <center><img class="img-rounded" src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms']; ?>&u=<?php echo $_SESSION['pseudo']; ?>&s=100"></center>
+                            <center><img class="img-rounded" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $_SESSION['pseudo']; ?>/100"></center>
                             <h3 class="text-center">Goug3</h3>
                         </li>
                         <li>
@@ -204,19 +204,46 @@
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/notify/"><i class="fa fa-quote-right" aria-hidden="true"></i> Notifications </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/news/"><i class="fa fa-info-circle" aria-hidden="true"></i> News </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-users"></i> Gestion des utilisateurs <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/comptes/list/"><i class="fa fa-users"></i> Tous les comptes</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/comptes/permissions/"><i class="fa fa-wrench"></i> Gestion des roles</a></a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Configuration du CMS<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/">Configuration générale</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/cgu/">Page CGU/CGV</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/m-legal/">Page Mentions légales</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/reglement/">Page Règlement</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/jouer/">Fenêtre jouer</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/faq/">Page FAQ</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/images/"><i class="fa fa-image"></i> Gestionnaire d'images</a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

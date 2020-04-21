@@ -2,19 +2,24 @@
 /**
  * isAccount - Fonction pour savoir si le couple pseudo-mot de passe est bon
  * @author Aldric.L
- * @copyright Copyright 2016-2017 Aldric L.
+ * @copyright Copyright 2016-2017 Aldric L. 2020
  * @return boolean
  * @access public
  */
-function isAccount($db, $Serveur_config, $pseudo, $mdp){
+function isAccount($db, $Serveur_config, $pseudo, $mdp, $salt){
   //On hâche le mot de passe pour pouvoir le comparé à ceux stoqués dans la BDD
-  $password = sha1(htmlspecialchars($mdp));
+  if (empty($salt)){
+    $m = $mdp;
+  }else {
+    $m = $mdp + $salt;
+  }
+  $password = sha1(htmlspecialchars($m));
 
   //On protege le pseudo
   $pseudo_co = htmlspecialchars($pseudo);
 
   //On récupère tous les membres ayants le pseudo $pseudo et le mot de passe $mdp
-  $req = $db->prepare('SELECT id, pseudo, admin, ip FROM d_membre WHERE pseudo = :pseudo AND password = :password');
+  $req = $db->prepare('SELECT id, pseudo, ip FROM d_membre WHERE pseudo = :pseudo AND password = :password');
 
   //On passe les paramètres
   $req->bindParam(':pseudo', $pseudo_co, PDO::PARAM_STR);
@@ -43,9 +48,7 @@ function isAccount($db, $Serveur_config, $pseudo, $mdp){
         //return false;
       }
     }
-    if ($rep['admin'] == true){
-      $_SESSION['admin'] = $rep['admin'];
-    }
+
     if ($rep['ip'] != $_SERVER['REMOTE_ADDR']){
       $db->exec("UPDATE d_membre SET ip =\"{$_SERVER['REMOTE_ADDR']}\" WHERE id = \"{$rep['id']}\"");
     }

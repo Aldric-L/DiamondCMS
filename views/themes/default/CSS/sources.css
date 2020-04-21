@@ -3,6 +3,20 @@
  Exclusivement réservé à une utilisation normale de DiamondCMS
  Copyright Aldric L. (GougDEV)
 */
+/* Ces polices sont stockées "au cas où", mais on préfère les charger depuis l'API google font dans le header
+@font-face {
+  font-family:'BreeSerif';
+  src: url('fonts/BreeSerif-Regular.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+@font-face {
+  font-family:'Raleway-Light';
+  src: url('fonts/Raleway-Light.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+*/
 body {
   line-height: 1.6;
   -ms-overflow-style: scrollbar;
@@ -227,28 +241,16 @@ li.dropdown.open.compte > a.dropdown-toggle:hover {
 li.dropdown.compte > a.dropdown-toggle {
   padding-top: 10px;
 }
-@media (min-width: 1300px){
+@media (min-width: 1400px){
   .navbar{
     padding-left: 14%;
     padding-right: 14%;
   }
 }
-@media (max-width: 1300px){
-  .navbar{
-    padding-left: 12%;
-    padding-right: 12%;
-  }
-}
-@media (max-width: 1138px){
+@media (min-width: 1200px){
   .navbar{
     padding-left: 8%;
     padding-right: 8%;
-  }
-}
-@media (max-width: 870px){
-  .navbar{
-    padding-left: 2%;
-    padding-right: 2%;
   }
 }
 

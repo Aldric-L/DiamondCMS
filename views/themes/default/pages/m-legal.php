@@ -7,5 +7,5 @@
 </div>
 <div class="content-container">
     <h1>Mentions légales :</h1>
-    <?php require ROOT . "config/m-legal.ftxt"; ?>
+    <?php echo file_get_contents(ROOT . "config/m-legal.ftxt"); ?>
 </div>  

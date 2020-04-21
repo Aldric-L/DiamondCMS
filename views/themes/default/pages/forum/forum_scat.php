@@ -11,12 +11,12 @@
     <?php
     
     foreach ($posts as $post) {
-      echo '<tr><a class="forum-a" href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/com/'. $post['id'] .'"><td><img width=54 height=54 src="http://api.diamondcms.fr/face.php?id='. $Serveur_Config['id_cms'] . '&u='. $post['user'] . '&s=64"></a></td>';
-      echo '<td><a class="forum-a" href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/com/'. $post['id'] .'"><span style="font-weight: bold;">'. $post['titre_post'] . ' | Par ' . $post['user'] . ' le ' . $post['date_post'] . '</span><br />' . $post['content_post'];
+      echo '<tr><a class="forum-a" href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/com/'. $post['id'] .'"><td><img width=54 height=54 src="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT .'getprofileimg/' . $post['user'] . '/64"></a></td>';
+      echo '<td><a class="forum-a" href="' . $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/com/'. $post['id'] .'"><span style="font-weight: bold;">'. $post['titre_post'] . '</span><br />Par <strong>' . $controleur_def->echoRoleName($controleur_def->bddConnexion(), $post['user']) . $post['user'] . '</strong> le ' . $post['date_post'];
       echo '</td>'; 
       echo '<td>' . $post['nb_rep'] . ' réponses</td>';
       echo '</a></tr>';
-    }     
+    }    
     ?>
   </table>
 <?php global $pages, $cur_page; if ($pages != 1){

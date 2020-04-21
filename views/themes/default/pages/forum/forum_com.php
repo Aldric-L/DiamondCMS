@@ -1,10 +1,10 @@
-<?php global $post, $posts, $coms, $sous_cat, $resolu, $cat;?>
+<?php global $post, $posts, $coms, $sous_cat, $resolu, $cat, $Serveur_Config, $controleur_def; ?>
 <style>
 @media (min-width: 1400px){
   .content-container-forum {
-    margin-left: 25%;
-    margin-right: 25%;
-    width: 50%;
+    margin-left: 18%;
+    margin-right: 18%;
+    width: 64%;
     /*border: 1.8px dotted #197d62;
     /*border-radius: 20px;*/
     height: 100%;
@@ -14,19 +14,6 @@
   }
 }
 @media (max-width: 1200px){
-  .content-container-forum {
-    margin-left: 20%;
-    margin-right: 20%;
-    width: 60%;
-    /*border: 1.8px dotted #197d62;
-    /*border-radius: 20px;*/
-    height: 100%;
-    background-color: white;
-    margin-top: 2%;
-    margin-bottom: 2%;
-  }
-}
-@media (max-width: 1000px){
   .content-container-forum {
     margin-left: 15%;
     margin-right: 15%;
@@ -39,11 +26,11 @@
     margin-bottom: 2%;
   }
 }
-@media (max-width: 800px){
+@media (max-width: 1000px){
   .content-container-forum {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 100%;
     /*border: 1.8px dotted #197d62;
     /*border-radius: 20px;*/
     height: 100%;
@@ -52,6 +39,7 @@
     margin-bottom: 2%;
   }
 }
+
 </style>
 <div id="fh5co-page-title">
   <div class="overlay"></div>
@@ -60,10 +48,15 @@
   </div>
 </div>
 <div class="content-container-forum">
-  <div id="f_cat"><h3><?php echo $post['titre_post'] . ' par <a style="text-decoration: underline;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' .$post['user'] . '">' . $post['user'] .  '</a> le '. $post['date_post']; ?></h3></div>
+  <?php if ($post['user'] != "Utilisateur inconnu"){ ?>
+    <div id="f_cat"><h3><?php echo $post['titre_post'] . ' par <a style="text-decoration: underline;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' .$post['user'] . '">' . $post['user'] .  '</a> le '. $post['date_post']; ?></h3></div>
+  <?php }else { ?>
+    <div id="f_cat"><h3><?php echo $post['titre_post'] . ' par ' . $controleur_def->echoRoleName($controleur_def->bddConnexion(), $post['user']) . $post['user'] .  ' le '. $post['date_post']; ?></h3></div>
+  <?php } ?>
   <table class="table table-forum">
     <tr>
-      <td class='border'><img width=100 height=100 src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'] . '&u='. $post['user']; ?>&s=100"></td>
+        <td class='border'><img width=100 height=100 src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $post['user']; ?>/100"></td>
+      
       <td class="text-justify"><?php echo $post['content_post']; ?><br /><?php
       if ($resolu) {?>
         <span class="bold" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i>Resolu</span>
@@ -85,10 +78,15 @@
   </table>
   <br />
   <?php $i =1; foreach ($coms as $key => $com) {?>
-    <div id="f_com" class="<?php echo $i; ?>"><h3>En réponse à <?php echo $post['titre_post'] . ' par <a style="text-decoration: underline;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' . $com['user'] . '">' . $com['user'] . '</a> le '. $com['date_com']; ?></h3></div>
+    <?php if ($com['user'] != "Utilisateur inconnu"){ ?>
+      <div id="f_com" class="<?php echo $i; ?>"><h3>En réponse à "<?php echo $post['titre_post'] . '" par <a style="text-decoration: none;" class="no" href="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' . $com['user'] . '">'  . $com['role'] . '<span style="text-decoration: underline;">' . $com['user'] . '</span>' . '</a> le '. $com['date_com']; ?></h3></div>
+    <?php } else { ?>
+      <div id="f_com" class="<?php echo $i; ?>"><h3>En réponse à "<?php echo $post['titre_post'] . '" par ' . $com['role'] . $com['user'] . ' le '. $com['date_com']; ?></h3></div>
+    <?php } ?>
+    
     <table class="table table-forum-com <?php echo $i; ?>">
       <tr>
-        <td class='border'><img width=90 height=90 src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'] . '&u='. $com['user']; ?>&s=90"></td>
+        <td class='border'><img width=90 height=90 src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $com['user']; ?>/90"></td>
         <td class="text-justify"><?php echo $com['content_com']; ?><?php
         if ((isset($_SESSION['admin']) && $_SESSION['admin']) || (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == $com['user'])) {?>
           <br /><span class="bold" style="float: right; color: red;"><a id="dl_<?php echo $com['id']; ?>" class="bold" style="color: red;" href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>

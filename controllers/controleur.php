@@ -9,8 +9,10 @@
   class Controleur{
     private $Serveur_Config = array();
     private $content_errors_file;
+    private $bdd;
     public $errors = array();
     public $css;
+    public $js = array();
     public $title;
 
       //Le constructeur pour récupérer Serveur_Config
@@ -22,7 +24,7 @@
       }
 
       //Pour charger un model
-      function loadModel($model){
+      public function loadModel($model){
         //Si le fichier existe...
         if (file_exists(ROOT . 'models/' . $model . '.php')){
           //... on le charge
@@ -31,7 +33,7 @@
       }
 
       //Pour charger une vue
-      function loadView($view, $lcss=false, $ltitle=false){
+      public function loadView($view, $lcss=false, $ltitle=false){
         //Si un CSS est demandé :
         if (isset($lcss) && $lcss != false){
           //on le charge pour le réutiliser dans le header
@@ -55,8 +57,17 @@
 
       }
 
+       //Pour charger un fichier JS particulier
+       public function loadJS($js){
+        //Si le fichier existe ...
+        if (file_exists(ROOT . 'js/themes/'. $this->Serveur_Config['theme'] . '/' . $js . '.js')){
+          array_push($this->js, $this->Serveur_Config['protocol'] . '://' .$_SERVER['HTTP_HOST'] . WEBROOT .'js/themes/'. $this->Serveur_Config['theme'] . '/' . $js . '.js');
+        }
+
+      }
+
       //Pour charger une vue admin
-      function loadViewAdmin($view, $lcss=false, $ltitle=false){
+      public function loadViewAdmin($view, $lcss=false, $ltitle=false){
         //Si un CSS est demandé :
         if (isset($lcss) && $lcss != false){
           //on le charge pour le réutiliser dans le header
@@ -81,17 +92,22 @@
       }
 
       //Pour ce connecter à la base de donnée
-      function bddConnexion(){
+      public function bddConnexion(){
         require_once(ROOT . 'models/bdd_connexion.php');
         //On crée une connexion PDO
-        $bdd = new BDD(parse_ini_file(ROOT . "config/bdd.ini", true));
-        return $bdd->getPDO();
+        $this->bdd = new BDD(parse_ini_file(ROOT . "config/bdd.ini", true));
+        return $this->bdd->getPDO();
+      }
+
+      //Pour récuperer une instance de la class BDD (pour par exemple acceder à la config)
+      public function getBDD(){
+        return $this->bdd;
       }
 
       /**
       * @access private
       **/
-      function loadCSS($css, $admin=false){
+      private function loadCSS($css, $admin=false){
           if ($admin){
             //Si le fichier CSS existe ...
             if (file_exists(ROOT . '/views/themes/'. $this->Serveur_Config['theme'] . '/CSS/admin/' . $css . '.css')){
@@ -108,7 +124,7 @@
           
       }
 
-      function log($error_code) {
+      public function log($error_code) {
           if (!empty($_SESSION['pseudo'])){
       	    file_put_contents(ROOT . 'logs/errors.log', $error_code . " - " . date("j/m/y à H:i:s") .  " - Envoyé à l'utilisateur ". $_SESSION['pseudo'] . " sur la page : ". str_replace(WEBROOT, '', $_SERVER['REQUEST_URI']) . ") \r\n".file_get_contents("logs/errors.log"));
           }else {
@@ -116,7 +132,7 @@
           }
     	 }
 
-      function addError($code_error){
+      public function addError($code_error){
         @$this->isValid();
         if (array_key_exists($code_error, $this->content_errors_file)){
           array_push($this->errors, $this->content_errors_file[$code_error] . "</span> <span>(Code d'erreur " . $code_error . ".)");
@@ -158,17 +174,17 @@
       }
 
       function getnotify($user){
-        $notifications = select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", $user), "AND", array("view", "!=", 1)));
+        $notifications = simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", $user), "AND", array("view", "!=", 1)));
         if (!empty($notifications)){
           foreach ($notifications as $not){
             $this->bddConnexion()->exec("UPDATE d_notify SET view = 1 WHERE id = " . $not['id']);
           }
-        }
+        } 
         return $notifications;
       }
 
       function getnotifyadmin(){
-        return select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")));
+        return simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")));
       }
 
       function getRole($db, $pseudo){
@@ -193,17 +209,49 @@
         return $this->role['name'] = $role['name'];
       }
 
-      function getRoleNameById($db, $id_role){
-        $req = $db->prepare('SELECT name FROM d_roles WHERE id = "' . $id_role . '"');
+      /**
+        * getRoleNameById - Fonction pour récuperer le nom d'un role à partir de son id
+        * Cette méthode correspond aux nouvelles normes d'utilisation SQL (2020) en utilisant les fonctions de simplification/sécurisation
+        * @author Aldric.L
+        * @copyright Copyright 2020 Aldric L.
+        * @access public
+        * @return false|array
+        */
+      public function getRoleNameById($db, $id_role){
+        $n = simplifySQL\select($this->bddConnexion(), true, "d_roles", "name", array(array("id", "=", $id_role)));
+        if (!empty($n)){
+          return $n['name'];
+        }else {
+          return false;
+        }
+        
+      }
 
-        //On execute la requete
-        $req->execute();
-        //On récupère tout
-        $role = $req->fetch();
-        //On ferme la requete
-        $req->closeCursor();
-
-        return $role['name'];
+      /**
+        * echoRoleName - Fonction gérant l'affichage des grades devant les pseudos
+        * Cette méthode correspond aux nouvelles normes d'utilisation SQL (2020) en utilisant les fonctions de simplification/sécurisation
+        * @author Aldric.L
+        * @copyright Copyright 2020 Aldric L.
+        * @access public
+        * @return string
+        */
+      public function echoRoleName($db, $pseudo){
+        $r = simplifySQL\select($this->bddConnexion(), true, "d_membre", "role", array(array("pseudo", "=", $pseudo)));
+        if (!empty($r)){
+          $n = simplifySQL\select($this->bddConnexion(), true, "d_roles", "name, level", array(array("id", "=", $r['role'])));
+          if (!empty($n)){
+            if ($n['level'] >= 1){
+              return "[" . $n['name'] . "] ";
+            }else {
+              return "";
+            }
+          }else {
+            return "";
+          }
+        }else {
+          return "";
+        }
+          
       }
       
       function getRoleLevel($db, $id_role){
@@ -216,7 +264,24 @@
         //On ferme la requete
         $req->closeCursor();
 
-        return $role['level'];
+        return $role;
+      }
+      
+      /**
+        * getRoleLevelByPseudo - Fonction pour récuperer le level d'un membre à partir de son pseudo
+        * Cette méthode correspond aux nouvelles normes d'utilisation SQL (2020) en utilisant les fonctions de simplification/sécurisation
+        * @author Aldric.L
+        * @copyright Copyright 2020 Aldric L.
+        * @access public
+        * @return false|array
+        */
+      public function getRoleLevelByPseudo($pseudo){
+        $membre = simplifySQL\select($this->bddConnexion(), true, "d_membre", "role", array(array("pseudo", "=", $pseudo)))['role'];
+        if (!empty($membre)){
+          return simplifySQL\select($this->bddConnexion(), true, "d_roles", "level", array(array("id", "=", $membre)))['level'];
+        }else {
+          return false;
+        }
       }
 
       function isValid(){

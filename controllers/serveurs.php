@@ -1,46 +1,45 @@
 <?php
-//$controleur_def->loadModel('serveurs');
+//Si le module permettant de se lier aux serveurs est activé
+if (defined("DServerLink") && DServerLink == true){
+    //On initie les connexions avec les serveurs liés
+    $linkmc->connect();
 
-if (!empty($param[1])){
-    if ($param[1] == "json" && isset($param[2]) && !empty($param[2])){
-        $servers = $jsonapi->getInfoOnServers(intval($param[2]));
-        $fichier_save = "";
-        //header("Content-type: text/ini");
-        /*foreach($servers as $key => $item_n){
-            $fichier_save .= "\n".$key.' = "'.$item_n . '"';
+    if (!empty($param[1])){
+        //Si on passe en mode transmission de données (AJAX)
+        //et si on cherche à obtenir les informations sur un seul serveur
+        if ($param[1] == "json" && isset($param[2]) && !empty($param[2])){
+            $servers = $linkmc->getInfoOnServer(intval($param[2]));
+            echo json_encode($servers, JSON_NUMERIC_CHECK);
+        //ou si on cherche à obtenir des informations sur tous les serveurs
+        }else if ($param[1] == "json"){
+            $servers = $linkmc->getInfoOnServers();
+            $fichier_save = "";
+            echo json_encode($servers, JSON_NUMERIC_CHECK);
+
+        //Sinon, on passe en mode affichage
+        }else {
+            //On verifie qu'un serveur est bien demandé
+            if (intval($param[1])){
+                $server_id = $param[1];
+                $servers = $linkmc->getInfoOnServer($server_id);
+                $connect = 0;
+                //Si on ne reçoit rien, on considère que le serveur n'est pas connecté
+                if ($servers['results'] == false){
+
+                    $empty = true;
+                    $controleur_def->loadView('pages/serveurs', 'emptyServer', 'Serveurs');
+                    die();
+                }
+                $players = $linkmc->getPlayers(intVal($param[1]));
+                $controleur_def->loadView('pages/serveurs', '', 'Serveurs');
+            }else {
+                header('Location: '. $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT);
+            }   
         }
-        $fichier_save = substr($fichier_save, 1);
-        echo $fichier_save;*/
-        echo /*"data = '" .*/json_encode($servers, JSON_NUMERIC_CHECK)/* . "';" */;
-    }else if ($param[1] == "json"){
-        $servers = $jsonapi->getInfoOnServers();
-        $fichier_save = "";
-        //header("Content-type: text/ini");
-        /*foreach($servers as $key => $item_n){
-            $fichier_save .= "\n".$key.' = "'.$item_n . '"';
-        }
-        $fichier_save = substr($fichier_save, 1);
-        echo $fichier_save;*/
-        echo /*"data = '" .*/json_encode($servers, JSON_NUMERIC_CHECK)/* . "';" */;
+        
     }else {
-        if (intval($param[1])){
-            $server_id = $param[1];
-            $servers = $jsonapi->getInfoOnServers($server_id);
-            $i = $jsonapi->getPlayersOnline();
-            //var_dump($i[0][0]['success'][0]);
-            $connect = 0;
-            if ($servers['Connect'] == false){
-                $empty = true;
-                $controleur_def->loadView('pages/serveurs', 'emptyServer', 'Serveurs');
-                die();
-            }
-            echo is_int($param[1]);
-            $players = $jsonapi->getServeursConnect();
-            var_dump($players);
-            $controleur_def->loadView('pages/serveurs', '', 'Serveurs');
-        }   
+        header('Location: '. $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT);
     }
-    
 }else {
     header('Location: '. $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT);
 }

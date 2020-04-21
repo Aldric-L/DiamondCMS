@@ -8,7 +8,7 @@
   <h2>Le serveur <?php echo $Serveur_Config['Serveur_name']; ?> met à votre disposition un forum.</h2>
   <p class="explicp">Ce forum vous permettra, de "report" des bugs trouvés sur le serveur, demander de l'aide à d'autres joueurs plus expérimentés, de contacter le staff, et bien d'autre.
     N'hesitez pas à nous rejoindre, et à partager votre expérience avec d'autres joueurs</p>
-  <p id="red" class="text-danger"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Attention, tout comportement inaproprié pourra entrainer des sonctions graves.  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></p>
+  <p id="red" class="text-danger"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Attention, tout comportement inaproprié pourra entrainer des sonctions.  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></p>
 </div>
 <div class="content-container-forum">
         <?php

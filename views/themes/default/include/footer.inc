@@ -1,5 +1,6 @@
-<?php global $Serveur_Config;
+<?php global $Serveur_Config, $controleur_def;
 $link = $Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT;
+$js = $controleur_def->js;
 ?>
   <br /></br />
     <footer class="footer-distributed">
@@ -31,11 +32,11 @@ $link = $Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT;
 				</p>
 				<div class="footer-icons">
           <?php if (!empty($Serveur_Config['Social']['gl']) || !empty($Serveur_Config['Social']['fb']) || !empty($Serveur_Config['Social']['tw']) || !empty($Serveur_Config['Social']['yt']) || !empty($Serveur_Config['Social']['discord'])){ ?>
-                <?php if (!empty($Serveur_Config['Social']['gl'])){ ?><a href="<?= $Serveur_Config['Social']['gl']; ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a><?php }?>
-                <?php if (!empty($Serveur_Config['Social']['yt'])){ ?><a href="<?= $Serveur_Config['Social']['yt']; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a><?php }?>
-                <?php if (!empty($Serveur_Config['Social']['fb'])){ ?><a href="<?= $Serveur_Config['Social']['fb']; ?>"><i class="fa fa-facebook"></i></a><?php }?>
-                <?php if (!empty($Serveur_Config['Social']['tw'])){ ?><a href="<?= $Serveur_Config['Social']['tw']; ?>"><i class="fa fa-twitter"></i></a><?php } ?>
-								<?php if (!empty($Serveur_Config['Social']['discord'])){ ?><a href="<?= $Serveur_Config['Social']['discord']; ?>"><img src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/Discord-Logo-White.png" alt="logo discord" width="35px" height="35px"></a><?php } ?> </p><?php
+                <?php if (!empty($Serveur_Config['Social']['gl']) && $Serveur_Config['Social']['gl'] != "disabled"){ ?><a href="<?= $Serveur_Config['Social']['gl']; ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a><?php }?>
+                <?php if (!empty($Serveur_Config['Social']['yt']) && $Serveur_Config['Social']['yt'] != "disabled"){ ?><a href="<?= $Serveur_Config['Social']['yt']; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a><?php }?>
+                <?php if (!empty($Serveur_Config['Social']['fb']) && $Serveur_Config['Social']['fb'] != "disabled"){ ?><a href="<?= $Serveur_Config['Social']['fb']; ?>"><i class="fa fa-facebook"></i></a><?php }?>
+                <?php if (!empty($Serveur_Config['Social']['tw']) && $Serveur_Config['Social']['tw'] != "disabled"){ ?><a href="<?= $Serveur_Config['Social']['tw']; ?>"><i class="fa fa-twitter"></i></a><?php } ?>
+								<?php if (!empty($Serveur_Config['Social']['discord']) && $Serveur_Config['Social']['discord'] != "disabled"){ ?><a href="<?= $Serveur_Config['Social']['discord']; ?>"><img src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/Discord-Logo-White.png" alt="logo discord" width="35px" height="35px"></a><?php } ?> </p><?php
           }?>
 				</div>
 			</div>
@@ -44,6 +45,14 @@ $link = $Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT;
     <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/font_awesome.js"></script>
     <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/bootstrap.js"></script>
     <?php
+
+    //On charge les CSS demandés par le controleur
+    if (!empty($js)){
+      foreach($js as $j){
+        echo '<script src="'. $j . '"></script>';
+      }
+    }
+
     //Code pour charger les plugins js/css
     //On ouvre le dossier
     if($jsfolder = opendir(ROOT . 'js/plugins/listener')){

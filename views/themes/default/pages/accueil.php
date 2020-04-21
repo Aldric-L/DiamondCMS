@@ -20,22 +20,23 @@
     $.ajax({
       url: lien_base + "serveurs/json/"
     }).done(function( arg ) {
-      //console.log(JSON.parse(arg));
+      console.log("AJAX :");
+      console.log(JSON.parse(arg));
       var json_result = JSON.parse(arg);
       console.log(json_result);
       $("#loader").hide();
       $(".request_depend").show();
       
       for (var i = 1; n_serveurs >= i; i++){
-        $("#desc_serveur_".concat(i)).html(json_result[i-1]['Description']);
-        $("#serveur_name_".concat(i)).html(json_result[i-1]['ServerName']);
-        $("#img_serveur_".concat(i)).attr('src', lien_base+"views/uploads/img/" + json_result[i-1]['ImgDesc']);
-        if (json_result[i-1]['Connect'] == false){
+        $("#desc_serveur_".concat(i)).html(json_result[i-1]['desc']);
+        $("#serveur_name_".concat(i)).html(json_result[i-1]['name']);
+        $("#img_serveur_".concat(i)).attr('src', lien_base+"views/uploads/img/" + json_result[i-1]['img']);
+        if (json_result[i-1]['results'] == false){
           $("#slots_serveur_".concat(i)).html('Slots : <span style="color: red;">Déconnecté</span>');
           $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
           $("#link_serveur_".concat(i)).attr('disabled', "");
         }else {
-          $("#slots_serveur_".concat(i)).html('Slots : ' + json_result[i-1]['Players_n'] + " / " + json_result[i-1]['Slots']);
+          $("#slots_serveur_".concat(i)).html('Slots : ' + json_result[i-1]['results']['Players'] + " / " + json_result[i-1]['results']['MaxPlayers']);
           $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: green;">Connecté</span>');
           $("#link_serveur_".concat(i)).attr('href', lien_base+"serveurs/" + i);
         }
@@ -114,15 +115,19 @@
         <?php
         global $staff;
         if (!empty($staff)){
+          $i = 0;
           foreach ($staff as $staffs) {?>
-            <div class="col-sm-4">
-              <p class="text-center"><img class="rounded-circle" src="http://api.diamondcms.fr/face.php?id=<?php echo $Serveur_Config['id_cms'] . '&u=' . $staffs['pseudo']; ?>&s=140" alt="Un membre du staff" width="140" height="140"></p>
+            <div class="col-sm-3">
+              <p class="text-center"><img class="rounded-circle" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $staffs['pseudo']; ?>/140" alt="Un membre du staff" width="140" height="140"></p>
               <h2 class="text-center"><?php echo $staffs['pseudo']; ?></h2>
-              <?php if (!empty($staffs['staff_desc'])){ ?>
-                <p class="text-center"><?php echo $staffs['staff_desc']; ?></p>
-              <?php } ?>
+              <p class="text-center"><?php echo $staffs['role_name']; ?></p>
+              <p class="text-center bree-serif"><a href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'compte/' ?><?php echo $staffs['pseudo']; ?>"><button type="button" class="btn btn-primary acc">Voir le profil</button></a></p>
             </div><!-- /.col-lg-4 -->
-      <?php } }else { ?>
+            <?php $i = $i+1;
+            if ($i == 4){ $i=0; ?>
+              <div class="col-sm-12"><br><br></div>
+              <?php }
+       } }else { ?>
         <p>Aucun membre du staff n'a encore été enregistré !</p>
         <?php } ?>
     </div>
@@ -143,14 +148,25 @@
         <p>Aucune news à afficher...</p>
       <?php }else {
         foreach ($news as $n){ ?>
-          <p class="text-center"><img class="img-rounded" src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>views/uploads/img/<?php echo $n['img'];?>" alt="<?php echo $n['name'];?>"></p>
+        
+        <div class="col-sm-4">
+        <?php if ($n['img'] != "noimg") { ?>
+          <p class="text-center"><img style="width: 400px" class="img-rounded" src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>views/uploads/img/<?php echo $n['img'];?>" alt="<?php echo $n['name'];?>"></p>
+          <?php }else { ?>
+        <p class="text-center" style="font-size: 150px; color: black;"><span>
+          <i class="fa fa-info"></i>
+        </span><p>
+        <?php } ?>
+          
           <p class="text-center news"><?php echo $n['name'];?></p>
           <p class="text-center bold">Le <?php echo $n['date'];?> par <?php echo $n['user'];?></p>
-          <p class="text-center"><?php echo substr($n['content_new'], 0, 70);?>...</p>
           <p class="text-center bree-serif"><a href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'news/' ?><?php echo $n['id']; ?>"><button type="button" class="btn btn-primary acc">En savoir plus...</button></a></p>
+          </div>
         <?php }
        } ?> 
     </div>
+    <div class="col-md-12">
+      
   </div>
   <br />
 </div>

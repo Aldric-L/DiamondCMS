@@ -31,22 +31,25 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
-                                <?php foreach($errors_content as $error){ ?>
-                                <a href="#" class="list-group-item">
-                                    <?php if ($error['0'] == "332 "){?>
-                                        <i class="fa fa-lock fa-fw"></i>
-                                    <?php }else if ($error[0] == "311 "){ ?>
-                                        <i class="fa fa-ban fa-fw"></i>
-                                    <?php }else if ($error[0] == "121 "){ ?>
-                                        <i class="fa fa-ban fa-cogs"></i>
-                                    <?php }else { ?>
-                                        <i class="fa fa-warning fa-fw"></i>
-                                    <?php } ?>
-                                      <?php echo $error[2]; ?> (Erreur n° <?php echo $error['0']; ?>)
-                                    <span class="pull-right text-muted small"><em>le <?php echo $error['1']; ?></em>
-                                    </span>
-                                </a>
-                                <?php } ?>
+                                <?php 
+                                if (isset($errors_content) && !empty($errors_content)){
+                                    foreach($errors_content as $error){ ?>
+                                        <a href="#" class="list-group-item">
+                                            <?php if ($error['0'] == "332 "){?>
+                                                <i class="fa fa-lock fa-fw"></i>
+                                            <?php }else if ($error[0] == "311 "){ ?>
+                                                <i class="fa fa-ban fa-fw"></i>
+                                            <?php }else if ($error[0] == "121 "){ ?>
+                                                <i class="fa fa-ban fa-cogs"></i>
+                                            <?php }else { ?>
+                                                <i class="fa fa-warning fa-fw"></i>
+                                            <?php } ?>
+                                              <?php echo $error[2]; ?> (Erreur n° <?php echo $error['0']; ?>)
+                                            <span class="pull-right text-muted small"><em>le <?php echo $error['1']; ?></em>
+                                            </span>
+                                        </a>
+                                <?php }
+                                 } ?>
                             </div>
                             <!-- /.list-group -->
                         </div>

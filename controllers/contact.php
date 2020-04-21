@@ -1,5 +1,4 @@
 <?php 
-var_dump($_POST);
 if (isset($_POST) && !empty($_POST)
 && isset($_POST['name']) && !empty($_POST['name'])
 && isset($_POST['email']) && !empty($_POST['email'])

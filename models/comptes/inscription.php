@@ -14,15 +14,18 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
       //On test si il n'y a pas de membres enregistrés
       $isMembre = isMembre($db, $pseudo, $email, $_SERVER["REMOTE_ADDR"]);
       if ($isMembre == false){
-        $cryptpsw = sha1($psw);
-        $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, news, date_inscription, ip) VALUES(:pseudo, :email, :password, :news, :date_inscription, :ip)');
+        $uuid = uniqid();
+        $cryptpsw = sha1($uuid + $psw);
+        $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img)');
         $req->execute(array(
           'pseudo' => $pseudo,
           'email' => $email,
+          'salt' => $uuid,
           'password' => $cryptpsw,
           'news' => $news,
           'date_inscription' => date('Y-m-d H:i:s'),
-          'ip' => $_SERVER["REMOTE_ADDR"]
+          'ip' => $_SERVER["REMOTE_ADDR"],
+          'profile_img' => "profiles/no_profile.png"
         ));
       }else {
         return 3;
@@ -44,12 +47,11 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
  */
 function isMembre($db, $pseudo, $email, $ip){
   //On récupère tous les membres ayant le meme pseudo ou email ou la même ip
-  $req = $db->prepare('SELECT id, pseudo, email FROM d_membre WHERE pseudo = :pseudo OR email = :email OR ip = :ip');
+  $req = $db->prepare('SELECT id, pseudo, email FROM d_membre WHERE pseudo = :pseudo OR email = :email');
 
   //On passe les paramètres
   $req->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
   $req->bindParam(':email', $email, PDO::PARAM_STR);
-  $req->bindParam(':ip', $ip, PDO::PARAM_STR);
 
   //On execute la requete
   $req->execute();

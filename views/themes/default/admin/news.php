@@ -13,8 +13,8 @@
                     <div class="panel-heading">
                             Ajouter une news
                         </div>
-                        <div class="panel-body">
-                            <form method="POST" class="" id="form_new_news">
+                        <div class="panel-body" class="">
+                            <form method="POST" action="" enctype="multipart/form-data" class="" id="form_new_news">
                                 <div class="row control-group">
                                     <div class="form-group col-xs-12 floating-label-form-group controls">
                                         <label>Titre de la news</label>
@@ -22,10 +22,13 @@
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-12 floating-label-form-group controls fallback dropzone" id="dz">
-                                    <!--<label>Image</label>
-                                    <input type="file" name="file" />-->
+                                <div class="row control-group">
+                                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                                        <label>Envoyer une image (optionnel)</label>
+                                        <input type="file" class="form-control-file" placeholder="file" name="img" id="img">
+                                    </div>
                                 </div>
+                                <br>
                                 <div class="row control-group">
                                     <div class="form-group col-xs-12 floating-label-form-group controls">
                                         <label>Message</label>
@@ -33,9 +36,16 @@
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
-                                    <button type="submit" class="btn btn-success btn-lg">Envoyer</button>
+                                    <button type="submit" id="submit-all" class="btn btn-success btn-lg">Envoyer</button>
                             </form>
-                            <form action="/upload-target" class="dropzone"></form>
+                            <!--<div class="image_upload_div">
+                                <form action="/" class="dropzone" style="background: none repeat scroll 0 0 white; border: 2px dashed #C0C0C0; border-radius: 5px;" id="dz">
+                                    <div class="dz-message">
+                                        Drop files here or click to upload.<br>
+                                        <span class="note">(This is for demo purpose. Selected files are not actually uploaded.)</span>
+                                    </div>
+                                </form>
+                            </div>-->
                         </div>
                     </div>
         </div>
@@ -78,7 +88,9 @@
                         <h3 class="modal-title"><?php echo $n['name']; ?></h3>
                     </div>
                     <div class="modal-body">
+                        <?php if ($n['img'] != "noimg"){ ?>
                         <p class="text-center"><img class="img-rounded" src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>views/uploads/img/<?php echo $n['img'];?>" alt="<?php echo $n['name'];?>" /></p>
+                        <?php } ?>
                         <h3><?php echo $n['name']; ?><small> par <?php echo $n['user']; ?></small></h3>
                         <p><?php echo $n['content_new']; ?></p>
                     </div>

@@ -1,4 +1,5 @@
-<?php
+<?php global $controleur_def;
+$js = $controleur_def->js;
     //Code pour charger les plugins js/css
     //On ouvre le dossier
     if($jsfolder = opendir(ROOT . 'js/plugins/listener')){
@@ -25,6 +26,13 @@
         echo "<!--Inclusion de " . $count . " plugins javascript ! -->";
       }else {
         echo '<!--Aucun plugin trouvé, chargement des libs de "base" -->';
+      }
+      
+    }
+    //On charge les CSS demandés par le controleur
+    if (!empty($js)){
+      foreach($js as $j){
+        echo '<script src="'. $j . '"></script>';
       }
     }
     ?>

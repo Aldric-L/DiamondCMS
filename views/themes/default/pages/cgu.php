@@ -6,5 +6,5 @@
 </div>
 <div class="content-container">
   <h1>Conditions Génerales d'utilisation et de vente :</h1>
-  <?php require ROOT . "config/cgu.ftxt"; ?>
+  <?php echo file_get_contents(ROOT . "config/cgu.ftxt"); ?>
 </div>

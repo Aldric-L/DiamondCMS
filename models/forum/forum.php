@@ -1,12 +1,22 @@
 <?php
 /**
+ *
+ * Ces fonctions sont quasiment toutes dépréciées :
+ * Désormais, il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
+ * @deprecated 
+ * Elles seront donc supprimées d'ici une prochaine mise à jour. (Dernière édition - avril 2020)
+ */
+
+
+
+/**
  * getPosts - Fonction pour recupérer les derniers posts
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
 function getPosts($db, $id_scat, $min, $limite){
-    $req = $db->prepare('SELECT id, titre_post, user, resolu, content_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post, id_scat, nb_rep FROM d_forum WHERE id_scat = ' . $id_scat . ' ORDER BY date_post DESC LIMIT :min, :limite ');
+    $req = $db->prepare('SELECT id, titre_post, user, resolu, content_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_p, id_scat, nb_rep FROM d_forum WHERE id_scat = ' . $id_scat . ' ORDER BY date_post DESC LIMIT :min, :limite ');
 
     //On passe les paramètres
     $req->bindParam(':min', $min, PDO::PARAM_INT);
@@ -18,7 +28,10 @@ function getPosts($db, $id_scat, $min, $limite){
     $post = $req->fetchAll();
     //On ferme la requete
     $req->closeCursor();
-
+    foreach ($post as $k => $p){
+      $post[$k]['date_post'] = $post[$k]['date_p'];
+    }
+    
     return $post;
 }
 
@@ -72,7 +85,7 @@ function getPost($db, $id_post){
  * @return array
  */
 function getComs($db, $id_post){
-    $req2 = $db->prepare('SELECT id, content_com, user, admin, DATE_FORMAT(date_comment, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_com');
+    $req2 = $db->prepare('SELECT id, content_com, user, admin, DATE_FORMAT(date_comment, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_comment');
 
     //On passe les paramètres
     $req2->bindParam(':id_post', $id_post, PDO::PARAM_INT);
@@ -113,7 +126,7 @@ function newCom($db, $id_post, $pseudo, $content){
       'admin' => 0
     ));
   }
-  $select = select($db, true, "d_forum", array("id", "nb_rep"), array("id", "=", $id_post));
+  $select = simplifySQL\select($db, true, "d_forum", array("id", "nb_rep"), array("id", "=", $id_post));
   //var_dump($select);
   if (!empty($select)){
     $req = $db->exec('UPDATE d_forum SET nb_rep = ' . ($select["nb_rep"]+1) . ' WHERE id=' . $select["id"]);
@@ -127,6 +140,7 @@ function newCom($db, $id_post, $pseudo, $content){
  * @return void
  */
 function newPost($db, $title, $pseudo, $content, $scat){
+  var_dump($db, $title, $pseudo, $content, $scat);
   //Pour mettre a jour le nombre de post de la sous_cat
   $select = $db->query('SELECT * FROM d_forum WHERE id_scat=' . $scat . '');
   $rep = $select->fetch();
@@ -163,7 +177,7 @@ function newPost($db, $title, $pseudo, $content, $scat){
   * @return bool
   */
   function is_solved($db, $id_post){
-    $rep = select($db, true, "d_forum", "resolu", array(array("id", "=", $id_post)));
+    $rep = simplifySQL\select($db, true, "d_forum", "resolu", array(array("id", "=", $id_post)));
     if ($rep['resolu'] == 1){
       return true;
     }else {
@@ -178,7 +192,7 @@ function newPost($db, $title, $pseudo, $content, $scat){
    */
   function delSubject($db, $id){
     //Je récupère les infos de l'ancien post (scat, ...)
-    $rep_s = select($db, true, "d_forum", "*", array(array("id", "=", $id)));
+    $rep_s = simplifySQL\select($db, true, "d_forum", "*", array(array("id", "=", $id)));
     
     //Je le supprime
     $req = $db->prepare('DELETE FROM d_forum WHERE id = :id');
@@ -199,8 +213,8 @@ function newPost($db, $title, $pseudo, $content, $scat){
   }
 
   function delCom($db, $id){
-    $com_post = select($db, true, "d_forum_com", "*", array(array("id", "=", $id)));
-    $sujet = select($db, true, "d_forum", "*", array(array("id", "=", $com_post["id_post"])));
+    $com_post = simplifySQL\select($db, true, "d_forum_com", "*", array(array("id", "=", $id)));
+    $sujet = simplifySQL\select($db, true, "d_forum", "*", array(array("id", "=", $com_post["id_post"])));
 
     if (!isset($com_post) || empty($com_post) || $com_post == null || $com_post = false){
       return false;

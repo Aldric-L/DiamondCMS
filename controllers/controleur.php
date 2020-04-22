@@ -140,7 +140,7 @@
           return true;
         }else {
           array_push($this->errors, "Une erreur inconnue est survenue.</span> <span>(Code d'erreur 121.)");
-          $this->log("121 (Erreur première : " . $code_error . ")");
+          $this->log("121 (Erreur : " . $code_error . ")");
           return false;
         }
       }

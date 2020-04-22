@@ -1,6 +1,6 @@
 //On utilise cette ligne pour verifier qu'aucun autre code n'ai changé la valeur de $
 jQuery(function ($){
-    $(".supp_img").click(function(){
+    $(".supp_contact").click(function(){
       var id = $(this).attr('id');
       var link = $(this).attr('data');
       console.log(link);
@@ -14,8 +14,8 @@ jQuery(function ($){
               console.log(data_rep);
               alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
             }else {    
-              $('#modal_img_' + id).modal('hide');
-              $('#line_' + id).remove();
+              $('#contact_modal_' + id).modal('hide');
+              $('#contact_line_' + id).remove();
             }
           },
           error: function() {
@@ -25,7 +25,7 @@ jQuery(function ($){
     });
 
 
-    $('.img_preview').click(function(){
-      $('#modal_img_' + $(this).attr('data')).modal('show');
+    $('.contact_modal_link').click(function(){
+      $('#contact_modal_' + $(this).attr('data')).modal('show');
     });
 });

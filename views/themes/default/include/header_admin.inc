@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta lang="fr">
-    <meta name="author" content="DiamondCMS, par GougDEV pour <?= $Serveur_Config['Serveur_name']; ?>">
+    <meta name="author" content="DiamondCMS, pour <?= $Serveur_Config['Serveur_name']; ?>">
     <link rel="icon" type="image/png" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>.png" />
 
     <!-- Title -->
@@ -239,11 +239,17 @@
                                 <li>
                                     <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/faq/">Page FAQ</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/forum/">Page Forum</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/images/"><i class="fa fa-image"></i> Gestionnaire d'images</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/contact/"><i class="fa fa-inbox"></i> Contact</a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

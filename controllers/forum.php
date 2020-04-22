@@ -78,7 +78,7 @@ if (!isset($param[1]) || empty($param[1])){
   }
   //On redirige vers forum
   header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum');
-  //Si on passe en mode Post par Sous-Categories
+//Si on passe en mode Post par Sous-Categories
 }else if (isset($param[1]) && !empty($param[1]) && !empty(getSousCategorieByName($controleur_def->bddConnexion(), str_replace('-', ' ',$param[1])))){
   $sous_cat = getSousCategorieByName($controleur_def->bddConnexion(), str_replace('-', ' ', $param[1]));
   //On récupère le nom de la categorie
@@ -138,23 +138,6 @@ if (isset($_POST) && !empty($_POST) && isset($_SESSION['user'])){
     $erreur_newpost = "Merci de compléter tous les champs";
   }
 }
-
-//On récupère la connexion à la base de donnée pour la fonction de récupération des articles
-//$posts = getPosts($controleur_def->bddConnexion(), 0, 10);
-
-//On parcourt le tableau retourner par getPosts
-/*foreach ($posts as $key => $post) {
-  //On les mets en forme
-  $posts[$key]['id'] = $post['id'];
-  //On utilise la fonction htmlspecialchars pour eviter les failles de sécurité
-  $posts[$key]['titre_post'] = htmlspecialchars($post['titre_post']);
-  $posts[$key]['content_post'] = substr(htmlspecialchars($post['content_post']), 0, 70) . '...';
-}
-
-if (isset($param[1]) && !empty($param[1]) && $param[1] == "del" && isset($param[2]) && !empty($param[2])){
-
-}*/
-
 
 
 //On termine par charger la vue, comme ça les variables/modifications seront prisent en comptes.

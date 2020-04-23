@@ -36,4 +36,5 @@ if (isset($_POST) && !empty($_POST)){
 
 $news = simplifySQL\select($controleur_def->bddConnexion(), false, "d_news", "*", false, "date", true);
 
+$controleur_def->loadJS("admin/news");
 $controleur_def->loadViewAdmin('admin/news', 'accueil', 'Systeme de News');

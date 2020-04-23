@@ -47,7 +47,7 @@
 
   /**
    * getPDO - Fonction pour faire une connexion PDO plus stable
-   * @author Aldric.L, Darth d'OpenClassroom
+   * @author Aldric.L 
    * @copyright Copyright 2016-2017 Aldric L.
    * @access public
    */
@@ -58,13 +58,14 @@
           $db = $this->bdd_Config['db'];
           $user = $this->bdd_Config['usr'];
           $pwd = $this->bdd_Config['pwd'];
+          $port = intval($this->bdd_Config['port']);
           $charset = 'utf8';
           $options = [
              PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // activation des erreurs par exceptions
              PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
              PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
           ];
-          $dsn = sprintf('mysql:host=%s;dbname=%s;charset=%s', $host, $db, $charset);
+          $dsn = sprintf('mysql:host=%s;port=%p;dbname=%s;charset=%s', $host, $port, $db, $charset);
           try {
             $pdo = new PDO($dsn, $user, $pwd, $options);
           }catch (PDOException $e) {

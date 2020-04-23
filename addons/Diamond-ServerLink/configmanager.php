@@ -21,7 +21,7 @@ class configManager{
 
     public function editConfig($newConf){
         //Ecriture dans le fichier ini
-            //On appel la class ini pour réecrire le fichier
+            //On appelle la class ini pour réecrire le fichier
             $ini = new \ini (ROOT . "config/serveurs.ini", 'Configuration DiamondCMS : Addon Diamond-ServerLink');
             //On lui passe l'array modifié
             $ini->ajouter_array($newConf);

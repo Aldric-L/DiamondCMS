@@ -25,7 +25,7 @@ class MinecraftQuery
 	{
 		if( !is_int( $Timeout ) || $Timeout < 0 )
 		{
-			throw new \InvalidArgumentException( 'Timeout must be an integer.' );
+			throw new \Exception( 'Timeout must be an integer.' );
 		}
 
 		if( $ResolveSRV )
@@ -37,7 +37,7 @@ class MinecraftQuery
 
 		if( $ErrNo || $this->Socket === false )
 		{
-			throw new MinecraftQueryException( 'Could not create socket: ' . $ErrStr );
+			throw new \Exception( 'Could not create socket: ' . $ErrStr );
 		}
 
 		Stream_Set_Timeout( $this->Socket, $Timeout );
@@ -59,7 +59,7 @@ class MinecraftQuery
 	{
 		if( !is_int( $Timeout ) || $Timeout < 0 )
 		{
-			throw new \InvalidArgumentException( 'Timeout must be an integer.' );
+			throw new \Exception( 'Timeout must be an integer.' );
 		}
 
 		if( $ResolveSRV )
@@ -71,7 +71,7 @@ class MinecraftQuery
 
 		if( $ErrNo || $this->Socket === false )
 		{
-			throw new MinecraftQueryException( 'Could not create socket: ' . $ErrStr );
+			throw new \Exception( 'Could not create socket: ' . $ErrStr );
 		}
 
 		\stream_set_timeout( $this->Socket, $Timeout );
@@ -103,7 +103,7 @@ class MinecraftQuery
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( 'Failed to receive challenge.' );
+			throw new \Exception( 'Failed to receive challenge.' );
 		}
 
 		return Pack( 'N', $Data );
@@ -115,7 +115,7 @@ class MinecraftQuery
 
 		if( !$Data )
 		{
-			throw new MinecraftQueryException( 'Failed to receive status.' );
+			throw new \Exception( 'Failed to receive status.' );
 		}
 
 		$Last = '';
@@ -126,7 +126,7 @@ class MinecraftQuery
 
 		if( Count( $Data ) !== 2 )
 		{
-			throw new MinecraftQueryException( 'Failed to parse server\'s response.' );
+			throw new \Exception( 'Failed to parse server\'s response.' );
 		}
 
 		$Players = SubStr( $Data[ 1 ], 0, -2 );
@@ -213,24 +213,24 @@ class MinecraftQuery
 
 		if( $Length !== \fwrite( $this->Socket, $Command, $Length ) )
 		{
-			throw new MinecraftQueryException( "Failed to write on socket." );
+			throw new \Exception( "Failed to write on socket." );
 		}
 
 		$Data = \fread( $this->Socket, 4096 );
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( "Failed to read from socket." );
+			throw new \Exception( "Failed to read from socket." );
 		}
 
 		if( $Data[ 0 ] !== "\x1C" ) // DefaultMessageIDTypes::ID_UNCONNECTED_PONG
 		{
-			throw new MinecraftQueryException( "First byte is not ID_UNCONNECTED_PONG." );
+			throw new \Exception( "First byte is not ID_UNCONNECTED_PONG." );
 		}
 
 		if( \substr( $Data, 17, 16 ) !== $OFFLINE_MESSAGE_DATA_ID )
 		{
-			throw new MinecraftQueryException( "Magic bytes do not match." );
+			throw new \Exception( "Magic bytes do not match." );
 		}
 
 		// TODO: What are the 2 bytes after the magic?
@@ -262,14 +262,14 @@ class MinecraftQuery
 
 		if( $Length !== FWrite( $this->Socket, $Command, $Length ) )
 		{
-			throw new MinecraftQueryException( "Failed to write on socket." );
+			throw new \Exception( "Failed to write on socket." );
 		}
 
 		$Data = FRead( $this->Socket, 4096 );
 
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( "Failed to read from socket." );
+			throw new \Exception( "Failed to read from socket." );
 		}
 
 		if( StrLen( $Data ) < 5 || $Data[ 0 ] != $Command[ 2 ] )

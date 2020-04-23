@@ -1,7 +1,7 @@
 <?php 
 define("DServerLink", true);
-define("DServerLinkVersion", "1.0.0");
-define("DServerLinkGamesSupported", array("Minecraft-Java"));
+define("DServerLinkVersion", "1.0.1");
+define("DServerLinkGamesSupported", array("Minecraft-Java", "GMod", "CS-GO", "Team-Fortress 2", "Minecraft-MPCE"));
 
 require_once __DIR__ . '/src/MinecraftQuery.php';
 require_once __DIR__ . '/src/MinecraftQueryException.php';
@@ -23,9 +23,16 @@ require_once __DIR__ . '/src/SourceQuery/SourceQuery.php';
 
 require_once(ROOT . 'addons/Diamond-ServerLink/configmanager.php');
 $cm = new DServerLink\ConfigManager();
-require_once(ROOT . 'addons/Diamond-ServerLink/LinkWithMinecraft.php');
-$linkmc = new DServerLink\QueryWithMinecraft($controleur_def, $cm);
+/*require_once(ROOT . 'addons/Diamond-ServerLink/LinkWithMinecraft.php');
+$linkmc = new DServerLink\QueryWithMinecraft($controleur_def, $cm);*/
+require_once(ROOT . 'addons/Diamond-ServerLink/Link.php');
+$servers_link = new DServerLink\Query($controleur_def, $cm);
 
+/*$rconmc = new DServerLink\RCon($controleur_def, $cm);
+$rconmc->connect(3);
+var_dump($rconmc->execOnServer(3,  "ulx adduser John superadmin "));
+$rconmc->disconnect();
+*/
 /*
 Template for RCON :
 $rconmc = new RConWithMinecraft($controleur_def);

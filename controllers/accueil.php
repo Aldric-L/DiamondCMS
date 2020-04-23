@@ -1,6 +1,6 @@
 <?php
 if (defined("DServerLink")){
-    $n_serveurs = $linkmc->getNbServers();
+    $n_serveurs = $servers_link->getNbServers();
 }
 
 $membres = simplifySQl\select($controleur_def->bddConnexion(), false, "d_membre", "*", false);

@@ -131,6 +131,10 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
         //On récupère tout
         $post = $req->fetchAll();
     }
+
+    //On ferme la requete
+    $req->closeCursor();
+    
     return $post;
 }
 

@@ -77,6 +77,10 @@ class User {
     return $this->infos['id'];
   }
 
+  function getMoney(){
+    return $this->infos['money'];
+  }
+
   function getArrayRole(){
     return $this->role;
   }

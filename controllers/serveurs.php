@@ -35,7 +35,7 @@ if (defined("DServerLink") && DServerLink == true){
                     die();
                 }
                 $players = $servers_link->getPlayers(intVal($param[1]));
-                $game = $servers_link->getGame(3);
+                $game = $servers_link->getGame($server_id);
                 $servers_link->disconnect();
                 $controleur_def->loadView('pages/serveurs', '', 'Serveurs');
             }else {

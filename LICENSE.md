@@ -1,8 +1,10 @@
 **Préambule**
- - Est désigné dans la présente licence, par "DiamondCMS", l'ensemble des fichiers situés dans les dossiers controlers, models, js, et views à l'exception de ceux dont il est explicitement indiqué qu'Aldric L. n'en est pas l'auteur.
+ - Est désigné dans la présente licence, par "DiamondCMS", l'ensemble des fichiers situés dans les dossiers controlers, models, js, et views à l'exception de ceux dont il est explicitement indiqué qu'Aldric L. n'en est pas l'auteur. Tous les autres fichiers, dont Aldric L. est l'auteur ou non, sont sous licence MIT sauf indication contraire.
  - DiamondCMS est un CMS (Abréviation de Content Manager System) dont l'objectif est de permettre la création d'un site internet performant en relation avec l'univers du jeu vidéo.
  - A cet effet, DiamondCMS n'est pas affilier à Mojang, ou à aucune entreprise.
  - Les fichiers désignés par le projet nommé "DiamondCMS", ont été rédigés par Aldric L. et il en est donc le seul propriétaire des droits intellectuels associés. En cela, il se réserve le droit d'éditer cette licence à tout moment, et considère qu'en utilisant DiamondCMS et en continuant à installer ses mises à jour, vous acceptez la présence et vous tenez informez de ses possibles modifications.
+ - "DiamondCMS" tel qu'il vient d'être explicité, est soumis à la licence qui suit :
+
 
 **| Licence publique Creative Commons Attribution - Utilisation non commerciale - Pas d’Œuvre dérivée 4.0 International |**
 

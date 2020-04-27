@@ -34,8 +34,6 @@
     <!-- MetisMenu CSS -->
     <link href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/admin/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/admin/sources.css"/>
-    <!-- Morris Charts CSS -->
-    <link href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/admin/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/themes/<?= $Serveur_Config['theme']; ?>/CSS/admin/font-awesome.css" rel="stylesheet" type="text/css">
@@ -85,7 +83,6 @@
         <?php if (!empty($controleur_def->getErrors())){ ?>
             $("#c_def_error").modal('show');
         <?php } ?>
-    		$("textarea").ghostDown();
     });
     <?php if (!empty($notify)){ 
       foreach ($notify as $n) { ?>

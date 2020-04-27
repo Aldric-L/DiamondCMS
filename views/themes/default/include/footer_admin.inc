@@ -45,11 +45,6 @@ $js = $controleur_def->js;
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/raphael.min.js"></script>
-    <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/morris.min.js"></script>
-    <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>js/plugins/load/admin.theme.js"></script>
 </body>

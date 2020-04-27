@@ -15,6 +15,7 @@ function addRole($db, $name, $level){
  * modifiy - Fonction pour modifier les informations d'un utilisateur
  * @author Aldric.L
  * @copyright Copyright 2020
+ * @deprecated
  */
  function modify($db, $id, $money, $role_id, $unban=null){
   if (isset($unban) && !empty($unban) && $unban == true){

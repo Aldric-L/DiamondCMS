@@ -21,7 +21,7 @@ if ($param[0] == 'forum' && isset($param[1]) && $param[1] == 'com' && $param[2] 
     $membre = simplifySQL\select($controleur_def->bddconnexion(), true, "d_membre", 'pseudo', array(array("id", "=", $post['user'])));
     if (!empty($membre) && $_SESSION['pseudo'] != $pseudo){
       $pseudo = $membre['pseudo'];
-      $controleur_def->notify('Une nouvelle réponse a été envoyé sur votre sujet "'. $post['titre_post'] . '"', $pseudo, 4, "Nouvelle Activité", $Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT . "forum/com/" . $param[2]);
+      $controleur_def->notify('Une nouvelle réponse a été envoyée sur votre sujet "'. $post['titre_post'] . '"', $pseudo, 4, "Nouvelle Activité", $Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT . "forum/com/" . $param[2]);
     }
   }else {
     $erreurcom = "Vous devez écrire un message !";

@@ -21,7 +21,7 @@
                     <div id="Carousel_main" class="carousel slide">
                         <ol class="carousel-indicators">
                             <li data-target="#Carousel_main" data-slide-to="0" class="active"></li>
-                            <li data-target="#Carousel_main" data-slide-to="1" class="active"></li>
+                            <li data-target="#Carousel_main" data-slide-to="1"></li>
                         </ol>
                     <!-- Carousel items -->
                     <div class="carousel-inner">   

@@ -125,6 +125,18 @@
       }
 
       public function log($error_code) {
+          //Environ une fois sur 60, on purge le log
+          if (rand ( 1 , 60 ) == 42 ){
+              $tabfile = file(ROOT . 'logs/errors.log');
+              $txt = "";
+              // Boucle pour ne conserver que les "n" premières ligne(s)
+              for ($i = 1; $i <= 100; $i++) {
+                $txt .=  $tabfile[$i];
+              }
+              $open=fopen(ROOT . 'logs/errors.log',"w+" );
+              fwrite($open,$txt);
+              fclose($open);
+          }
           if (!empty($_SESSION['pseudo'])){
       	    file_put_contents(ROOT . 'logs/errors.log', $error_code . " - " . date("j/m/y à H:i:s") .  " - Envoyé à l'utilisateur ". $_SESSION['pseudo'] . " sur la page : ". str_replace(WEBROOT, '', $_SERVER['REQUEST_URI']) . ") \r\n".file_get_contents("logs/errors.log"));
           }else {
@@ -292,11 +304,11 @@
 
       function isValid(){
         //Verification de la compatibilité du CMS et de ses Mise à jours
-        $url = file_get_contents('http://api.diamondcms.fr/is_valid.php?id=' . $this->Serveur_Config['id_cms']);
+        /*$url = file_get_contents('http://api.diamondcms.fr/is_valid.php?id=' . $this->Serveur_Config['id_cms']);
         if ($url != ''){
           die($url);
-        }
-        if ($this->Serveur_Config['url'] != $this->Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT){
+        }*/
+        /*if ($this->Serveur_Config['url'] != $this->Serveur_Config['protocol'] . "://" . $_SERVER['HTTP_HOST'] . WEBROOT){
           //Ecriture dans le fichier ini
             //Copie du fichier dans un array temporaire
             $temp_conf = $this->Serveur_Config;
@@ -314,7 +326,7 @@
           if ($url != ''){
             die($url);
           }
-        }
+        }*/
       }
 
 

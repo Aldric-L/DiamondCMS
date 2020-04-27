@@ -92,9 +92,6 @@
       </script>
     <?php } ?>
   <script>
-    $(document).ready(function () {
-    		$("textarea").ghostDown();
-    });
     <?php if (isset($_SESSION['pseudo']) && !empty($_SESSION['pseudo']) && !empty($notify)){ 
       foreach ($notify as $n) { ?>
         $(document).ready(function () {

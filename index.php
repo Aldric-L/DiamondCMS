@@ -91,6 +91,7 @@
     $voteurs = bestVotes($controleur_def->bddConnexion());
   }
 
+  $addons = array();
   //Chargement des addons
   if ($dir = opendir(ROOT . 'addons/')) {
     while($file = readdir($dir)) {
@@ -100,6 +101,7 @@
           while($f = readdir($d)) {
             //Dans ces sous-dossiers, on charge les fichiers nommés init.php qui s'occupent eux-même de charger les addons auquels ils appartiennent
             if ($f == "init.php"){
+              array_push($addons, $file);
               require_once(ROOT . 'addons/' . $file . '/' . $f);
             }
           }

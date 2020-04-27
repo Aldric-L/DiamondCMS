@@ -1,4 +1,4 @@
-<?php global $nb_coms, $errors, $nb_tickets, $infos_cms, $errors_content, $Serveur_Config; ?>
+<?php global $nb_coms, $errors, $nb_tickets, $infos_cms, $errors_content, $Serveur_Config, $addons, $servers, $n_serveurs; ?>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -35,28 +35,6 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo $errors; ?></div>
-                                    <div>Erreurs levées</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/errors/">
-                            <div class="panel-footer">
-                                <span class="pull-left">Voir plus...</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
@@ -75,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
+                    <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -96,22 +74,31 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                    <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $errors; ?></div>
+                                    <div>Erreurs levées</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/errors/">
+                            <div class="panel-footer">
+                                <span class="pull-left">Voir plus...</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Ventes réalisées en boutique
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                </div>
-                <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -134,6 +121,41 @@
                             <?php } ?>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Addons installés
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <?php foreach($addons as $addon){ ?>
+                                <a href="#" class="list-group-item">
+                                     <?php echo $addon; ?>
+                                </a>
+                                <?php } ?>
+                            </div>
+                            <!-- /.list-group -->
+                            <?php if (defined("DServerLink") && DServerLink){ ?>
+                                <hr>
+                                <?php for ($i=1; $i <= $n_serveurs; $i++){ ?>
+                                <div class="request_depend">
+                                <p> <span class="" id="serveur_name_<?php echo $i; ?>"></span> - <span id="etat_serveur_<?php echo $i; ?>"></span></p>
+                                    
+                                </div>
+                                <?php } ?>
+                                <p style="display:none;" id="infos-servers" data-link="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>" data-nb="<?php echo $n_serveurs; ?>"></p>
+                                <h3 id="loader" style="display: block;" class="text-center bree-serif"><img src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>views/uploads/img/ajax-loader.gif" alt="loading" /> Chargement en cours...</h5>
+                            <?php } ?>
+                            
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Erreurs levées par le systeme
@@ -164,5 +186,7 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-    <!-- /#wrapper -->    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+    </div>
     <!-- /#wrapper -->

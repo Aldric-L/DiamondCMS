@@ -1,6 +1,4 @@
 <?php 
-$controleur_def->loadModel('boutique/boutique');
-
 //Si la page "boutique/getback" est demandée, alors on charge son controlleur
 if (isset($param[1]) && !empty($param[1]) && $param[1] == "getback" && isset($param[2]) && !empty($param[2])){
     require_once (ROOT . "controllers/boutique.getback.php");
@@ -104,8 +102,6 @@ if (isset($param[1]) && !empty($param[1]) && $param[1] == "article" && isset($pa
             $cant_by = 2;
         }
 
-        //$article = getArticleByid($controleur_def->bddConnexion(), $id);
-        //$reviews = getReviewsByid($controleur_def->bddConnexion(), $article['id']);
         $controleur_def->loadJS('boutique_article');
         $controleur_def->loadView('pages/boutique/boutique_article', 'boutique', $article_name);
     }
@@ -115,7 +111,7 @@ if (isset($param[1]) && !empty($param[1]) && $param[1] == "article" && isset($pa
 $l_articles = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_articles", "*", false, "id", true, array(0, 6));
 $n_articles_global = 0;
 foreach ($l_articles as $key => $article){
-    $cat = getCat($controleur_def->bddConnexion(), intval($article["cat"]));
+    $cat = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cat", "*", array(array("id", "=", $article["cat"])));
     $article["cat"] = $cat['name'];
     $l_articles[$key]["cat"] = $article["cat"];
     if (strpos($l_articles[$key]['img'], "png") !== false) {
@@ -128,9 +124,9 @@ foreach ($l_articles as $key => $article){
     $n_articles_global++;    
 }
 unset($cat, $key);
-$cats = getAllCats($controleur_def->bddConnexion());
+$cats = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_cat", "*");
 foreach ($cats as $key => $cat){
-    $cat['articles'] = getArticlesByCat($controleur_def->bddConnexion(), intval($cat['id']));
+    $cat['articles'] = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_articles", array('id', 'name', 'description', 'img', 'prix', 'cat', array('date_ajout', "%d/%m/%Y", 'date_add')), array(array('cat', '=', $cat['id'])), 'date_ajout', true);
     $cats[$key]['articles'] = $cat['articles'];
     foreach ($cats[$key]['articles'] as $k => $c){
         if (strpos($cats[$key]['articles'][$k]['img'], "png") !== false) {

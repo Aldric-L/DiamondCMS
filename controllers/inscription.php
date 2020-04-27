@@ -24,10 +24,6 @@ if (!isset($_SESSION['pseudo']) || empty($_SESSION['pseudo'])){
                 $controleur_def->addError("333");
               }else {
                 $_SESSION['pseudo'] = htmlspecialchars($_POST['pseudo_inscription']);
-                //FONCTIONNALITE DESACTIVEE POUR LE MOMENT VOIR INDEX
-                /*if (isset($_POST['souvenir'])){
-                  setcookie('pseudo', sha1(htmlspecialchars($_POST['pseudo_inscription'])), time() + 365*24*3600, null, null, false, true);
-                }*/
   
                 if (!empty($_POST['page'])){
                   header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . $_POST['page']);

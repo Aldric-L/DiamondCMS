@@ -21,25 +21,13 @@
                     <div id="Carousel_main" class="carousel slide">
                         <ol class="carousel-indicators">
                             <li data-target="#Carousel_main" data-slide-to="0" class="active"></li>
-                            <?php $i = $n_articles_global;
-                                $n = 0;
-                                while (true){
-                                    if ($i-3 < 3){
-                                        $n++;
-                                        echo '<li data-target="#Carousel_main" data-slide-to="' . $n . '"></li>';
-                                        break;
-                                    }else {
-                                        $n++;
-                                        $i = $i-3;
-                                        echo '<li data-target="#Carousel_main" data-slide-to="'. $n . '"></li>';
-                                    }
-                                } ?>
+                            <li data-target="#Carousel_main" data-slide-to="1" class="active"></li>
                         </ol>
                     <!-- Carousel items -->
                     <div class="carousel-inner">   
                         <div class="item active">
                 	        <div class="row">
-                                <?php $i = 0; foreach ($l_articles as $key => $article){ $i++;?>
+        <?php $i = 0; foreach ($l_articles as $key => $article){ $i++;?>
                                 <div class="col-lg-4 col-sm-6 text-center">
                                     <img class="img-responsive img-center" src="<?php echo $article['link']; ?>" alt="">                                    
                                     <h3><?php echo $article['name']; ?>
@@ -48,14 +36,14 @@
                                     <h4><span class="bree-serif">Prix : <strong><?php echo $article['prix']; ?> <?php echo $Serveur_Config['Serveur_money']; ?>(s)</strong></span> - <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>boutique/article/<?php echo $article['id']; ?>/">En savoir plus... </a></h4>
                                     <!--<p><?php echo $article['description']; ?></p>-->
                                 </div>
-                        <?php if ($i % 3 == 0){ ?>
+                        <?php if ($i % 3 == 0 && $i != sizeof($l_articles)){ ?>
                             </div>
                         </div><!--.item-->
                                         
                         <div class="item">
                             <div class="row">
                         <?php }
-                                } //End foreach ?>
+        } //End foreach ?>
                     </div>
                 </div><!--.item-->
                  
@@ -75,12 +63,14 @@
                             <div id="Carousel_<?php echo str_replace(" ", "-", $cat['name']); ?>" class="carousel slide">
                                     <ol class="carousel-indicators">
                                         <li data-target="#Carousel_<?php echo str_replace(" ", "-", $cat['name']); ?>" data-slide-to="0" class="active"></li>
-                                        <?php $i = $cat['nb_articles'];
+                                        <?php $i = $cat['nb_articles']; 
                                             $n = 0;
                                             while (true){
-                                                if ($i-3 < 3){
+                                                if ($i-3 < 3 && $i > 3){
                                                     $n++;
                                                     echo '<li data-target="#Carousel_' . str_replace(" ", "-", $cat['name']) .'" data-slide-to="' . $n . '"></li>';
+                                                    break;
+                                                }else if ($i < 3) {
                                                     break;
                                                 }else {
                                                     $n++;

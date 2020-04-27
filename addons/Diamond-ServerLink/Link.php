@@ -11,6 +11,8 @@ namespace DServerLink;
 class Query {
     private $controleur_def;
     private $config_file;
+    private $private_errors = false;
+    private $errors = array();
     private $isloaded = false;
 
     // Attention, ce tableau commence à 1
@@ -25,12 +27,46 @@ class Query {
     *
     * @param $controleur_def : class controleur de DiamondCMS dont on garde une instance
     * @param $cm : class ConfigManager de l'addon dont on garde une instance
+    * @param boolean $private_errors : si true, on n'utilise pas le controleur def pour lever des erreurs
     * @author Aldric L.
     * @copyright 2020
     */
-    public function __construct($controleur_def, $cm){
+    public function __construct($controleur_def, $cm, $private_errors=false){
         $this->controleur_def = $controleur_def;
         $this->config_file = $cm->getConfig();
+        if ($private_errors){
+            $this->private_errors = true;
+        }
+    }
+
+    /**
+    * newError : cette fonction permet de lever une erreur.
+    *
+    * @author Aldric L.
+    * @copyright 2020
+    * @return array|boolean
+    */
+    private function newError($error_code){
+        if ($this->private_errors){
+            array_push($this->errors, $error_code);
+            return;
+        }else {
+            $this->controleur_def->addError($error_code);
+        }
+    }
+
+    /**
+    * getErrors : cette fonction permet de récupérer les erreurs stockées si private_errors est activé.
+    *
+    * @author Aldric L.
+    * @copyright 2020
+    * @return array|boolean
+    */
+    public function getErrors(){
+        if ($this->private_errors){
+            return $this->errors;
+        }
+        return false;
     }
 
     /**
@@ -41,6 +77,9 @@ class Query {
     * @return void
     */
     private function load(){
+        if ($this->isloaded){
+            return;
+        }
         for ($i = 1; $i <= sizeof($this->config_file); $i++){
             if (($this->config_file[$i]["game"] == "Minecraft-Java" || $this->config_file[$i]["game"] == "Minecraft-MPCE") && ($this->config_file[$i]["enabled"] == "true")){
                 $this->api[$i] = array(new MinecraftQuery\MinecraftQuery(), array($this->config_file[$i]["host"], $this->config_file[$i]["queryport"], 1, $this->config_file[$i]["game"], $this->config_file[$i]["id"], false));
@@ -48,6 +87,7 @@ class Query {
                 $this->api[$i] = array(new SourceQuery\SourceQuery(), array($this->config_file[$i]["host"], $this->config_file[$i]["queryport"], 5, $this->config_file[$i]["game"], $this->config_file[$i]["id"], false));
             }
         }
+        $this->isloaded = true;
     }
 
     /**
@@ -63,7 +103,7 @@ class Query {
             $this->load();
         }
         for ($i = 1; $i <= sizeof($this->config_file); $i++){
-            if ($server == null || ($server != null && $server == $this->api[$i][1][4])){
+            if ($server == null || ($server != null && isset($this->api[$i]) && $server == $this->api[$i][1][4])){
                 try
                 {
                     if (isset($this->api[$i])){
@@ -83,11 +123,11 @@ class Query {
                 {
                     if ($e->getMessage() != 'Failed to receive challenge.'){
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(400);
+                            $this->newError(400);
                         }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                            $this->controleur_def->addError("400b");
+                            $this->newError("400b");
                         }else {
-                            $this->controleur_def->addError("400c");
+                            $this->newError("400c");
                         }
                         $this->api[$i][1][5] = false;
                     }
@@ -122,21 +162,21 @@ class Query {
                     }catch ( \Exception $e ) {
                         $inf[$i]['results'] = false;
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(410);
+                            $this->newError(410);
                         }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                            $this->controleur_def->addError("410b");
+                            $this->newError("410b");
                         }else {
-                            $this->controleur_def->addError("410c");
+                            $this->newError("410c");
                         }
                     }
                 }catch (\Exception $ex){
                     $inf[$i]['results'] = false;
                     if ($this->api[$i][1][3] == "Minecraft-Java"){
-                        $this->controleur_def->addError(440);
+                        $this->newError(440);
                     }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                        $this->controleur_def->addError("440b");
+                        $this->newError("440b");
                     }else {
-                        $this->controleur_def->addError("440c");
+                        $this->newError("440c");
                     }
                 }
                 
@@ -172,21 +212,21 @@ class Query {
                     }catch ( \Exception $e ) {
                         $inf[$i]['results'] = false;
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(420);
+                            $this->newError(420);
                         }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                            $this->controleur_def->addError("420b");
+                            $this->newError("420b");
                         }else {
-                            $this->controleur_def->addError("420c");
+                            $this->newError("420c");
                         }
                     }
                 }catch (Exception $ex){
                     $inf[$i]['results'] = false;
                     if ($this->api[$i][1][3] == "Minecraft-Java"){
-                        $this->controleur_def->addError(440);
+                        $this->newError(440);
                     }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                        $this->controleur_def->addError("440b");
+                        $this->newError("440b");
                     }else {
-                        $this->controleur_def->addError("440c");
+                        $this->newError("440c");
                     }
                 }
                 
@@ -263,7 +303,7 @@ class Query {
     */
     public function disconnect($server=NULL){
         for ($i = 1; $i <= sizeof($this->config_file); $i++){
-            if (($server == null || ($server != null && $server == $this->api[$i][1][4])) && isset($this->api[$i])){
+            if (($server == null || ($server != null && isset($this->api[$i]) && $server == $this->api[$i][1][4])) ){
                 try
                 {
                     if (isset($this->api[$i])){
@@ -281,11 +321,11 @@ class Query {
                 {
                     if ($e->getMessage() != 'Failed to receive challenge.'){
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(420);
+                            $this->newError(420);
                         }else if ($this->api[$i][1][3] == "Minecraft-MPCE"){
-                            $this->controleur_def->addError("420b");
+                            $this->newError("420b");
                         }else {
-                            $this->controleur_def->addError("420c");
+                            $this->newError("420c");
                         }
                     }
                 }
@@ -297,6 +337,8 @@ class Query {
                 }
             }   
         }
+        $this->isloaded = false;
+        $this->api = array();
     }
 
 }
@@ -313,6 +355,8 @@ class Query {
      private $controleur_def;
      private $config_file;
      private $isloaded = false;
+     private $private_errors = false;
+     private $errors = array();
  
      // Attention, ce tableau commence à 1
      // Il est de la structure suivant : array( instance classe, array(host, port, timeout, nom du jeu, id, -une fois que la méthode connect a été appelée- success))
@@ -329,10 +373,43 @@ class Query {
      * @author Aldric L.
      * @copyright 2020
      */
-     public function __construct($controleur_def, $cm){
+     public function __construct($controleur_def, $cm, $private_errors=false){
          $this->controleur_def = $controleur_def;
          $this->config_file = $cm->getConfig();
+         if ($private_errors){
+             $this->private_errors = true;
+         }
      }
+
+     /**
+    * newError : cette fonction permet de lever une erreur.
+    *
+    * @author Aldric L.
+    * @copyright 2020
+    * @return array|boolean
+    */
+    private function newError($error_code){
+        if ($this->private_errors){
+            array_push($this->errors, $error_code);
+            return;
+        }else {
+            $this->controleur_def->addError($error_code);
+        }
+    }
+
+    /**
+    * getErrors : cette fonction permet de récupérer les erreurs stockées si private_errors est activé.
+    *
+    * @author Aldric L.
+    * @copyright 2020
+    * @return array|boolean
+    */
+    public function getErrors(){
+        if ($this->private_errors){
+            return $this->errors;
+        }
+        return false;
+    }
  
      /**
      * load : cette fonction permet d'instancier les class de connexion aux serveurs dans un tableau pour les utiliser plus tard.
@@ -383,9 +460,9 @@ class Query {
                  {
                      if ($e->getMessage() != 'Failed to receive challenge.'){
                          if ($this->api[$i][1][3] == "Minecraft-Java"){
-                             $this->controleur_def->addError(450);
+                             $this->newError(450);
                          }else {
-                             $this->controleur_def->addError("450b");
+                             $this->newError("450b");
                          }
                          $this->api[$i][1][5] = false;
                      }
@@ -412,9 +489,9 @@ class Query {
                     catch( Exception $e )
                     {
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(470);
+                            $this->controleur_def->newError(470);
                         }else {
-                            $this->controleur_def->addError("470b");
+                            $this->controleur_def->newError("470b");
                         }
                     }
                     return $return;
@@ -433,8 +510,8 @@ class Query {
      */
     function disconnect($server=null){
         for ($i = 1; $i <= sizeof($this->api); $i++){
-            if (in_array(intval($this->api[$i][1][4]), $this->connected_servers)){
-                if ($server == null || $server == $this->api[$i][1][4]){
+            if (isset($this->api[$i]) && in_array(intval($this->api[$i][1][4]), $this->connected_servers)){
+                if ($server == null || (isset($this->api[$i]) && $server == $this->api[$i][1][4])){
                     try
                     {
                         $this->api[$i][0]->Disconnect();
@@ -442,10 +519,10 @@ class Query {
                     catch( Exception $e )
                     {
                         if ($this->api[$i][1][3] == "Minecraft-Java"){
-                            $this->controleur_def->addError(460);
+                            $this->controleur_def->newError(460);
                             $pb = $e;
                         }else {
-                            $this->controleur_def->addError("460b");
+                            $this->controleur_def->newError("460b");
                             $pb = $e;
                         }
                     }

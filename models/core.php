@@ -98,7 +98,6 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
     if ($limit != false && is_array($limit)){
         $request .= "LIMIT :min, :limite ";
     }
-    //var_dump($request, $bindparams);
     //Preparation de la requete
     $req = $db->prepare($request);
     // Ajout des bindparams (ceux de la clause WHERE)

@@ -99,8 +99,8 @@
       foreach ($notify as $n) { ?>
         $(document).ready(function () {
             Snarl.addNotification({
-                title: '<?php echo $n['title']; ?>',
-                text: '<?php echo $n['content']; ?>',
+                title: "<?php echo $n['title']; ?>",
+                text: "<?php echo $n['content']; ?>",
                 <?php if ($n['type'] == 1){ //CONTACT ?>
                   icon: '<i class="fa fa-comment" aria-hidden="true"></i>',
                 <?php }else if ($n['type'] == 2) { //SUPPORT ?>
@@ -113,7 +113,7 @@
                 icon: '<i class="fa fa-quote-right" aria-hidden="true"></i>',
                 <?php } ?>
                 <?php if (!empty($n["link"])){?>
-                action: '<?php echo $n["link"]; ?>',
+                action: "<?php echo $n["link"]; ?>",
                 <?php } ?>
                 timeout: 12000
 

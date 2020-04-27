@@ -184,7 +184,13 @@
       }
 
       function getnotifyadmin(){
-        return simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")));
+        $notifications = simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")));
+        if (!empty($notifications)){
+          foreach ($notifications as $not){
+            $this->bddConnexion()->exec("UPDATE d_notify SET view = 1 WHERE id = " . $not['id']);
+          }
+        } 
+        return $notifications;
       }
 
       function getRole($db, $pseudo){

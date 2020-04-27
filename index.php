@@ -60,7 +60,7 @@
     if (isset($notify) || !empty($notify)){
       unset($notify);
     }
-    $notify = $controleur_def->getnotify($_SESSION['pseudo']);
+    $notify = $controleur_def->getnotify($_SESSION['user']->getId());
   }
 
   if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->isAdmin()){

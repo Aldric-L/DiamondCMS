@@ -248,6 +248,49 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[
         $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");
         die;
     }
+}else if (isset($param[2]) && !empty($param[2]) && $param[2] == "tasks"){
+    if ($Serveur_Config['en_boutique']){
+        if (defined("DServerLink") && DServerLink == true){
+            $serveurs = $cm->getConfig();
+        }
+
+        //On récupère les 20 dernières tâches
+        $tasks = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_todolist", "*", false, 'id', true, array(0, 20));
+        
+        //On récupère les 20 dernières commandes
+        $commandes = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_achats", "*", false, 'id', true, array(0, 20));
+
+        foreach ($commandes as $key => $c){
+            $article = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_articles" ,"*", array(array("id", "=", $commandes[$key]['id_article'])));
+            if (empty($article)){
+                $article['name'] = "Article inconnu";
+            }
+            $commandes[$key]['article'] = $article['name'];
+            
+            $user = simplifySQL\select($controleur_def->bddConnexion(), true, "d_membre" ,"*", array(array("id", "=", $commandes[$key]['id_user'])));
+            if (empty($user)){
+                $user['pseudo'] = "Utilisateur inconnu";
+            }
+            $commandes[$key]['user'] = $user['pseudo'];
+        }
+
+        foreach ($tasks as $k => $t){
+            //On récupère la commande correspondante
+            $tasks[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd'])));    
+            $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
+            $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+        }        
+
+        //var_dump($tasks, $commandes);
+        //var_dump($_POST);
+        $config = $Serveur_Config;
+        //$controleur_def->loadJS('admin/boutique/articles');
+        $controleur_def->loadViewAdmin('admin/boutique/tasks', 'accueil', "Tâches et achats virtuels");
+        die;
+    }else {
+        $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");
+        die;
+    }
 }
 
 $cats = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_cat" ,"*");

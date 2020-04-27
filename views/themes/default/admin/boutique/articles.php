@@ -258,7 +258,7 @@
                                             </div>
                                             <div class="row control-group">
                                                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                                                    <label>Commande à éxecuter : (max: 255 caractères)</label>
+                                                    <label>Commande à éxecuter : (max: 255 caractères, inscrire {PLAYER} pour insérer le pseudo du joueur)</label>
                                                     <input class="form-control" value="null" type="text" id="<?php echo $a['id']; ?>_<?= $s['id']; ?>_cmd" <?php if ($s['enabled'] != "true") { ?> disabled <?php } ?>>
                                                     <p class="help-block text-danger"></p>
                                                 </div>

@@ -91,8 +91,8 @@
       foreach ($notify as $n) { ?>
         $(document).ready(function () {
             Snarl.addNotification({
-                title: '<?php echo $n['title']; ?>',
-                text: '<?php echo $n['content']; ?>',
+                title: "<?php echo $n['title']; ?>",
+                text: "<?php echo $n['content']; ?>",
                 <?php if ($n['type'] == 1){ //CONTACT ?>
                   icon: '<i class="fa fa-comment" aria-hidden="true"></i>',
                 <?php }else if ($n['type'] == 2) { //SUPPORT ?>
@@ -108,6 +108,27 @@
             });
         });
   <?php } } ?>
+  <?php if (!empty($notifyadmin)){ 
+      foreach ($notifyadmin as $n) { if ($n['view'] != 1) {?>
+        $(document).ready(function () {
+            Snarl.addNotification({
+                title: "<?php echo $n['title']; ?>",
+                text: "<?php echo $n['content']; ?>",
+                <?php if ($n['type'] == 1){ //CONTACT ?>
+                  icon: '<i class="fa fa-comment" aria-hidden="true"></i>',
+                <?php }else if ($n['type'] == 2) { //SUPPORT ?>
+                  icon: '<i class="fa fa-question-circle-o" aria-hidden="true"></i>',
+                <?php }else if ($n['type'] == 3) { //ERROR ?>
+                  icon: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                <?php }else if ($n['type'] == 4) { //FORUM ?>
+                  icon: '<i class="fa fa-comments-o" aria-hidden="true"></i>',
+                <?php }else { ?>
+                icon: '<i class="fa fa-quote-right" aria-hidden="true"></i>',
+                <?php } ?>
+                timeout: 12000
+            });
+        });
+  <?php } } } ?>
   </script>
 
     <div id="wrapper">
@@ -259,6 +280,9 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/articles/">Gestion des articles</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/tasks/">Tâches et commandes</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

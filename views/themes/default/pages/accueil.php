@@ -10,51 +10,6 @@
       </div>
     </div>
   </div>
-  <!--<script type="text/javascript" src="http://localhost:8080/DiamondCMS/serveurs/json/1"></script>-->
-  <script>
-  var n_serveurs = <?php echo $n_serveurs; ?>;
-  var lien_base = "<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>";
-  //console.log(JSON.parse(data));
-  $(document).ready(function(e) {
-    $(".request_depend").hide();
-    $.ajax({
-      url: lien_base + "serveurs/json/"
-    }).done(function( arg ) {
-      console.log("AJAX :");
-      console.log(JSON.parse(arg));
-      var json_result = JSON.parse(arg);
-      console.log(json_result);
-      $("#loader").hide();
-      $(".request_depend").show();
-      
-      for (var i = 1; n_serveurs >= i; i++){
-        $("#desc_serveur_".concat(i)).html(json_result[i]['desc']);
-        $("#serveur_name_".concat(i)).html(json_result[i]['name']);
-        var img = json_result[i]['img'];
-        if (img.substring(img.length - 4) == ".png"){
-          console.log(lien_base+"getimage/png/-/" + img.substring(img.length-4, -4) + "/350/150/");
-          $("#img_serveur_".concat(i)).attr('src', lien_base+"getimage/png/-/" + img.substring(img.length-4, -4) + "/"+ (Math.round((9 * 350)/16)).toString() +"/350/");
-        }else if (img.substring(img.length - 4) == ".jpg"){
-          $("#img_serveur_".concat(i)).attr('src', lien_base+"getimage/jpg/-/" + img.substring(img.length-4, -4) + "/"+ (Math.round((9 * 350)/16)).toString() +"/350/");
-        }else if (img.substring(img.length - 4) == "jpeg"){
-          $("#img_serveur_".concat(i)).attr('src', lien_base+"getimage/jpeg/-/" + img.substring(img.length-5, -5) + "/" (Math.round((9 * 350)/16)).toString() + "/350/");
-        }
-        //$("#img_serveur_".concat(i)).attr('src', lien_base+"views/uploads/img/" + json_result[i]['img']);
-        if (json_result[i]['results'] == false){
-          $("#slots_serveur_".concat(i)).html('Slots : <span style="color: red;">Déconnecté</span>');
-          $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
-          $("#link_serveur_".concat(i)).attr('disabled', "");
-        }else {
-          $("#slots_serveur_".concat(i)).html('Slots : ' + json_result[i]['results']['Players'] + " / " + json_result[i]['results']['MaxPlayers']);
-          $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: green;">Connecté</span>');
-          $("#link_serveur_".concat(i)).attr('href', lien_base+"serveurs/" + i);
-        }
-        console.log(i);
-      }
-    })
-  });
-  </script>
-
   <?php if ($Serveur_Config['Accueil']['en_propa']){?>
   <br />
   <div id="infos">
@@ -83,6 +38,7 @@
 <div class="servers">
   <div class="container">
     <div class="rows">
+      <p style="display:none;" id="infos-servers" data-link="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>" data-nb="<?php echo $n_serveurs; ?>"></p>
       <h1 class="text-center bree-serif">Etat du réseau <?php echo $Serveur_Config['Serveur_name']; ?></h1><br>
       <h3 id="loader" style="display: block;" class="text-center bree-serif"><img src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>views/uploads/img/ajax-loader.gif" alt="loading" /> Chargement en cours...</h5>
       <?php for ($i=1; $i <= $n_serveurs; $i++){
@@ -146,9 +102,6 @@
 <div id="news">
   <div class="container">
   <hr>
-    <!--<div class="row">
-      <center><h2 class="text-danger">Dernières news sur le serveur :</h2><center>
-    </div>-->
     <h1 class="text-center bree-serif">News !</h1>
     <p class="text-center">Decouvrez les nouveautés en rapport avec nos serveurs ! <a href="news/">Voir toutes les nouveautés...</a></p>
     <br /><br />
@@ -175,7 +128,6 @@
        } ?> 
     </div>
     <div class="col-md-12">
-      
   </div>
   <br />
 </div>

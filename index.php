@@ -16,6 +16,8 @@
   define('WEBROOT', str_replace('index.php','', $_SERVER['SCRIPT_NAME']));
   define('ROOT', str_replace('index.php','', $_SERVER['SCRIPT_FILENAME']));
 
+  define('DCMS_VERSION', '1.0Bc');
+
   require_once(ROOT.'controllers/user.php');
 
   //On démarre les sessions pour avoir les variables superglobal sur le joueur.

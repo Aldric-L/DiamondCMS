@@ -21,8 +21,7 @@ $js = $controleur_def->js;
 					·
 					<a href="<?php echo $link; ?>contact">Contact</a>
 				</p>
-				<p class="footer-company-name">Créé par GougDev.fr, DiamondCMS © 2016 - <?php echo date('Y'); ?><br />
-				<br />DiamondCMS est en Beta est ne peut etre commertialisé comme tel.</p>
+				<p class="footer-company-name">Créé par <?= $Serveur_Config['Serveur_name']; ?>  © <?php echo date('Y'); ?><br /></p>
 			</div>
 			<div class="footer-right">
 				<p class="footer-company-about">
@@ -58,14 +57,13 @@ $js = $controleur_def->js;
     if($jsfolder = opendir(ROOT . 'js/plugins/listener')){
       //On initialise une variable "compteur"
       $count = 0;
-      //On lance une boucle
       while(false !== ($plugin = readdir($jsfolder))){
         //Si c'est bien un plugin "listener"
         if($plugin != '.' && $plugin != '..' && $plugin != 'plugins_listener.js' && (substr($plugin, -3) == '.js' || substr($plugin, -4) == '.css')){
           //Qu'il appartient bien à notre theme
           if (substr($plugin, -9) != '.theme.js' || (substr($plugin, -9) == '.theme.js' && str_replace(".theme.js", "", $plugin) == $Serveur_Config['theme'])){
             $count++;
-            //On l'inclus
+            //On l'inclu
             if (substr($plugin, -3) == '.js'){
               echo '<script src="'. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'js/plugins/listener/' . $plugin . '"></script>';
             }else {
@@ -91,15 +89,13 @@ $js = $controleur_def->js;
 </html>
 <?php
   /*
-    Merci de ne pas supprimer les liens vers les sites de DiamondCMS et GougDev. En cas de suppression,
+    Merci de ne pas supprimer les liens vers DiamondCMS. En cas de suppression,
     votre site sera immobilisé et pourra faire l'objet de poursuites (Conformément aux CGU disponibles sur le site officiel de DiamondCMS).
     Modifier le footer (sans accord), c'est voler le CMS.
-    Pour pouvoir modifier ce footer, merci de souscrire à une version Premium du CMS.
-    Merci de votre compréhention, GougDev.
+    Merci de votre compréhension.
 
     Attention : ne modifiez pas les attributs des balises a ("footer_text_link"), sinon votre site sera bloqué automatiquement.
 
-    NB: Les CGU/CGV sont disponibles sur le site : www.diamondcms.fr
     PS: Ces balises PHP ne sont là que pour avoir un commentaire invisible dans le navigateur (lors d'une inspection de page).
   */
 ?>

@@ -1,4 +1,4 @@
-<?php global $nb_coms, $errors, $nb_tickets, $infos_cms, $errors_content, $Serveur_Config, $addons, $servers, $n_serveurs; ?>
+<?php global $nb_coms, $errors, $nb_tickets, $infos_cms, $errors_content, $Serveur_Config, $addons, $servers, $n_serveurs, $themes, $config; ?>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -121,6 +121,40 @@
                             <?php } ?>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Thèmes installés et compatibles
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <?php foreach($themes as $t){ ?>
+                                <a href="#" class="list-group-item">
+                                   "<?php echo $t['name']; ?>" par <?php echo $t['author']; ?>
+                                    <span class="pull-right text-muted small">
+                                        <?php if ($t['enabled']){ ?>
+                                            <button 
+                                                data="<?php echo $config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/accueil/theme/<?php echo $t['name']; ?>" 
+                                                type="submit" style ="padding-left: 8px; padding-right: 8px; padding-top: 1px; padding-bottom: 1px;" 
+                                                class="modify_theme btn btn-danger btn-sm"
+                                                <?php if (sizeof($themes) == 1){ ?> disabled <?php } ?>>Désactiver
+                                            </button>
+                                        <?php }else { ?>
+                                            <button 
+                                                data="<?php echo $config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/accueil/theme/<?php echo $t['name']; ?>" 
+                                                type="submit" style ="padding-left: 8px; padding-right: 8px; padding-top: 1px; padding-bottom: 1px;" 
+                                                class="modify_theme btn btn-success btn-sm">Activer
+                                            </button>
+                                        <?php } ?>
+                                    </span>
+                                </a>
+                                <?php } ?>
+                            </div>
+                            <!-- /.list-group -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
                 <div class="col-lg-4">
                     <div class="panel panel-default">

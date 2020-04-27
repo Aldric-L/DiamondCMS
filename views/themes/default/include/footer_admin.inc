@@ -5,14 +5,13 @@ $js = $controleur_def->js;
     if($jsfolder = opendir(ROOT . 'js/plugins/listener')){
       //On initialise une variable "compteur"
       $count = 0;
-      //On lance une boucle
       while(false !== ($plugin = readdir($jsfolder))){
         //Si c'est bien un plugin "listener"
         if($plugin != '.' && $plugin != '..' && $plugin != 'plugins_listener.js' && (substr($plugin, -3) == '.js' || substr($plugin, -4) == '.css')){
           //Qu'il appartient bien à notre theme
           if (substr($plugin, -9) != '.theme.js' || (substr($plugin, -15) == '.admin.theme.js' && str_replace(".admin.theme.js", "", $plugin) == $Serveur_Config['theme'])){
             $count++;
-            //On l'inclus
+            //On l'inclu
             if (substr($plugin, -3) == '.js'){
               echo '<script src="'. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'js/plugins/listener/' . $plugin . '"></script>';
             }else {
@@ -29,7 +28,7 @@ $js = $controleur_def->js;
       }
       
     }
-    //On charge les CSS demandés par le controleur
+    //On charge les JS demandés par le controleur
     if (!empty($js)){
       foreach($js as $j){
         echo '<script src="'. $j . '"></script>';

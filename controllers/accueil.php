@@ -13,5 +13,5 @@ for($i =0; $i < sizeof($membres); $i++){
     }
 }
 $news = simplifySQl\select($controleur_def->bddConnexion(), false, "d_news", "*", false, "date", true, array(0, 3));
-
+$controleur_def->loadJS('accueil');
 $controleur_def->loadView('pages/accueil', 'accueil', 'Accueil');

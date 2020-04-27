@@ -50,11 +50,6 @@ html, body {
   bottom: 0;
   width: 100%;
   position: absolute;
-  /*background: #81c141;
-  background: -webkit-linear-gradient(legacy-direction(#41c19e), #81c141);
-  background: linear-gradient(#41c19e, #81c141);
-  opacity: 0.7;
-  filter: alpha(opacity=70);*/
 }
 #fh5co-page-title .text {
   position: relative;
@@ -108,21 +103,7 @@ p {
 }
 /*End Global */
 
-/*Footer*/
-/*footer{
-  line-height: 1.2;
-  text-align: center;
-  height: 87px;
-  margin-top: auto;
-  /*background-color: #222222;*/
-  /*background-color: #E5E5E5;
-  padding: 11px;
-  font-size: 16px;*/
-  /*color: #9d9d9d;*/
-/*}*/
-/*End footer*/
-
-/*Content Container, utiliser pour mettre en forme les pages */
+/*Content Container, utilisé pour mettre en forme les pages */
 .content-container {
   margin-left: 9%;
   margin-right: 9%;

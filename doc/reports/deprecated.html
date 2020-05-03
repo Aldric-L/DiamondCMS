@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>    Documentation &raquo; Deprecated elements
+</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="icon" href="../images/favicon.ico"/>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.6/fuse.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+<header class="phpdocumentor-top-header"></header>
+<header class="phpdocumentor-header">
+    <section class="phpdocumentor-section">
+        <h1 class="phpdocumentor-title">Documentation</h1>
+    </section>
+</header>
+<main class="phpdocumentor">
+    <div class="phpdocumentor-section">
+        <aside class="three phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h1 class="phpdocumentor-sidebar__category-header">Search</h1>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <h1 class="phpdocumentor-sidebar__category-header">Namespaces</h1>
+            <h2 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/dserverlink.html"><abbr title="\DServerLink">DServerLink</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                                    <li><a href="../namespaces/dserverlink-minecraftquery.html"><abbr title="\DServerLink\MinecraftQuery">MinecraftQuery</abbr></a></li>
+                                    <li><a href="../namespaces/dserverlink-sourcequery.html"><abbr title="\DServerLink\SourceQuery">SourceQuery</abbr></a></li>
+                            </ul>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/simplifysql.html"><abbr title="\simplifySQL">simplifySQL</abbr></a></h3>
+            <ul class="phpdocumentor-list">
+                            </ul>
+            
+        <h1 class="phpdocumentor-sidebar__category-header">Packages</h1>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/Default.html"><abbr title="\Default">Default</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                    </ul>
+            <h2 class="phpdocumentor-sidebar__root-package"><a href="../packages/xPaw.html"><abbr title="\xPaw">xPaw</abbr></a></h2>
+        <ul class="phpdocumentor-list">
+                            <li><a href="../packages/xPaw-SourceQuery.html"><abbr title="\xPaw\SourceQuery">SourceQuery</abbr></a></li>
+                    </ul>
+        
+    <h1 class="phpdocumentor-sidebar__category-header">Reports</h1>
+        <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h2>
+    <h2 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h2>
+</aside>
+
+        <div class="nine phpdocumentor-columns phpdocumentor-content">
+            <ul class="phpdocumentor-breadcrumbs">
+        <li><a href="../index.html">Home</a></li>
+    </ul>
+
+    <div class="phpdocumentor-row">
+        <h2 class="phpdocumentor-content__title">Deprecated</h2>
+
+                <h3>Table of Contents</h3>
+        <table class="phpdocumentor-table_of_contents">
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/addons/Diamond-ServerLink/LinkWithMinecraft.php">test/DiamondCMS/addons/Diamond-ServerLink/LinkWithMinecraft.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/admin/comptes.php">test/DiamondCMS/models/admin/comptes.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/admin/news.php">test/DiamondCMS/models/admin/news.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/comptes/comptes.php">test/DiamondCMS/models/comptes/comptes.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/forum/forum.php">test/DiamondCMS/models/forum/forum.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/comptes/connexion.php">test/DiamondCMS/models/comptes/connexion.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/comptes/inscription.php">test/DiamondCMS/models/comptes/inscription.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/forum/forum_cat.php">test/DiamondCMS/models/forum/forum_cat.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="#test/DiamondCMS/models/support.php">test/DiamondCMS/models/support.php</a></td>
+                </tr>
+                    </table>
+        
+                    <a id="test/DiamondCMS/addons/Diamond-ServerLink/LinkWithMinecraft.php"></a>
+            <h3><abbr title="test/DiamondCMS/addons/Diamond-ServerLink/LinkWithMinecraft.php">LinkWithMinecraft.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">12</td>
+                            <td class="phpdocumentor-cell"><a href="../classes/DServerLink-QueryWithMinecraft.html"><abbr title="\DServerLink\QueryWithMinecraft">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désormais d&#039;utiliser la class Query qui supporte tous les jeux</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">111</td>
+                            <td class="phpdocumentor-cell"><a href="../classes/DServerLink-RConWithMinecraft.html"><abbr title="\DServerLink\RConWithMinecraft">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désormais d&#039;utiliser la class RCON qui supporte tous les jeux</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/admin/comptes.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/admin/comptes.php">comptes.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">4</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_delRole"><abbr title="\delRole()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désomais d&#039;utiliser les fonctions de simplication du namespace simplifySQL</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">9</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_addRole"><abbr title="\addRole()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désomais d&#039;utiliser les fonctions de simplication du namespace simplifySQL</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">23</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_modify"><abbr title="\modify()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désomais d&#039;utiliser les fonctions de simplication du namespace simplifySQL</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/admin/news.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/admin/news.php">news.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">4</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_delNews"><abbr title="\delNews()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désomais d&#039;utiliser les fonctions de simplication du namespace simplifySQL</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">15</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_addNews"><abbr title="\addNews()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient désomais d&#039;utiliser les fonctions de simplication du namespace simplifySQL</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/comptes/comptes.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/comptes/comptes.php">comptes.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">37</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getInfo"><abbr title="\getInfo()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">80</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_ban"><abbr title="\ban()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">96</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_banId"><abbr title="\banId()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/forum/forum.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/forum/forum.php">forum.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">68</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getPost"><abbr title="\getPost()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">19</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getPosts"><abbr title="\getPosts()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">46</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getNPosts"><abbr title="\getNPosts()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">91</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getComs"><abbr title="\getComs()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">113</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_newCom"><abbr title="\newCom()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">148</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_newPost"><abbr title="\newPost()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">175</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_set_solved"><abbr title="\set_solved()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">201</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_delSubject"><abbr title="\delSubject()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">249</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getIdPost"><abbr title="\getIdPost()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/comptes/connexion.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/comptes/connexion.php">connexion.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">68</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_isBan"><abbr title="\isBan()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/comptes/inscription.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/comptes/inscription.php">inscription.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">64</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_isMembre"><abbr title="\isMembre()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/forum/forum_cat.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/forum/forum_cat.php">forum_cat.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">9</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getCategorie"><abbr title="\getCategorie()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">Il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
+Elles seront donc supprimées d&#039;ici une prochaine mise à jour. (Dernière édition - avril 2020)</td>
+                        </tr>
+                                                </table>
+                    <a id="test/DiamondCMS/models/support.php"></a>
+            <h3><abbr title="test/DiamondCMS/models/support.php">support.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">3</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_addResponse"><abbr title="\addResponse()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">22</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_createTicket"><abbr title="\createTicket()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">34</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getTickets"><abbr title="\getTickets()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">52</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getTicketById"><abbr title="\getTicketById()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">69</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getNumberTickets"><abbr title="\getNumberTickets()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">83</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getNumberTicketsByName"><abbr title="\getNumberTicketsByName()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">97</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getTicketsByName"><abbr title="\getTicketsByName()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">116</td>
+                            <td class="phpdocumentor-cell"><a href="../namespaces/default.html#function_getTicketsReponses"><abbr title="\getTicketsReponses()">normal</abbr></a></td>
+                            <td class="phpdocumentor-cell">il convient d&#039;utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD</td>
+                        </tr>
+                                                </table>
+            </div>
+            <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+                <h2>Search results</h2>
+                <ul class="phpdocumentor-search-results__entries">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

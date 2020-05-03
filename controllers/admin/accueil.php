@@ -111,5 +111,16 @@ $all_addons = array();
     }
     closedir($dir);
   }
+
+//Vérification de la version du CMS :
+$outdated = false;
+$version = @file_get_contents('https://aldric-l.github.io/DiamondCMS/version.txt');
+if (!empty($version)){
+  $version = intval($version);
+  if (DCMS_INT_VERSION < $version){
+    $outdated = true;
+  }
+}
+
 $controleur_def->loadJS('admin/accueil');
 $controleur_def->loadViewAdmin('admin/accueil', 'accueil', 'Accueil');

@@ -1,4 +1,4 @@
-<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes;  ?>
+<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes, $outdated;  ?>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -107,8 +107,13 @@
                         <div class="panel-body">
                             <p><strong>Numéro d'identification du CMS :</strong> <?php echo $Serveur_Config["id_cms"]; ?><br />
                             <strong>Version du CMS :</strong> <?php echo DCMS_VERSION; ?><br />
-                            <strong>Installé le : </strong><?php echo $Serveur_Config["date_install"]; ?> 
-                            <br><br>
+                            <strong>Installé le : </strong><?php echo $Serveur_Config["date_install"]; ?> <br>
+                            <?php if($outdated){ ?>
+                                <strong><span style="color: red;">Attention !</span> DiamondCMS n'est plus à jour.</strong> <a href="https://aldric-l.github.io/DiamondCMS/">Cliquez-ici pour en savoir plus.</a>
+                            <?php }else { ?>
+                                DiamondCMS est à jour
+                            <?php } ?>
+                            </p>
                             <?php if ($Serveur_Config['mtnc'] == "false"){ ?>
                                 <a id="mtnc" data="<?php echo $config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/accueil/mtnc/" class="btn btn-default btn-block mtnc">Démarrer une maitenance</a>
                             <?php }else { ?>

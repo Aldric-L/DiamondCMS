@@ -18,6 +18,8 @@
   define('ROOT', str_replace('index.php','', $_SERVER['SCRIPT_FILENAME']));
 
   define('DCMS_VERSION', '1.0Bc');
+  define('DCMS_INT_VERSION', 1);
+
   // OU define('DCMS_TYPE', 'Extended');
   define('DCMS_TYPE', 'Extended');
   // OU define('DCMS_DEFAULT_ADDONS_INSTALLED', array());

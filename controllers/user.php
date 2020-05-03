@@ -115,12 +115,19 @@ class User {
 
     //On execute la requete
     $req->execute();
+  
     //On récupère tout
     $role = $req->fetch();
     //On ferme la requete
     $req->closeCursor();
 
     return $this->role['name'] = $role['name'];
+  }
+
+  function credit($db, $money){
+    $curmoney = $this->getMoney();
+    $this->infos['money'] = intval($curmoney) + intval($money);
+    return simplifySQL\update($db, "d_membre", array(array("money", "=", intval($curmoney) + intval($money))), array(array("id", "=", $this->getId())));
   }
 
   function var_dump(){

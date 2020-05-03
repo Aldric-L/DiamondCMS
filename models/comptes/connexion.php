@@ -61,6 +61,7 @@ function isAccount($db, $Serveur_config, $pseudo, $mdp, $salt){
  * isBan - Savoir si le compte est banni
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @return boolean
  * @access public
  */

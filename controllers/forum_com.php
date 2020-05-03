@@ -31,7 +31,9 @@ if ($param[0] == 'forum' && isset($param[1]) && $param[1] == 'com' && $param[2] 
   if (empty($post)){
     header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT . 'forum');
   }
-  $sous_cat = getSousCategorie($controleur_def->bddConnexion(), intval($post['id_scat']));
+  $sous_cat = simplifySQL\select($controleur_def->bddConnexion(), false, "d_forum_sous_cat", "*", array(array("id", "=", $post['id_scat'])));
+  //= getSousCategorie($controleur_def->bddConnexion(), intval($post['id_scat']));
+  //var_dump($sous_cat, getSousCategorie($controleur_def->bddConnexion(), intval($post['id_scat'])));
   //On récupère le nom de la categorie
   $cat = getCategorie($controleur_def->bddConnexion(), str_replace('-', ' ', $sous_cat[0]['id_cat']));
 

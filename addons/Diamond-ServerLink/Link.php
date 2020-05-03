@@ -478,6 +478,15 @@ class Query {
          }
      }
 
+    /**
+     * execOnServer : cette fonction permet d'éxecuter une commande sur un serveur
+     *
+     * @param int $id : id du serveur auquel il faut envoyer la commande
+     * @param string $cmd : commande qu'il faut exécuter
+     * @author Aldric L.
+     * @copyright 2020
+     * @return bool
+     */
     function execOnServer($id, $cmd){
         if (in_array($id, $this->connected_servers)){
             for ($i = 1; $i <= sizeof($this->api); $i++){

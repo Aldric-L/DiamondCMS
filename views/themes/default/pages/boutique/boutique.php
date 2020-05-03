@@ -1,5 +1,5 @@
 <?php global $l_articles, $n_articles_global, $cats; ?>
-<div id="fh5co-page-title" style="margin-bottom: 0;">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1>Boutique</h1>
@@ -11,9 +11,30 @@
   <p class="explicp">Cette boutique vous offre la possbilité d'acheter du contenu disponible sur notre serveur qui servira à compenser les dépenses liées au serveur, et ainsi vous offrir des parties de jeu de plus en plus confortables, et permettre le maintien du serveur dans le temps. <br />Merci de votre soutien !</p>
   <p id="red" class="text-danger"><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Attention, aucun remboursement ne sera effectué, comme précisé dans nos conditions génerales de vente.  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong></p>
 </div>
-<br />
+<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])){ ?>
+<div class="container">
+    <div class="rows">
+        <div class="col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2">
+            <p style="text-align: right;"><br><img class="" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $_SESSION['user']->getPseudo(); ?>/110"></p>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <h3><?= $_SESSION['user']->getPseudo(); ?></h3>
+            <p>Vous disposez de <strong><?= $_SESSION['user']->getMoney(); ?> <?= $Serveur_Config['Serveur_money']; ?>(s)</strong></p>
+            <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>boutique/getmoney/"><button class="btn btn-success btn-md" style="background-color: #197d62; border-color: #197d62;">Acheter des <?= $Serveur_Config['Serveur_money']; ?>s</button></a>
+        </div>
+        
+    </div>
+</div>
+<?php }else { ?>
+    <br />
+<?php } ?>
+
 <div class="container">
     <div class="row">
+        <?php if (empty($l_articles)) { ?>
+            <br><br>
+        <center><P>Malheureusement, aucun article n'est pour le moment mis en vente.</P></center>
+        <?php }else { ?>
             <div class="col-lg-12">
                 <h3 class="page-header">Derniers articles ajoutés <small> - <?php echo $n_articles_global; ?> Articles </small></h3>
             </div>
@@ -54,6 +75,7 @@
 		    </div> <!-- .col-md-12 --></div>
             <br><br>
         <div class="rows">
+    <?php } ?>
         <?php foreach ($cats as $key => $cat){ ?>
             <div class="col-lg-12">
                 <h3 class="page-header"><?php echo $cat['name']; ?><small> - <?php echo $cat['nb_articles']; ?> Articles </small></h3>

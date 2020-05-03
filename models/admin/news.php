@@ -1,6 +1,6 @@
 <?php 
 
-/** @deprecated */
+/** @deprecated Il convient désomais d'utiliser les fonctions de simplication du namespace simplifySQL */
 function delNews($db, $id){
   return $db->exec("DELETE FROM d_news WHERE id = " . $id);
 }
@@ -9,7 +9,7 @@ function delNews($db, $id){
  * addNews - Fonction pour poster une news, une fois que le fichier est uploadé
  * @author Aldric.L
  * @copyright Copyright 2020 Aldric L.
- * @deprecated
+ * @deprecated Il convient désomais d'utiliser les fonctions de simplication du namespace simplifySQL
  * @return void
  */
  function addNews($db, $name, $content, $file_name, $user){

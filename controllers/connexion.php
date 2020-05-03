@@ -13,6 +13,9 @@ if (!isset($_SESSION['pseudo']) || empty($_SESSION['pseudo'])){
           $salt = simplifySQL\select($controleur_def->bddConnexion(), true, "d_membre", "salt", array(array("pseudo", "=", $_POST['pseudo_connexion'])));
           if ($salt == false){
             $controleur_def->addError(332);
+            if ($Serveur_Config['mtnc'] == "true"){
+              header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT);
+            }
             require('accueil.php');
             die;
           }
@@ -23,6 +26,9 @@ if (!isset($_SESSION['pseudo']) || empty($_SESSION['pseudo'])){
             if ($is_ban != false){
               $ban = true;
               $r_ban = isBan($controleur_def->bddConnexion(), htmlspecialchars($_POST['pseudo_connexion']));
+              if ($Serveur_Config['mtnc'] == "true"){
+                header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT);
+              }
               require('accueil.php');
               die;
             }
@@ -45,12 +51,21 @@ if (!isset($_SESSION['pseudo']) || empty($_SESSION['pseudo'])){
             }
           }else {
             $controleur_def->addError(332);
+            if ($Serveur_Config['mtnc'] == "true"){
+              header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT);
+            }
           }
       }else {
         $controleur_def->addError("331h");
+        if ($Serveur_Config['mtnc'] == "true"){
+          header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT);
+        }
       }
     }else {
       $controleur_def->addError("331g");
+      if ($Serveur_Config['mtnc'] == "true"){
+        header('Location: '. $Serveur_Config['protocol'] . '://'. $_SERVER['HTTP_HOST'] . WEBROOT);
+      }
     }
   }
 

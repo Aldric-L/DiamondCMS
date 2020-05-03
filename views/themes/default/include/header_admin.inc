@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta lang="fr">
     <meta name="author" content="DiamondCMS, pour <?= $Serveur_Config['Serveur_name']; ?>">
-    <link rel="icon" type="image/png" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>.png" />
+    <link rel="icon" type="image/png" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>" />
 
     <!-- Title -->
     <?php if (!empty($title)){?>
@@ -176,7 +176,7 @@
                                             <?php $i++; } }  } ?>
                         
                         <li>
-                            <a class="text-center" href="#">
+                            <a class="text-center" href="notify">
                                 <strong>Voir toutes les alertes</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -209,7 +209,7 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <center><img class="img-rounded" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $_SESSION['pseudo']; ?>/100"></center>
-                            <h3 class="text-center">Goug3</h3>
+                            <h3 class="text-center"><?php echo $_SESSION['pseudo']; ?></h3>
                         </li>
                         <li>
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/"><i class="fa fa-dashboard fa-fw"></i> Tableau de Bord</a>
@@ -259,6 +259,9 @@
                                 <li>
                                     <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/forum/">Page Forum</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/configaccueil/">Page d'Accueil</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -279,6 +282,12 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/tasks/">Tâches et commandes</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/paypal/">Configuration de PayPal</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/dedipass/">Configuration de DediPass</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

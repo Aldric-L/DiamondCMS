@@ -15,11 +15,9 @@
                         </div>
                         <div class="panel-body">
                              <p class="title">Vous ne comprenez pas ces erreurs ?</p><br />
-                             <p class="text-justify"><strong class="important_explain">Ne vous inquietez pas, nous allons vous aider.</strong> Pour celà, vous pouvez consulter la documentation à propos de erreurs levées
-                             par le CMS ou bien, si votre problème persiste, nous contacter via notre support : nous nous ferons un plaisir de vous aider !</p>
+                             <p class="text-justify">Vous pouvez consulter une documentation de toutes les erreurs émises par le CMS pour mieux les comprendre et réparer les possibles problèmes qu'elles révèlent.</p>
                              <hr>
-                             <p><strong class="">Documentation des erreurs :</strong> lien<br/>
-                             <strong class="">Support du CMS :</strong> lien</P>
+                             <p><strong class="">Documentation des erreurs :</strong> <em>Disponible d'ici une prochaine mise à jour.</em><br/></p>
                         </div>
                     </div>
         </div>

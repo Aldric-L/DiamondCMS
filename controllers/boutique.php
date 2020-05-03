@@ -1,7 +1,14 @@
 <?php 
+//On fait le choix ici de séparer les controlleurs pour que leur lecture reste aisée
 //Si la page "boutique/getback" est demandée, alors on charge son controlleur
 if (isset($param[1]) && !empty($param[1]) && $param[1] == "getback" && isset($param[2]) && !empty($param[2])){
     require_once (ROOT . "controllers/boutique.getback.php");
+    die;
+}
+
+//Si la page "boutique/getmoney" est demandée, alors on charge son controlleur
+if (isset($param[1]) && !empty($param[1]) && $param[1] == "getmoney"){
+    require_once (ROOT . "controllers/boutique.getmoney.php");
     die;
 }
 
@@ -80,7 +87,7 @@ if (isset($param[1]) && !empty($param[1]) && isset($param[2]) && !empty($param[2
     }
 }
 
-
+//Si on veut afficher la page d'un article
 if (isset($param[1]) && !empty($param[1]) && $param[1] == "article" && isset($param[2]) && !empty($param[2])){
     $id = $param[3];
     $article = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_articles", "*", array(array("id", "=", $param[2])));

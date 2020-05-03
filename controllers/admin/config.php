@@ -22,7 +22,9 @@ if (isset($param[2]) && !empty($param[2]) && isset($param[3]) && !empty($param[3
             isset($_POST['socialyt']) &&
             isset($_POST['socialfb']) &&
             isset($_POST['socialtw']) &&
-            isset($_POST['socialdiscord']) ){
+            isset($_POST['socialdiscord']) &&
+            isset($_POST['favicon']) &&
+            isset($_POST['logo']) ){
             //Ecriture dans le fichier ini
                 //Copie du fichier dans un array temporaire
                 $temp_conf = $Serveur_Config;
@@ -42,6 +44,14 @@ if (isset($param[2]) && !empty($param[2]) && isset($param[3]) && !empty($param[3
                 }else {
                     $temp_conf['en_vote'] = 0;
                 }
+                if ($_POST['logo'] == "name_server"){
+                    $temp_conf['logo_img'] = "0";
+                    $temp_conf['name_logo'] = $_POST['logo'];
+                }else {
+                    $temp_conf['logo_img'] = "1";
+                    $temp_conf['name_logo'] = $_POST['logo'];
+                }
+                $temp_conf['favicon'] = $_POST['favicon'];
                 //$temp_conf['en_vote'] = $_POST['vote_en'];
                 //$temp_conf['en_support'] = $_POST['support_en'];
                 $temp_conf['lien_vote'] = $_POST['lien_vote'];
@@ -103,7 +113,17 @@ if (isset($param[2]) && !empty($param[2]) && isset($param[3]) && !empty($param[3
                 
                 $newconf = $cm->getConfig();
                 unset($newconf[intval($_POST['id'])]);
+                foreach ($newconf as $k => $nc){
+                    if ($nc['id'] > $_POST['id']){
+                        $newconf[$k]['id'] = $newconf[$k]['id']-1;
+                        $newconf[$k-1] = $newconf[$k];
+                    }
+                }
+                unset($newconf[sizeof($newconf)]);
                 
+                //Il faut bien penser aussi aux conséquences, comme la suppression des commandes associées
+                simplifySQL\delete($controleur_def->bddConnexion(), "d_boutique_cmd", array(array("server", "=", $_POST['id'])));
+
                 $cm->editConfig($newconf);
 
             die('Success');
@@ -156,5 +176,5 @@ if (DServerLink == true){
 }
 
 
-
+$controleur_def->loadJS('admin/config');
 $controleur_def->loadViewAdmin('admin/config/config', 'accueil', 'Configuration du CMS');

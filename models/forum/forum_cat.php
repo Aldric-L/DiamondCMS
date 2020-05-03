@@ -2,24 +2,10 @@
 /**
  *
  * Ces fonctions sont quasiment toutes dépréciées :
- * Désormais, il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
- * @deprecated 
+ * @deprecated  Il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * Elles seront donc supprimées d'ici une prochaine mise à jour. (Dernière édition - avril 2020)
  */
 
-
-function getCategories($db){
-  $req = $db->prepare('SELECT id, titre FROM d_forum_cat ORDER BY id');
-
-  //On execute la requete
-  $req->execute();
-  //On récupère tout
-  $cats = $req->fetchAll();
-  //On ferme la requete
-  $req->closeCursor();
-
-  return $cats;
-}
 function getCategorie($db, $id){
   $req = $db->prepare('SELECT id, titre FROM d_forum_cat WHERE id='. $id . ' ORDER BY id');
 

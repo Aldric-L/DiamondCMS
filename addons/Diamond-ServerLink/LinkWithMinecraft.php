@@ -4,7 +4,7 @@ namespace DServerLink;
  * Class permettant de faire le lien (Ici d'utiliser la fonction query) entre un serveur Minecraft et DiamondCMS
  * Construit sur le projet "Minecraft Query PHP" et "Source Query" de xpaw
  * 
- * @deprecated 
+ * @deprecated Il convient désormais d'utiliser la class Query qui supporte tous les jeux
  * @author Aldric L.
  * @copyright 2020
  */
@@ -103,6 +103,7 @@ class QueryWithMinecraft {
  * Construit sur le projet "Minecraft Query PHP" et "Source Query" de xpaw
  * 
  * Attention, contrairement à QueryWithMinecraft, cette class ne supporte pas la version MCPE de Minecraft
+ * @deprecated Il convient désormais d'utiliser la class RCON qui supporte tous les jeux
  * @author Aldric L.
  * @copyright 2020
  */

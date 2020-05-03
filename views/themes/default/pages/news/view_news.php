@@ -1,5 +1,5 @@
 <?php global $news; ?>
-<div id="fh5co-page-title">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1><a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT; ?>news/">News du serveur</a> - <?php echo $news['name']; ?> par <?php echo $news['user']; ?> le <?php echo $news['date']; ?></h1>

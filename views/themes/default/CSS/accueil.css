@@ -30,7 +30,7 @@
     outline: none;
   }
   #fh5co-hero .overlay {
-    background-image: url('web_font-jump.png');
+    /*background-image: url('web_font-jump.png');*/
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

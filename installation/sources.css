@@ -4,13 +4,18 @@ h1{
 }
 @font-face {
   font-family:'BreeSerif';
-  src: url('BreeSerif-Regular.ttf') format('truetype');
+  src: url('fonts/BreeSerif-Regular.ttf') format('truetype');
   font-weight:normal;
   font-style:normal
 }
 @font-face {
   font-family:'Raleway-Light';
-  src: url('Raleway-Light.ttf') format('truetype');
+  src: url('fonts/Raleway-Light.ttf') format('truetype');
   font-weight:normal;
   font-style:normal
+}
+
+button.green{
+  background-color: #197d62;
+  border-color: #197d62;
 }

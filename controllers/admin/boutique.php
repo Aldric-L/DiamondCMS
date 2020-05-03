@@ -1,6 +1,6 @@
 <?php 
 global $cm; 
-//Si on reçoit des informations dans la variable $_POST
+//Si on reçoit des informations dans la variable $_POST (Ajout d'une catégorie)
 if (isset($_POST) && !empty($_POST)){
     //Si le formulaire a bien été rempli entierement
     if (isset($_POST['new_cat']) && !empty($_POST['new_cat'])){
@@ -9,6 +9,7 @@ if (isset($_POST) && !empty($_POST)){
         }
     }
 }
+$boutique_config = parse_ini_file(ROOT . 'config/boutique.ini', true);
 
 //Si on passe en mode XHR
 if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[3]) && !empty($param[3])){
@@ -145,6 +146,79 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[
         }
         
         die('Success');
+
+    //Si on supprime une offre PayPal
+    }else if ($param[3] == "delete_offre" && isset($param[4]) && !empty($param[4])){
+        if (simplifySQL\delete($controleur_def->bddConnexion(), "d_boutique_paypal_offres", array(array("id", "=", $param[4]))) != true){
+            $controleur_def->addError("341b");
+            die('Error SQL');
+        }
+        die('Success');
+    
+    //Si on modifie les réglages PayPal
+    }else if ($param[3] == "configpaypal" && !empty($_POST) && isset($_POST['en_paypal']) && isset($_POST['sandbox']) && isset($_POST['money']) && isset($_POST['id_pp']) && isset($_POST['secret_pp'])){
+        $tmp_boutique = $boutique_config;
+        $tmp_boutique['PayPal']['en_paypal'] = $_POST['en_paypal'];
+        $tmp_boutique['PayPal']['sandbox'] = $_POST['sandbox'];
+        $tmp_boutique['PayPal']['money'] = $_POST['money'];
+        $tmp_boutique['PayPal']['id'] = $_POST['id_pp'];
+        $tmp_boutique['PayPal']['secret'] = $_POST['secret_pp'];
+
+        //On appel la class ini pour réecrire le fichier
+        $ini = new ini (ROOT . "config/boutique.ini", 'Configuration de la boutique de DiamondCMS');
+        //On lui passe l'array modifié
+        $ini->ajouter_array($tmp_boutique);
+        //On écrit en lui demmandant de conserver les groupes
+        $ini->ecrire(true);
+        //FIN Encriture ini
+        $boutique_config = $tmp_boutique;
+        die('Success');
+
+    //Si on modifie les réglages DediPass
+    }else if ($param[3] == "configddp" && !empty($_POST) && isset($_POST['en_ddp']) && isset($_POST['pub_key']) && isset($_POST['priv_key'])){
+        $tmp_boutique = $boutique_config;
+        $tmp_boutique['DediPass']['en_ddp'] = $_POST['en_ddp'];
+        $tmp_boutique['DediPass']['public_key'] = $_POST['pub_key'];
+        $tmp_boutique['DediPass']['private_key'] = $_POST['priv_key'];
+
+        //On appel la class ini pour réecrire le fichier
+        $ini = new ini (ROOT . "config/boutique.ini", 'Configuration de la boutique de DiamondCMS');
+        //On lui passe l'array modifié
+        $ini->ajouter_array($tmp_boutique);
+        //On écrit en lui demmandant de conserver les groupes
+        $ini->ecrire(true);
+        //FIN Encriture ini
+        $boutique_config = $tmp_boutique;
+        die('Success');
+    
+    //Si on modifie les réglages généraux
+    }else if ($param[3] == "saveconf" && !empty($_POST) && isset($_POST['money_sym']) && isset($_POST['money_name']) && isset($_POST['money'])){
+        //Ecriture dans le fichier ini
+        //Copie du fichier dans un array temporaire
+        $temp_conf = $Serveur_Config;
+        $temp_conf['money'] = $_POST['money_sym'];
+        $temp_conf['money_name'] = $_POST['money_name'];
+        $temp_conf['Serveur_money'] = $_POST['money'];
+
+        //On appel la class ini pour réecrire le fichier
+        $ini = new ini (ROOT . "config/config.ini", 'Configuration DiamondCMS');
+        //On lui passe l'array modifié
+        $ini->ajouter_array($temp_conf);
+        //On écrit en lui demmandant de conserver les groupes
+        $ini->ecrire(true);
+        //FIN Encriture ini
+        $config = $temp_conf;
+        die('Success');
+        
+    //Si on ajoute une offre PayPal
+    }else if ($param[3] == "addpaypal" && !empty($_POST) && isset($_POST['name']) && isset($_POST['nb']) && isset($_POST['prix'])){
+        if (simplifySQL\insert($controleur_def->bddConnexion(), "d_boutique_paypal_offres", 
+            array("name", "price", "tokens", "uuid"), 
+            array($_POST['name'], $_POST['prix'], $_POST['nb'], uniqid())) != true){
+            $controleur_def->addError("342c");
+            die('SQL: Error');
+        }
+        die('Success');
     }
 
 //Si on charge le gestionnaire d'articles
@@ -239,7 +313,6 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[
                 $cats[$key]['articles'][$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_cmd", "*", array(array("id_article", "=", $cats[$key]['articles'][$k]['id'])));
             }
         }                
-        //var_dump($_POST);
         $config = $Serveur_Config;
         $controleur_def->loadJS('admin/boutique/articles');
         $controleur_def->loadViewAdmin('admin/boutique/articles', 'accueil', "Gestion des articles");
@@ -248,6 +321,7 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[
         $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");
         die;
     }
+//Si on charge les tâches et commandes à satisfaire
 }else if (isset($param[2]) && !empty($param[2]) && $param[2] == "tasks"){
     if ($Serveur_Config['en_boutique']){
         if (defined("DServerLink") && DServerLink == true){
@@ -276,16 +350,46 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "xhr" && isset($param[
 
         foreach ($tasks as $k => $t){
             //On récupère la commande correspondante
-            $tasks[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd'])));    
-            $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
-            $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+            $tasks[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd']))); 
+            if (!defined("DServerLink") || !DServerLink){
+                $tasks[$k]['cmd']['server_name'] = "";
+                $tasks[$k]['cmd']['server_game'] = "";
+            }else {
+                $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
+                $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+            }
+            
         }        
 
-        //var_dump($tasks, $commandes);
-        //var_dump($_POST);
         $config = $Serveur_Config;
-        //$controleur_def->loadJS('admin/boutique/articles');
         $controleur_def->loadViewAdmin('admin/boutique/tasks', 'accueil', "Tâches et achats virtuels");
+        die;
+    }else {
+        $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");
+        die;
+    }
+
+//Si on charge le gestionnaire de PayPal
+}else if (isset($param[2]) && !empty($param[2]) && $param[2] == "paypal"){
+    if ($Serveur_Config['en_boutique']){
+        $payments = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_paypal", "*", false, "id", true);
+        $offres = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_paypal_offres", "*", false, "id", true);
+
+        $controleur_def->loadJS('admin/boutique/paypal');
+        $controleur_def->loadViewAdmin('admin/boutique/paypal', 'accueil', "Gestion de PayPal");
+        die;
+    }else {
+        $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");
+        die;
+    }
+
+//Si on charge le gestionnaire DediPass
+}else if (isset($param[2]) && !empty($param[2]) && $param[2] == "dedipass"){
+    if ($Serveur_Config['en_boutique']){
+        $payments = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_dedipass", "*", false, "id", true);
+
+        $controleur_def->loadJS('admin/boutique/dedipass');
+        $controleur_def->loadViewAdmin('admin/boutique/dedipass', 'accueil', "Gestion de DediPass");
         die;
     }else {
         $controleur_def->loadViewAdmin('admin/boutique/disabled', 'accueil', "Boutique désactivée");

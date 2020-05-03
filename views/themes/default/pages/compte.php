@@ -1,5 +1,5 @@
 <?php
-global $infos, $lastactions, $pseudo, $not_user, $can_ban, $not_found, $Serveur_Config;
+global $infos, $lastactions, $pseudo, $not_user, $can_ban, $not_found, $Serveur_Config, $commandes;
  
 if (empty($infos) || $not_found){?>
     <div id="emptyServer">
@@ -10,7 +10,7 @@ if (empty($infos) || $not_found){?>
   </div><br /><br /><br />
 <?php }else {
  ?>
- <div id="fh5co-page-title">
+ <div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
    <div class="overlay"></div>
    <div class="text">
    <?php if (!$not_user){ ?>
@@ -84,7 +84,7 @@ if (empty($infos) || $not_found){?>
                     <input type="text" class="form-control" id="email" name="email" value="<?= $infos[0]['email']; ?>">
                   </div>
                 </div>
-                <?php if (!$Serveur_Config['en_minecraft_profile']){ ?>
+                <?php if (!defined("DMcProfileImg") || DMcProfileImg == false){ ?>
                   <div class="form-group row">
                     <label for="img" class="col-sm-2 col-form-label">Photo de profil</label>
                     <div class="col-sm-10">
@@ -98,6 +98,63 @@ if (empty($infos) || $not_found){?>
                   <p style="text-align: right;"><button type="submit" id="submit-all" class="btn btn-success btn-md">Envoyer</button></P>
                 <?php } ?>
               </form>
+            </div><!-- ./col-lg-8 -->
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+      </div><!-- ./rows -->
+    </div><!-- ./container -->
+    <hr>
+  <?php } ?>
+  <?php 
+  //Affichage de l'interface pour modifier le compte
+  if (!$not_user){ ?>
+    <div class="container">
+      <div class="rows">
+            <h3 class="text-center">Vos dernières notifications :</h1>
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+            <div class="col-lg-8">
+                <?php
+                if (empty($controleur_def->getNotifyLog($infos[0]['id']))){ ?>
+                    <p style="text-align: center;">Aucune notification à afficher</p>
+                <?php } ?>
+                <ul>
+                <?php foreach ($controleur_def->getNotifyLog($infos[0]['id']) as $n) {  ?>
+                <li>
+                  <strong><?php echo $n['title']; ?></strong> - 
+                 <?php echo $n['content']; ?> - <a href="<?= $n['link']; ?>">En savoir plus...</a>
+                </li>
+              <?php  }   ?>
+              </ul>
+            </div><!-- ./col-lg-8 -->
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+      </div><!-- ./rows -->
+    </div><!-- ./container -->
+    <hr>
+  <?php } ?>
+  <?php 
+  //Affichage de l'interface pour modifier le compte
+  if (!$not_user){ ?>
+    <div class="container">
+      <div class="rows">
+            <h3 class="text-center">Vos dernières commandes :</h1>
+            <div class="col-lg-2"></div><!-- ./col-lg-2 -->
+            <div class="col-lg-8">
+                <?php
+                if (empty($commandes)){ ?>
+                    <p style="text-align: center;">Vous n'avez pour le moment rien acheté sur notre boutique !</p>
+                <?php } ?>
+                <ul>
+                <?php foreach ($commandes as $c) {  ?>
+                <li>
+                  <strong>Achat de l'article "<?php echo $c['article']['name']; ?>" pour <?php echo $c['price']; ?> <?= $Serveur_Config['Serveur_money']; ?>(s)</strong> - 
+                 Numéro de commande : <?php echo $c['uuid']; ?> (passée le <?= $c['date']; ?>)
+                 <?php if ($c['success']){ ?>
+                    - <span style="color: green;"><strong>Terminée avec succès</strong></span>
+                 <?php }else { ?>
+                    - <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>boutique/getback/<?=$c['uuid']; ?>">Finir de réceptionner la commande</a>
+                 <?php } ?>
+                </li>
+              <?php  }   ?>
+              </ul>
             </div><!-- ./col-lg-8 -->
             <div class="col-lg-2"></div><!-- ./col-lg-2 -->
       </div><!-- ./rows -->

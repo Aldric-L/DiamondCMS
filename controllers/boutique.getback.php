@@ -27,7 +27,7 @@ if ($_SESSION['user']->getId() != $commande['id_user']){
 }
 
 //Si on passe en mode XHR
-// param 3 : test
+// param 3 : test/get
 // param 4 : id de la tache
 // param 5 : pseudo à tester
 if (isset($param[3]) && !empty($param[3]) && ($param[3] == "test" || $param[3] == "get") && isset($param[4]) && !empty($param[4]) && isset($param[5]) && !empty($param[5])){
@@ -242,9 +242,14 @@ if (isset($param[3]) && !empty($param[3]) && ($param[3] == "test" || $param[3] =
 $tasks = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_todolist", "*", array(array("id_commande", "=", $commande['id']), "AND", array("done", "=", 0)));
 foreach ($tasks as $k => $t){
     //On récupère la commande correspondante
-    $tasks[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd'])));    
-    $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
-    $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+    $tasks[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd'])));
+    if (defined("DServerLink") && DServerLink){    
+        $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
+        $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+    }else {
+        $tasks[$k]['cmd']['server_name'] = "";
+        $tasks[$k]['cmd']['server_game'] = "";
+    }
 }
 
 $tasks_done = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_todolist", "*", array(array("id_commande", "=", $commande['id']), "AND", array("done", "=", 1)));
@@ -252,8 +257,13 @@ $tasks_done = simplifySQL\select($controleur_def->bddConnexion(), false, "d_bout
 foreach ($tasks_done as $k => $t){
     //On récupère la commande correspondante
     $tasks_done[$k]['cmd'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_cmd", "*", array(array("id", "=", $t['cmd'])));    
-    $tasks_done[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks_done[$k]['cmd']['server']]['name'];
-    $tasks_done[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks_done[$k]['cmd']['server']]['game'];
+    if (defined("DServerLink") && DServerLink){    
+        $tasks[$k]['cmd']['server_name'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['name'];
+        $tasks[$k]['cmd']['server_game'] = $cm->getConfig()[$tasks[$k]['cmd']['server']]['game'];
+    }else {
+        $tasks[$k]['cmd']['server_name'] = "";
+        $tasks[$k]['cmd']['server_game'] = "";
+    }
 }
 //var_dump($tasks, $commande, $tasks_done);
 $controleur_def->loadJS('getback');

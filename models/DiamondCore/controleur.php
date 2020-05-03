@@ -1,9 +1,8 @@
 <?php
 /**
  * Controleur - Une class de "base" pour tous les controleurs
- * ATTENTION, toute modification de ce fichier pourrait entraîner des bugs graves et/ou la suspention DEFINITIVE du CMS.
- * @author Aldric.L (GougDEV)
- * @copyright Copyright 2016-2017 Aldric L.
+ * @author Aldric.L 
+ * @copyright Copyright 2016-2017-2020 Aldric L.
  */
 //Cette classe sert de base à tous les controleurs
   class Controleur{
@@ -93,7 +92,7 @@
 
       //Pour ce connecter à la base de donnée
       public function bddConnexion(){
-        require_once(ROOT . 'models/bdd_connexion.php');
+        require_once(ROOT . 'models/DiamondCore/bdd_connexion.php');
         //On crée une connexion PDO
         $this->bdd = new BDD(parse_ini_file(ROOT . "config/bdd.ini", true));
         return $this->bdd->getPDO();
@@ -195,8 +194,18 @@
         return $notifications;
       }
 
+      function getnotifyLog($user, $limit=10){
+        $notifications = simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", $user)), "id", true, array(0, $limit));
+        if (!empty($notifications)){
+          foreach ($notifications as $not){
+            $this->bddConnexion()->exec("UPDATE d_notify SET view = 1 WHERE id = " . $not['id']);
+          }
+        } 
+        return $notifications;
+      }
+
       function getnotifyadmin(){
-        $notifications = simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")));
+        $notifications = simplifySQL\select($this->bddConnexion(), false, "d_notify", "*", array(array("user", "=", "admin")), "id", true);
         if (!empty($notifications)){
           foreach ($notifications as $not){
             $this->bddConnexion()->exec("UPDATE d_notify SET view = 1 WHERE id = " . $not['id']);
@@ -301,6 +310,23 @@
           return false;
         }
       }
+
+      /**
+        * getPseudo - Fonction pour récuperer le pseudo d'un membre
+        * Cette méthode correspond aux nouvelles normes d'utilisation SQL (2020) en utilisant les fonctions de simplification/sécurisation
+        * @author Aldric.L
+        * @copyright Copyright 2020 Aldric L.
+        * @access public
+        * @return false|array
+        */
+        public function getPseudo($id){
+          $membre = simplifySQL\select($this->bddConnexion(), true, "d_membre", "id, pseudo", array(array("id", "=", $id)));
+          if (!empty($membre)){
+            return $membre['pseudo'];
+          }else {
+            return false;
+          }
+        }
 
       function isValid(){
         //Verification de la compatibilité du CMS et de ses Mise à jours

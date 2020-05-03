@@ -11,10 +11,8 @@ namespace simplifySQL {
   * 
   * @param boolean $fetch Type de récupération : fetch OU fetchall si $fetch = true alors fetch sinon fetchAll
   * @param string $from table SQL
-  * @param array $wanted Elements recupérés par la requete
-  * Syntaxe : soit un string "elem1, elem2" soit un array : array("elem1", "elem2", array("date_bdd", "format", "as"))
-  * @param array|bool $where Condition(s) à effectuer dans la requete SQL, si false alors ignorée
-  * Syntaxe : $where = array(array("nom_du_champ", "egalite", "valeur"), "OR", array("nom_du_champ", "egalite", "valeur"));
+  * @param array $wanted Elements recupérés par la requete (Syntaxe : soit un string "elem1, elem2" soit un array : array("elem1", "elem2", array("date_bdd", "format", "as")))
+  * @param array|bool $where Condition(s) à effectuer dans la requete SQL, si false alors ignorée (Syntaxe : $where = array(array("nom_du_champ", "egalite", "valeur"), "OR", array("nom_du_champ", "egalite", "valeur"));)
   * @param string|bool $order_by Nom du champ sur le-quel appliqué le classement des élements par ordre croissant
   * @param boolean $desc si true : Ordre décroissant des élements
   * @param array|bool $limit premier élement du tableau : minimum, deuxième : limite; false si ignoré
@@ -140,7 +138,9 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
 /**
   * Fonction de simplification, pour les requettes SQL de type INSERT
   * Cette fonction respecte les bonnes pratiques quant à l'utilisation de PDO, elle limite les failles SQL. Elle est donc a utiliser au maximum.
-
+  * Attention, cette fonction ne fonctionne que s'il y a correspondance parfaite entre les colonnes de $wanted, et les valeurs de $values qui y seront insérées
+  * Exemple : $wanted=array("col1","col2") et $values=array("valeur_de_la_col1", "valeur_de_la_col2")
+  * 
   * @author Aldric L.
   * @copyright 2020
   * @version 1.0
@@ -148,9 +148,6 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
   * @param string $into table SQL
   * @param array $wanted nom des colonnes modifiées
   * @param array|bool $values valeurs à insérer
-  *
-  * Attention, cette fonction ne fonctionne que s'il y a correspondance parfaite entre les colonnes de $wantes, et les valeurs de $values qui y seront insérées
-  * Exemple : $wanted=array("col1","col2") et $values=array("valeur_de_la_col1", "valeur_de_la_col2")
   *
   * @return bool si false, faire un débogage complet, sinon execution normale de la fonction.
   */
@@ -244,8 +241,7 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
   * @version 1.0
   * 
   * @param string $from table SQL
-  * @param array|bool $where Condition(s) à effectuer dans la requete SQL, si false alors ignorée
-  * Syntaxe : $where = array(array("nom_du_champ", "egalite", "valeur"), "OR", array("nom_du_champ", "egalite", "valeur"));ant
+  * @param array|bool $where Condition(s) à effectuer dans la requete SQL, si false alors ignorée (Syntaxe : $where = array(array("nom_du_champ", "egalite", "valeur"), "OR", array("nom_du_champ", "egalite", "valeur")))
   * @param boolean $desc si true : Ordre décroissant des élements
   *
   * @return bool si false, faire un débogage complet, sinon execution normale de la fonction.
@@ -404,117 +400,3 @@ function select($db, $fetch, $from, $wanted, $where=false, $order_by=false, $des
 }
 
 } //END namespace simplifySQL
-
-namespace {
-/**
-  * Fonction permettant l'upload de fichiers sur le serveur
-  * L'intéret de cette fonction est qu'elle isole tous les types d'erreurs possibles
-
-  * @author Aldric L.
-  * @copyright 2020
-  * @version 1.0
-  * 
-  * @param string $file : index du tableau $_FILESL
-  * @param string $folder : L'emplacement où doit être entreposé le fichier : views/uploads/img/ + $folder (Ce paramètre peut être vide)
-  * @param bool $rename : Si l'on modifie le nom du fichier pour y ajouter un identifiant unique
-  * 
-  * @return int|string si string, le fichier se trouve au bon emplacement slon le nom renvoyé
-  * Différents types de retours :
-  * @return 10 : aucun fichier uploadé
-  * @return 20 ou 21 : upload_max_filesize : phpini maxsize => Fichier trop important (20 => phpin ; 21 => html)
-  * @return 22 : erreur interne inconnue
-  * @return 23 : Aucun fichier uploadé
-  * @return 24 : problème lié à l'extension du fichier
-  * @return 25 : problème d'écriture
-  * @return 30 : encore un problème d'écriture, suite au déplacement du fichier (lié quasiment toujours aux droits d'accès : sous linux inscrire 777)
-  */
-function uploadFile($file, $folder=null, $rename=true){
-    //Test1: fichier correctement uploadé
-    if (!isset($_FILES[$file])){
-      return 10;
-    }
-    
-    //Test2: aucune erreur
-    if ($_FILES[$file]['error'] > 0){
-      //DEBUG
-      //var_dump($_FILES[$file]['error']);
-      //die;
-      if ($_FILES[$file]['error'] == 1){
-           return 20;
-      }else if ($_FILES[$file]['error'] == 2){
-           return 21;
-      }else if ($_FILES[$file]['error'] == 3 || $_FILES[$file]['error'] == 6){
-           return 22;
-      }else if ($_FILES[$file]['error'] == 4){
-           return 23;
-      }else if ($_FILES[$file]['error'] == 7){
-           return 24;
-      }else if ($_FILES[$file]['error'] == 8){
-           return 25;
-      }
-      //Erreur 1 upload_max_filesize : phpini maxsize
-      //Erreur 2 Taille trop grande, html
-      //Erreur 3 :interne
-      //Erreur 4 : Aucun fichier reçu
-      //Erreur 6 : Erreur interne (manque un dossier temp)
-      //Erreur 7 : Erreur d'ecriture
-      //Erreur 8 : Problème d'extention.
-    }
-
-    //Déplacement
-    if ($folder != null){
-        $u_id = uniqid();
-        $primary_name = str_replace(" ", "_", $_FILES[$file]['name']);
-        $primary_name = str_replace("é", "_", $primary_name);
-        $primary_name = str_replace("è", "_", $primary_name);
-        $primary_name = str_replace("ç", "_", $primary_name);
-        $primary_name = str_replace("&", "_", $primary_name);
-        $primary_name = str_replace("à", "_", $primary_name);
-        $primary_name = str_replace("@", "_", $primary_name);
-        if ($rename == false){
-            $deplacement = move_uploaded_file($_FILES[$file]['tmp_name'], 
-            ROOT .'views/uploads/img/' . $folder . '/' . "_" . $primary_name);
-        }else {
-            $deplacement = move_uploaded_file($_FILES[$file]['tmp_name'], 
-            ROOT .'views/uploads/img/' . $folder . '/' .  $u_id . "_" . $primary_name);
-        }
-    
-        if ($deplacement){
-            if ($rename == false){
-                return $folder . '/' . $primary_name;
-            }else {
-                return $folder . '/'. $u_id . "_" . $primary_name;
-            }
-        }else {
-           return 30;
-        }
-        
-    }else {
-        $u_id = uniqid();
-        $primary_name = str_replace(" ", "_", $_FILES[$file]['name']);
-        $primary_name = str_replace("é", "_", $primary_name);
-        $primary_name = str_replace("è", "_", $primary_name);
-        $primary_name = str_replace("ç", "_", $primary_name);
-        $primary_name = str_replace("&", "_", $primary_name);
-        $primary_name = str_replace("à", "_", $primary_name);
-        $primary_name = str_replace("@", "_", $primary_name);
-        if ($rename == false){
-            $deplacement = move_uploaded_file($_FILES[$file]['tmp_name'], 
-            ROOT .'views/uploads/img/' . $primary_name);
-        }else {
-            $deplacement = move_uploaded_file($_FILES[$file]['tmp_name'], 
-            ROOT .'views/uploads/img/' .  $u_id . "_" . $primary_name);
-        }
-        if ($deplacement){
-            if ($rename == false){
-                return $primary_name;
-            }else {
-                return $u_id . "_" . $primary_name;
-            }
-        }else {
-           return 30;
-        }
-    }
-
-}
-}// END namespace

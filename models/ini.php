@@ -1,7 +1,7 @@
 <?php
 // Une class pour écrire dans un ini 
 // Merci à Samuel ROZE (http://sroze.io/2008/05/18/ecrire-des-fichiers-ini-simplement-avec-php/) pour la réalisation de la class
-// Modifications by GougDev.
+// Modifications par Aldric L.
 class ini
 {
  

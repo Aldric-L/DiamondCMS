@@ -29,8 +29,49 @@ jQuery(function ($){
     })
   });
 
+  $('#mtnc').click(function(){
+    var link = $(this).attr('data');
+    console.log(link);
+      $.ajax({
+        url : link,
+        type : 'GET',
+        dataType : 'html',
+        success: function (data_rep) {
+          if (data_rep != "Success"){
+            console.log(data_rep);
+            alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
+          }else {    
+            location.reload(true);
+          }
+        },
+        error: function() {
+          alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
+        }
+      });
+  });
 
   $(".modify_theme").click(function(){
+    var link = $(this).attr('data');
+    console.log(link);
+      $.ajax({
+        url : link,
+        type : 'GET',
+        dataType : 'html',
+        success: function (data_rep) {
+          if (data_rep != "Success"){
+            console.log(data_rep);
+            alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
+          }else {    
+            location.reload(true);
+          }
+        },
+        error: function() {
+          alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
+        }
+      });
+  });
+
+  $(".modify_addon").click(function(){
     var link = $(this).attr('data');
     console.log(link);
       $.ajax({

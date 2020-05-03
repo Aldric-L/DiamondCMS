@@ -3,10 +3,10 @@
  * addMembre - Fonction pour ajouter un membre
  * @author Aldric.L
  * @copyright Copyright 2016-2017 Aldric L.
- * @return boolean
+ * @return int
  * @access public
  */
-function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
+function addMembre($db, $pseudo, $email, $news, $psw, $psw2, $diamond_master=FALSE){
   //Si les deux mots de passe sont bien égaux
   if ($psw == $psw2){
     //Si le mot de passe fait bien plus de 6 caractères
@@ -16,17 +16,32 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
       if ($isMembre == false){
         $uuid = uniqid();
         $cryptpsw = sha1($uuid + $psw);
-        $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img)');
-        $req->execute(array(
-          'pseudo' => $pseudo,
-          'email' => $email,
-          'salt' => $uuid,
-          'password' => $cryptpsw,
-          'news' => $news,
-          'date_inscription' => date('Y-m-d H:i:s'),
-          'ip' => $_SERVER["REMOTE_ADDR"],
-          'profile_img' => "profiles/no_profile.png"
-        ));
+        if ($diamond_master){
+          $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img, role) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img, :role)');
+          $req->execute(array(
+            'pseudo' => $pseudo,
+            'email' => $email,
+            'salt' => $uuid,
+            'password' => $cryptpsw,
+            'news' => $news,
+            'date_inscription' => date('Y-m-d H:i:s'),
+            'ip' => $_SERVER["REMOTE_ADDR"],
+            'profile_img' => "profiles/no_profile.png",
+            'role' => 6
+          ));
+        }else {
+          $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img)');
+          $req->execute(array(
+            'pseudo' => $pseudo,
+            'email' => $email,
+            'salt' => $uuid,
+            'password' => $cryptpsw,
+            'news' => $news,
+            'date_inscription' => date('Y-m-d H:i:s'),
+            'ip' => $_SERVER["REMOTE_ADDR"],
+            'profile_img' => "profiles/no_profile.png"
+          ));
+        }
       }else {
         return 3;
       }
@@ -41,6 +56,7 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2){
 /**
  * isMembre - Fonction pour savoir si un pseudo existe déja
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return boolean
  * @access private

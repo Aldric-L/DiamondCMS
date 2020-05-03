@@ -51,6 +51,8 @@ if (isset($param[1]) && !empty($param[1]) && isset($param[2])){
                     $controleur_def->addError(130);
                     die('Erreur');
                 }
+            }else {
+                header('Location: ' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'getimage/png/profiles/no_profile/' . $param[2] . '/'. $param[3]);     
             }
         }
         
@@ -70,6 +72,8 @@ if (isset($param[1]) && !empty($param[1]) && isset($param[2])){
                     $controleur_def->addError(130);
                     die('Erreur');
                 }
+            }else {
+                header('Location: ' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'getimage/png/profiles/no_profile/' . $param[2] . '/'. $param[2] );     
             }
         }
     }

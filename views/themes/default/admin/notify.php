@@ -15,12 +15,11 @@
                         </div>
                         <div class="panel-body">
                              <p class="title">Vous n'avez jamais vu ces notifications ?</p><br />
-                             <p class="text-justify"><strong class="important_explain">Ne vous inquietez pas, nous allons vous aider.</strong> Lorsque le CMS notifie les administrateurs, il ne le fait qu'une seule fois, c'est à dire que la notification ne s'affique qu'une fois au premier administrateur connecté.
+                             <p class="text-justify">Lorsque le CMS notifie les administrateurs, il ne le fait qu'une seule fois, c'est à dire que la notification ne s'affiche qu'une fois au premier administrateur connecté.
                              Ainsi, si vous ne connaissez pas ces notifications, c'est qu'il est probable qu'un autre administrateur ait-été notifié avant vous.
-                             <br>Si malgré cette explication, vous souhaitez en savoir plus, vous pouvez consulter la documentation à propos des notifications du CMS ou bien, si votre problème persiste, nous contacter via notre support : nous nous ferons un plaisir de vous aider !</p>
+                             <br>Si malgré cette explication, vous souhaitez en savoir plus, vous pouvez consulter la documentation à propos des notifications du CMS.</p>
                              <hr>
-                             <p><strong class="">Documentation des notifications :</strong> lien<br/>
-                             <strong class="">Support du CMS :</strong> lien</P>
+                             <p><strong class="">Documentation des erreurs :</strong> <em>Disponible d'ici une prochaine mise à jour.</em><br/></p>
                         </div>
                     </div>
         </div>

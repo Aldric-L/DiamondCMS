@@ -32,6 +32,27 @@
                             <label for="about_footer" class="col-form-label">A propos de vous : (texte du footer)</label>
                             <input class="form-control" type="text" name="about_footer" id="about_footer" value="<?= $Serveur_Config['about_footer']; ?>">
                         </div>
+                        <div class="form-group">
+                            <label>Logo en haut à gauche :</label>
+                            <select class="form-control" name="logo" id="logo">
+                                <option value="name_server">Utiliser le nom du serveur</option>
+                                <?php if (!empty($img_available)) {
+                                    foreach($img_available as $i){ ?>
+                                            <option value="<?= $i; ?>" <?php if ($i == $Serveur_Config['name_logo']){ ?> selected <?php } ?>><?= $i; ?></option>
+                                <?php } }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Favicon :</label>
+                            <select class="form-control" name="favicon" id="favicon">
+                                <?php if (!empty($img_available)) {
+                                    foreach($img_available as $i){ ?>
+                                            <option value="<?= $i; ?>" <?php if ($i == $Serveur_Config['favicon']){ ?> selected <?php } ?>><?= $i; ?></option>
+                                <?php } }
+                                ?>
+                            </select>
+                        </div>
                         <hr>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="support_en" <?php if ($Serveur_Config['en_support'] == "1") { ?> checked <?php } ?>>
@@ -69,14 +90,8 @@
                         <div class="form-group">
                             <label for="social.discord" class="col-form-label">Lien vers votre Discord : (inscrire "disabled" sinon)</label>
                             <input class="form-control" type="text" name="social.discord" id="socialdiscord" value="<?= $Serveur_Config['Social']['discord']; ?>">
-                        </div>
-
-                                <!--<div class="form-group">
-                                    <label for="email_inscription" class="col-form-label">Nombre d'unités de monnaie virtuelle</label>
-                                    <input class="form-control" type="number" min="0" id="money_" name="money">
-                                    <small class="form-text text-muted">Valeur actuelle :.</small>
-                                </div>    -->   
-                        <p class="text-right"><button type="button" class="mainconf btn btn-info mod_button" data="">Sauvegarder</button></p>
+                        </div>  
+                        <p class="text-right"><button type="button" class="mainconf btn btn-info mod_button" data-link="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/mainconf/">Sauvegarder</button></p>
                     </form>
                 </div>
             </div>
@@ -107,7 +122,7 @@
                             <label for="pwd" class="col-form-label">Mot de passe de ce dernier</label>
                             <input class="form-control" type="text" name="pwd" id="pwd" value="<?= $bddconfig['pwd']; ?>">
                         </div>
-                        <p class="text-right"><button type="button" class="bddconf btn btn-danger mod_button" data="">Sauvegarder</button></p>
+                        <p class="text-right"><button type="button" class="bddconf btn btn-danger mod_button" data-link="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/bddconf/">Sauvegarder</button></p>
                     </form>
                 </div>
             </div>
@@ -118,9 +133,13 @@
                         Réglages de la connexion avec les serveurs de jeu
                 </div>
                 <div class="panel-body">
-                <?php if (!DServerLink || empty($config_serveurs)){ ?>
+                <?php if (!DServerLink){ ?>
                     <p style="text-align: justify;"><span style="color: red"><strong>Impossible d'accèder à ces réglages.</strong></span><br> En effet, pour relier votre site à votre ou vos serveur(s), vous devez installer l'addon officiel nommé DServerLink. Si celui-ci est installé, vérifiez le fichier serveurs.ini dans le dossier config.</p>
                     <?php }else { 
+                        if (empty($config_serveurs)){ ?>
+                            <p>Aucun serveur n'est pour le moment configuré.</p>
+                            <hr>
+                        <?php }
                         foreach($config_serveurs as $c){ ?>
                         <h4>Serveur <?= $c['id']; ?> : </h4>
                     <form method="post">
@@ -183,7 +202,8 @@
                                 Activer le lien avec le serveur
                             </label>
                         </div>
-                        <p class="text-right"><button type="button" class="saveserver btn btn-warning mod_button" data="<?= $c['id']; ?>">Sauvegarder</button> <button type="button" class="suppserver btn btn-danger mod_button" data="<?= $c['id']; ?>">Supprimer le serveur</button></p>
+                        <p class="text-right"><button type="button" class="saveserver btn btn-warning mod_button" data-id="<?= $c['id']; ?>" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/<?= $c['id']; ?>">Sauvegarder</button> 
+                        <button type="button" class="suppserver btn btn-danger mod_button" data-id="<?= $c['id']; ?>" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/supp/">Supprimer le serveur</button></p>
                     </form>
                     <hr>
                     <?php } ?> 
@@ -229,12 +249,12 @@
                         </div>
                         <div class="form-group">
                             <label>Image associée (Liste des images disponibles sur le serveur) :</label>
-                            <select class="form-control" name="img" id="img_<?= $c['id']; ?>">
+                            <select class="form-control" name="img" id="img_ns">
                                 <?php if (!empty($img_available)) {
                                     foreach($img_available as $i){ ?>
                                             <option value="<?= $i; ?>"><?= $i; ?></option>
                                 <?php } }
-                                } ?>
+                                ?>
                             </select>
                         </div>
                         <div class="form-check">
@@ -243,13 +263,9 @@
                                 Activer le lien avec le serveur
                             </label>
                         </div>
-                        <p class="text-right"><button type="button" class="save_ns_server btn btn-danger mod_button">Sauvegarder</button></p>
-                    </form>
-                    
-                    
-                    
-                    
-                    <?php} ?>
+                        <p class="text-right"><button type="button" class="save_ns_server btn btn-danger mod_button" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/new">Sauvegarder</button></p>
+                    </form>           
+            <?php } ?>
                 </div>
             </div>
         </div>
@@ -259,103 +275,3 @@
     </div>
             <!-- /.col-lg-12 -->
 </div>
-<script>
-$(".mainconf").click(function(){
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/mainconf/',
-    type : 'POST',
-    data : 'Serveur_name=' + $('#Serveur_name').val() + '&protocol=' + $('#protocol').val() + '&desc=' + $('#desc').val() + '&about_footer=' + $('#about_footer').val() + '&support_en=' + $('#support_en').prop('checked') + '&vote_en=' + $('#vote_en').prop('checked') + '&lien_vote=' + $('#lien_vote').val() + '&socialgl=' + $('#socialgl').val() + '&socialtw=' + $('#socialtw').val() + '&socialyt=' + $('#socialyt').val() + '&socialdiscord=' + $('#socialdiscord').val() + '&socialfb=' + $('#socialfb').val(),
-    dataType : 'html',
-    success: function (data_rep) {
-        console.log(data_rep);
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-});
-
-$(".bddconf").click(function(){
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/bddconf/',
-    type : 'POST',
-    data : 'host=' + $('#host').val() + '&db=' + $('#db').val() + '&usr=' + $('#usr').val() + '&pwd=' + $('#pwd').val(),
-    dataType : 'html',
-    success: function (data_rep) {
-        console.log(data_rep);
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-});
-
-$(".saveserver").click(function(){
-  var link = $(this).attr("data");
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/' + link,
-    type : 'POST',
-    data : 'name=' + $('#name_'+link).val() + '&desc=' + $('#desc_' + link).val() + '&host=' + $('#host_'+link).val() + '&queryport=' + $('#queryport_'+link).val() + '&rconport=' + $('#rconport_'+link).val() + '&password=' + $('#password_'+link).val()+ '&version=' + $('#version_'+link).val() + '&enabled=' + $('#en_' +link).prop('checked') + '&game=' + $('#game_' + link + ' option:selected').val() + '&img=' + $('#img_' + link + ' option:selected').val(),
-    dataType : 'html',
-    success: function (data_rep) {
-        console.log(data_rep);
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-});
-$(".suppserver").click(function(){
-  var link = $(this).attr("data");
-  $.ajax({
-    url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/supp/',
-    type : 'POST',
-    data : 'id=' + link,
-    dataType : 'html',
-    success: function (data_rep) {
-        console.log(data_rep);
-      if (data_rep != "Success"){
-        alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-      }else {
-        location.reload();
-      }
-    },
-    error: function() {
-      alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-    }
-  });
-});
-$(".save_ns_server").click(function(){
-    if ($('#name_ns').val() != "" && $('#desc_ns').val() != "" && $('#host_ns').val() != "" && $('#queryport_ns').val() != "" && $('#rconport_ns').val() != "" && $('#password_ns').val() != "" && $('#version_ns').val() != ""){
-        $.ajax({
-            url : '<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/config/write/serveurs/new',
-            type : 'POST',
-            data : 'name=' + $('#name_ns').val() + '&desc=' + $('#desc_ns').val() + '&host=' + $('#host_ns').val() + '&queryport=' + $('#queryport_ns').val() + '&rconport=' + $('#rconport_ns').val() + '&password=' + $('#password_ns').val()+ '&version=' + $('#version_ns').val() + '&enabled=' + $('#en_ns').prop('checked') + '&game=' + $('#game_ns option:selected').val() + '&img=' + $('#img_ns option:selected').val(),
-            dataType : 'html',
-            success: function (data_rep) {
-                console.log(data_rep);
-                if (data_rep != "Success"){
-                    alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
-                }else {
-                    location.reload();
-                }
-            },
-            error: function() {
-            alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
-            }
-        });
-    }else {
-        alert("Formulaire incomplet : Merci de le compléter entièrement avant de sauvegarder la nouvelle configuration.");
-    }
-  
-});
-</script>

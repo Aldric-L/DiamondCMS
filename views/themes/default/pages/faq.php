@@ -1,4 +1,4 @@
-<div id="fh5co-page-title">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1>Foire aux questions</h1>

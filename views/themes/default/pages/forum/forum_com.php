@@ -41,7 +41,7 @@
 }
 
 </style>
-<div id="fh5co-page-title">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1>Forum -> <a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/'; ?>"><?php echo $cat['titre']; ?></a> -> <a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/' . str_replace(' ', '-', $sous_cat[0]['titre']) . '/';?>"><?php echo $sous_cat[0]['titre']; ?> </a>-> <?php echo $post['titre_post']; ?></h1>

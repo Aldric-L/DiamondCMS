@@ -1,7 +1,7 @@
 <?php global $tickets, $ntickets; ?>
 <!--Titre de la page -->
-<div id="fh5co-page-title">
-  <div class="overlay"></div>
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
+  <div class="overlay" ></div>
   <div class="text">
     <h1>Support <?php if ($_SESSION['user']->getLevel() >= 2){?>- Version <?php echo $_SESSION['user']->getRoleName($controleur_def->bddConnexion()); }?></h1>
   </div>

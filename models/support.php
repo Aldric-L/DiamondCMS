@@ -1,5 +1,5 @@
 <?php
-
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function addResponse($db, $content, $pseudo, $id_ticket, $role){
   $req = $db->prepare('INSERT INTO d_support_rep (contenu_reponse, id_ticket, pseudo, date_reponse, role) VALUES(:contenu_reponse, :id_ticket, :pseudo, :date_reponse, :role)');
   $s = $req->execute(array(
@@ -18,6 +18,7 @@ function addResponse($db, $content, $pseudo, $id_ticket, $role){
   return $s;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function createTicket($db, $pseudo, $titre, $content, $role=0){
   $req = $db->prepare('INSERT INTO d_support_tickets (contenu_ticket, titre_ticket, pseudo, date_ticket, role) VALUES(:contenu_ticket, :titre_ticket, :pseudo, :date_ticket, :role)');
   $s = $req->execute(array(
@@ -29,6 +30,7 @@ function createTicket($db, $pseudo, $titre, $content, $role=0){
   ));
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getTickets($db, $min, $limite){
   $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets ORDER BY date_ticket DESC LIMIT :min, :limite ');
 
@@ -46,6 +48,7 @@ function getTickets($db, $min, $limite){
   return $tickets;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getTicketById($db, $id){
   $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets WHERE id = :id ORDER BY date_ticket ');
 
@@ -62,6 +65,7 @@ function getTicketById($db, $id){
   return $ticket;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getNumberTickets($db){
   $req2 = $db->prepare('SELECT id FROM d_support_tickets');
 
@@ -75,6 +79,7 @@ function getNumberTickets($db){
   return $tickets;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getNumberTicketsByName($db, $pseudo){
   $req2 = $db->prepare('SELECT id FROM d_support_tickets WHERE pseudo = "' . $pseudo . '"');
 
@@ -88,6 +93,7 @@ function getNumberTicketsByName($db, $pseudo){
   return $tickets;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getTicketsByName($db, $pseudo, $min, $limite){
   $req2 = $db->prepare('SELECT id, status, contenu_ticket, titre_ticket, pseudo, DATE_FORMAT(date_ticket, \'%d/%m/%Y\') AS date_t FROM d_support_tickets WHERE pseudo = :pseudo ORDER BY date_ticket DESC LIMIT :min, :limite ');
 
@@ -106,6 +112,7 @@ function getTicketsByName($db, $pseudo, $min, $limite){
   return $tickets;
 }
 
+/** @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD  */
 function getTicketsReponses($db, $id_ticket){
   $req2 = $db->prepare('SELECT id, contenu_reponse, role, pseudo, DATE_FORMAT(date_reponse, \'%d/%m/%Y\') AS date_rep, id_ticket FROM d_support_rep WHERE id_ticket = :id_ticket ORDER BY date_reponse DESC');
 
@@ -189,18 +196,18 @@ function CloseTicket($db, $id, $pseudo=FALSE){
       }
     }
   }else {
-    //Aucun pseudo passer, on considère donc que la vérifiquation a été faite en hammont.
+    //Aucun pseudo passé, on considère donc que la vérifiquation a déjà été faite.
     //On valide donc en passant la variable valide à true.
     $valide = true;
   }
   //Si tout est valide ($valide == true)
   if ($valide){
-    //On update le status en fermer (2)
+    //On update le statut en fermé (2)
     $req = $db->prepare('UPDATE d_support_tickets SET status = 2 WHERE id = :id');
     $del = $req->execute(array(
       'id' => intval($id)
     ));
-    //On retourne le status de l'update : true si aucun problème, sinon la variable contiendra l'erreur.
+    //On retourne le statut de l'update : true si aucun problème, sinon la variable contiendra l'erreur.
     return $del;
   }else {
     //Si ce n'est pas valide, on retourne donc false.

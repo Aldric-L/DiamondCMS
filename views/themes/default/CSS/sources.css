@@ -32,10 +32,9 @@ html, body {
 
 /*Global*/
 #fh5co-page-title {
-  background-image: url('web_font-jump.png');
   padding-top: 1.5em;
   padding-bottom: 2em;
-  margin-bottom: 4em;
+  margin-bottom: 0.5em;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -227,14 +226,28 @@ li.dropdown.compte > a.dropdown-toggle {
     padding-left: 14%;
     padding-right: 14%;
   }
+  .navbar-brand {
+    display: block;
+  }
 }
 @media (min-width: 1200px){
   .navbar{
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+  .navbar-brand {
+    display: block;
   }
 }
-
+@media (max-width: 1200px){
+  .navbar{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar-brand {
+    display: none;
+  }
+}
 .navbar-nav > li > .compte {
   margin-right: 9px;
 }

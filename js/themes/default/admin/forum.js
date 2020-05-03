@@ -46,7 +46,6 @@ jQuery(function ($){
     $(".delete_cat").click(function(){
       var id = $(this).attr('id');
       var link = $(this).attr('data');
-      console.log(link);
         $.ajax({
           url : link,
           type : 'GET',
@@ -58,6 +57,27 @@ jQuery(function ($){
               alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
             }else {    
               $('#line_' + id).remove();
+            }
+          },
+          error: function() {
+            alert("Erreur, Code 111, Merci de contacter les administrateurs du site.");
+          }
+        });
+    });
+    $(".delete_scat").click(function(){
+      var id = $(this).attr('id');
+      var link = $(this).attr('data');
+        $.ajax({
+          url : link,
+          type : 'GET',
+          dataType : 'html',
+          success: function (data_rep) {
+            if (data_rep != "Success"){
+              console.log(id);
+              console.log(data_rep);
+              alert("Erreur, Code 112, Merci de contacter les administrateurs du site.");
+            }else {    
+              $('#line_scat_' + id).remove();
             }
           },
           error: function() {

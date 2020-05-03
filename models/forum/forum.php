@@ -12,6 +12,7 @@
 /**
  * getPosts - Fonction pour recupérer les derniers posts
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
@@ -38,6 +39,7 @@ function getPosts($db, $id_scat, $min, $limite){
 /**
  * getNPosts - Fonction pour recupérer le nombre de posts
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return int
  */
@@ -59,6 +61,7 @@ function getNPosts($db, $id_scat){
 /**
  * getPost - Fonction pour recupérer un post
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
@@ -81,6 +84,7 @@ function getPost($db, $id_post){
 /**
  * getComs - Fonction pour recupérer les commentaires par post
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
@@ -102,6 +106,7 @@ function getComs($db, $id_post){
 /**
  * newCom - Fonction pour poster un commentaire
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return void
  */
@@ -136,6 +141,7 @@ function newCom($db, $id_post, $pseudo, $content){
 /**
  * newPost - Fonction pour poster un sujet
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return void
  */
@@ -162,6 +168,7 @@ function newPost($db, $title, $pseudo, $content, $scat){
 /**
  * set_solved - Fonction pour definir l'état du sujet (résolu)
  * @author Aldric.L
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return void
  */
@@ -188,6 +195,7 @@ function newPost($db, $title, $pseudo, $content, $scat){
   /**
    * delSubject - Fonction pour supprimer un sujet
    * @author Aldric.L
+   * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
    * @copyright Copyright 2016-2017 Aldric L.
    */
   function delSubject($db, $id){
@@ -234,6 +242,7 @@ function newPost($db, $title, $pseudo, $content, $scat){
   /**
    * getIdPost - Fonction pour recupérer les ID des posts
    * @author Aldric.L
+   * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
    * @copyright Copyright 2016-2017 Aldric L.
    * @return array
    */

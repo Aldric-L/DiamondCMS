@@ -9,7 +9,7 @@
 </div><br /><br /><br />
 <?php die; } ?>
 
-<div id="fh5co-page-title" style="margin-bottom: 0;">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1><a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'boutique/' ?>">Boutique </a>-> Récupération des articles payés</h1>
@@ -38,7 +38,11 @@ a.no {
             <?php }else { ?>
             <ul>
             <?php foreach ($tasks_done as $task){ ?>
-                <li>Exécution d'une commande sur le serveur <?= $task['cmd']['server_game']; ?> nommé <?= $task['cmd']['server_name']; ?><br>
+                <?php if (defined("DServerLink") && DServerLink){     ?>
+                    <li>Exécution d'une commande sur le serveur <?= $task['cmd']['server_game']; ?> nommé <?= $task['cmd']['server_name']; ?><br>
+                <?php }else { ?>
+                    <li>Exécution d'une commande sur un serveur<br>
+                <?php } ?>
                 <span style="color: #197d62;"><strong>Terminé avec succès : </strong>le <?= $task['date_done']; ?></span>
                 </li>
             <?php } } ?>
@@ -50,7 +54,11 @@ a.no {
             <?php }else { ?>
             <ul>
             <?php foreach ($tasks as $task){ ?>
-                <li>Exécution d'une commande sur le serveur <?= $task['cmd']['server_game']; ?> nommé <?= $task['cmd']['server_name']; ?><br>
+                <?php if (defined("DServerLink") && DServerLink){     ?>
+                    <li>Exécution d'une commande sur le serveur <?= $task['cmd']['server_game']; ?> nommé <?= $task['cmd']['server_name']; ?><br>
+                <?php }else { ?>
+                    <li>Exécution d'une commande sur un serveur<br>
+                <?php } ?>
                 <?php if ($task['cmd']['connexion_needed'] == '1'){ ?>
                     <span style="color: red;"><strong>Attention: </strong>Votre présence sur le serveur est indispensable pour l'exécution de cette tâche.</span>
                 <?php }else { ?>
@@ -62,7 +70,11 @@ a.no {
             <hr>
             <p style="text-align: center;">
             <?php foreach ($tasks as $k => $task){ ?>
-                <button type="button" style="border-color: #197d62; background-color: #197d62;" class="btn btn-success task" data="<?= $k+1; ?>">Exécuter la tache <?= $k+1; ?></button>
+                <?php if (defined("DServerLink") && DServerLink){     ?>
+                    <button type="button" style="border-color: #197d62; background-color: #197d62;" class="btn btn-success task" data="<?= $k+1; ?>">Exécuter la tache <?= $k+1; ?></button>
+                <?php }else { ?>
+                    Le lien automatique entre la boutique et les serveurs n'est pas activé. Contactez un administrateur pour recevoir manuellement votre dû.
+                <?php } ?>
             <?php } ?>     
             </p>
             <?php if ($commande['success'] == '1' || $commande['success'] == true){ ?>

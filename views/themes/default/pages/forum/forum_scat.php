@@ -1,5 +1,5 @@
 <?php global $sous_cat, $cat, $posts; //var_dump($posts); ?>
-<div id="fh5co-page-title">
+<div id="fh5co-page-title" style="background-image: url(<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>views/uploads/img/<?php echo $Serveur_Config['bg']; ?>)">
   <div class="overlay"></div>
   <div class="text">
     <h1>Forum -> <a class="no" href="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'forum/' ?>"><?php echo $cat['titre']; ?></a> -> <?php echo $sous_cat['titre']; ?></h1>
@@ -7,6 +7,9 @@
 </div>
 <div class="content-container-forum">
   <div id="f_cat"><h3><?php echo $cat['titre']; ?> -> <?php echo $sous_cat['titre']; ?></h3></div>
+  <?php if (empty($posts)){ ?>
+    <br><p>Aucun sujet a été trouvé dans cette catégorie ! Créez-en un !</p>
+  <?php } ?>
   <table class="table table-forum">
     <?php
     

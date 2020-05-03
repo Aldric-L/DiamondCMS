@@ -1,5 +1,5 @@
 <?php
-if (defined("DServerLink")){
+if (defined("DServerLink") && DServerLink){
     $n_serveurs = $servers_link->getNbServers();
 }
 

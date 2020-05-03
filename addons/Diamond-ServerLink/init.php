@@ -1,5 +1,9 @@
 <?php 
-define("DServerLink", true);
+if (file_exists(ROOT . 'addons/Diamond-ServerLink/disabled.dcms')){
+    define("DServerLink", false);
+}else {
+    define("DServerLink", true);
+}
 define("DServerLinkVersion", "1.0.1");
 define("DServerLinkGamesSupported", array("Minecraft-Java", "GMod", "CS-GO", "Team-Fortress 2", "Minecraft-MPCE"));
 

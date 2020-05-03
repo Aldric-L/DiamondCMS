@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta lang="fr">
   <meta name="author" content="DiamondCMS, pour <?= $Serveur_Config['Serveur_name']; ?>">
-  <link rel="icon" type="image/png" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>.png" />
+  <link rel="icon" type="image/png" href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['favicon']; ?>" />
 
   <!-- Title -->
   <?php if (!empty($title)){?>
@@ -58,18 +58,7 @@
   }
   ?>
   <!-- JavaScript : Erreurs Modal, et Google analytics -->
-  <?php if ($Serveur_Config['en_analytics'] == true){?>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', '<?php echo $Serveur_Config['id_analytics']; ?>', 'auto');
-    ga('send', 'pageview');
-  </script>
-  <?php }
-    if (!empty($controleur_def->getErrors())){ ?>
+    <?php if (!empty($controleur_def->getErrors())){ ?>
     <script type="text/javascript">
       $(function(){
         $("#c_def_error").modal('show');
@@ -164,7 +153,7 @@
                           <div class="form-group">
                             <label for="email_inscription" class="col-form-label">Email</label>
                             <input class="form-control" type="email" id="email_inscription" name="email_inscription">
-                            <small id="mpHelp" class="form-text text-muted">Elle ne sera pas divulgué et nous n'en abuserons pas.</small>
+                            <small id="mpHelp" class="form-text text-muted">Elle ne sera pas divulguée et nous n'en abuserons pas.</small>
                           </div>
                           <div class="form-group">
                             <label for="mp_inscription" class="col-form-label">Mot de passe</label>
@@ -289,11 +278,7 @@
     <?php } ?>
   <nav class="navbar navbar-inverse">
           <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>-->
                 <?php if ($Serveur_Config['logo_img']){ ?>
                   <img class="img-responsive img-brand navbar-brand" style="padding: 0; margin: 0; margin-top: 4px;" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>views/uploads/img/<?= $Serveur_Config['name_logo']; ?>" alt="">
                 <?php }else { ?>

@@ -16,11 +16,26 @@
                         <div class="panel-body" class="">
                             <?php if ($config['en_boutique']){ ?>
                                 <p><strong>Pour désactiver la boutique par défaut, cliquez-ici : </strong><button data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/xhr/enable" type="submit" class="enable btn btn-danger btn-md">Désactiver</button></p>
-                                <hr>
                             <?php }else { ?>
                                 <p><strong>Pour activer la boutique par défaut, cliquez-ici : </strong><button data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/xhr/enable" type="submit" class="enable btn btn-success btn-md">Activer</button></p>
-                                <hr>
                             <?php } ?>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <label for="money_name" class="col-form-label">Nom de la monnaie réelle de paiement</label>
+                                    <input class="form-control" type="text" name="money_name" id="money_name" value="<?= $config['money_name']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="money_sym" class="col-form-label">Symbole de la monnaie</label>
+                                    <input class="form-control" type="text" name="money_sym" id="money_sym" value="<?= $config['money']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="money" class="col-form-label">Monnaie virtuelle utilisée (son nom au singulier)</label>
+                                    <input class="form-control" type="text" name="money" id="money" value="<?= $config['Serveur_money']; ?>">
+                                </div>
+                                <p class="text-right"><button type="button" class="saveconf btn btn-info mod_button" data-link="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/xhr/saveconf/">Sauvegarder</button></p>
+                            </form>
+                            <hr>
                             <p><strong>Ajouter une catégorie d'articles sur la boutique :</strong></p>
                             <form action"" method="POST">
                                 <div class="row control-group">
@@ -46,7 +61,7 @@
                             <?php }else { 
                                 foreach ($cats as $c){ ?>
                                     <a id="line_<?php echo $c['id']; ?>" data="<?php echo $c['id']; ?>" class="list-group-item">
-                                        <strong><?php echo $c['name']; ?></strong> (<?= $c['nb_articles']; ?> sujets enregistrés à l'intérieur)
+                                        <strong><?php echo $c['name']; ?></strong> (<?= $c['nb_articles']; ?> articles enregistrés à l'intérieur)
                                         <span class="pull-right text-muted small" style="margin-top: 0; padding: 0;">
                                             <button 
                                             data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/boutique/xhr/delete/<?php echo $c['id']; ?>" 

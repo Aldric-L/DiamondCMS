@@ -30,7 +30,7 @@ function disconnect(){
 /**
  * getInfo - Fonction pour recupérer des informations sur l'utilisateur
  * @author Aldric.L
- * @deprecated 
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
@@ -50,7 +50,7 @@ function getInfo($db, $pseudo){
 /**
  * getPost - Fonction pour recupérer un post
  * @author Aldric.L
- * @deprecated 
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return array
  */
@@ -73,7 +73,7 @@ function getPost($db, $id_post){
 /**
  * ban - Fonction pour bannir un utilisateur
  * @author Aldric.L
- * @deprecated 
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return true (boolean)
  */
@@ -89,7 +89,7 @@ function ban($db, $pseudo, $r=null){
 /**
  * ban - Fonction pour bannir un utilisateur
  * @author Aldric.L
- * @deprecated 
+ * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
  * @copyright Copyright 2016-2017 Aldric L.
  * @return true (boolean)
  */

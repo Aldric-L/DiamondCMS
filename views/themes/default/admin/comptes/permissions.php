@@ -26,7 +26,7 @@
                             <tbody>
                                 <tr>
                                     <td><strong>0</strong></td>
-                                    <td>Il s'agit du poids minimal, offert par défaut à tous les utilisateurs. Il n'offre aucun permission particulière.</td>
+                                    <td>Il s'agit du poids minimal, offert par défaut à tous les utilisateurs. Il n'offre aucune permission particulière.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>1</strong></td>
@@ -78,7 +78,7 @@
                                     <td><?= $p['level'] ?></td>
                                     <td><?= $p['nb_users'] ?></td>
                                     <?php if ($p['can_be_deleted']){ ?>
-                                        <td><a href="#" class="supp_role" id="<?php echo $p['id']; ?>" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/comptes/del_role/<?php echo $p['id']; ?>"><button type="button" class="btn btn-danger btn_role_del_<?php echo $n['id']; ?>">Supprimer</button></a></td>
+                                        <td><a href="#" class="supp_role" id="<?php echo $p['id']; ?>" data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/comptes/del_role/<?php echo $p['id']; ?>"><button type="button" class="btn btn-danger btn_role_del_<?php echo $p['id']; ?>">Supprimer</button></a></td>
                                     <?php }else { ?>
                                         <td><a href="#" class="" id="" data=""><button type="button" class="btn btn-danger" disabled>Supprimer</button></a></td>
                                     <?php } ?>

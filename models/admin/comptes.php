@@ -1,8 +1,11 @@
 <?php 
+
+/** @deprecated Il convient désomais d'utiliser les fonctions de simplication du namespace simplifySQL */
 function delRole($db, $id){
   return $db->exec("DELETE FROM d_roles WHERE id = " . $id);
 }
 
+/** @deprecated Il convient désomais d'utiliser les fonctions de simplication du namespace simplifySQL */
 function addRole($db, $name, $level){
     $req = $db->prepare('INSERT INTO d_roles (name, level) VALUES(:name, :level)');
     $req->execute(array(
@@ -15,7 +18,7 @@ function addRole($db, $name, $level){
  * modifiy - Fonction pour modifier les informations d'un utilisateur
  * @author Aldric.L
  * @copyright Copyright 2020
- * @deprecated
+ * @deprecated Il convient désomais d'utiliser les fonctions de simplication du namespace simplifySQL
  */
  function modify($db, $id, $money, $role_id, $unban=null){
   if (isset($unban) && !empty($unban) && $unban == true){

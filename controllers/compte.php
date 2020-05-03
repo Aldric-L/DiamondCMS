@@ -178,6 +178,12 @@ if (isset($param[1]) && !empty($param[1]) && isset($param[2]) && !empty($param[2
       $lastactions[$key]['id_post']['user'] = $ps;
     }
   }
+
+  $commandes = simplifySQL\select($controleur_def->bddConnexion(), false, "d_boutique_achats", "*", array(array("id_user", "=", $_SESSION['user']->getid())), "id", true);
+  foreach ($commandes as $k => $c){
+    $commandes[$k]['article'] = simplifySQL\select($controleur_def->bddConnexion(), true, "d_boutique_articles", "*", array(array("id", "=", $commandes[$k]['id_article'])));
+  }
+
   //On charge la vue
   $controleur_def->loadJS('comptes');
   $controleur_def->loadView('pages/compte', 'emptyServer', 'Mon Compte');

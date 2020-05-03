@@ -1,4 +1,4 @@
-<?php global $cats, $config;  ?>
+<?php global $cats, $scats, $config;  ?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -51,6 +51,27 @@
                                 </div>
                                     <p style="text-align: right"><button type="submit" <?php if (!$config['en_forum']){ ?> disabled <?php } ?> class="send_new_cat btn btn-success btn-md">Envoyer</button></p>
                             </form>
+                            <hr>
+                            <p><strong>Ajouter une sous-catégorie au forum (par défaut) :</strong></p>
+                            <form action"" method="POST">
+                                <div class="row control-group">
+                                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                                        <label>Catégorie :</label>
+                                        <select class="form-control" name="cat_id" id="cat_id">
+                                            <?php foreach ($cats as $c){ ?>
+                                                <option value="<?= $c['id']; ?>"><?= $c['titre']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                                        <label>Nouvelle sous-catégorie :</label>
+                                        <input class="form-control" type="text" <?php if (!$config['en_forum']){ ?> disabled <?php } ?> name="new_scat" id="new_scat">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                    <p style="text-align: right"><button type="submit" <?php if (!$config['en_forum']){ ?> disabled <?php } ?> class="send_new_scat btn btn-success btn-md">Envoyer</button></p>
+                            </form>
                         </div>
                     </div>
         </div>
@@ -71,6 +92,29 @@
                                             data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/forum/delete/<?php echo $c['id']; ?>" 
                                             id="<?php echo $c['id']; ?>" type="submit" style ="padding-left: 8px; padding-right: 8px; padding-top: 1px; padding-bottom: 1px;" 
                                             class="delete_cat btn btn-danger btn-sm">Supprimer
+                                            </button>
+                                        </span>
+                                    </a>
+                                <?php }
+                             } ?>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                            Sous-catégories enregistrées
+                        </div>
+                        <div class="panel-body" class="">
+                            <?php if (empty($scats)){ ?>
+                                <p>Aucune sous-catégorie n'a pour le moment été enregistrée.</p>
+                            <?php }else { 
+                                foreach ($scats as $c){ ?>
+                                    <a id="line_scat_<?php echo $c['id']; ?>" data="<?php echo $c['id']; ?>" class="list-group-item">
+                                        <strong><?php echo $c['titre']; ?></strong> (<?= $c['nb_sujets']; ?> sujets enregistrés) - Catégorie : <?= $c['cat_name']; ?>
+                                        <span class="pull-right text-muted small" style="margin-top: 0; padding: 0;">
+                                            <button 
+                                            data="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/forum/delete_scat/<?php echo $c['id']; ?>" 
+                                            id="<?php echo $c['id']; ?>" type="submit" style ="padding-left: 8px; padding-right: 8px; padding-top: 1px; padding-bottom: 1px;" 
+                                            class="delete_scat btn btn-danger btn-sm">Supprimer
                                             </button>
                                         </span>
                                     </a>

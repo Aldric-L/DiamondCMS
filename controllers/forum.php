@@ -16,10 +16,9 @@ $controleur_def->loadModel('forum/forum');
 $controleur_def->loadModel('forum/forum_cat');
 if (!isset($param[1]) || empty($param[1])){
 
-  $cats = getCategories($controleur_def->bddConnexion());
-
+  $cats = simplifySQL\select($controleur_def->bddConnexion(), false, "d_forum_cat", "*");
   foreach ($cats as $key => $cat) {
-    $cats[$key]['sous_cat'] = getSousCategorie($controleur_def->bddConnexion(), $cats[$key]['id']);
+    $cats[$key]['sous_cat'] = simplifySQL\select($controleur_def->bddConnexion(), false, "d_forum_sous_cat", "*", array(array("id_cat", "=", $cats[$key]['id'])));
   }
   //On termine par charger la vue, comme ça les variables/modifications seront prisent en comptes.
   $controleur_def->loadView('pages/forum/forum', 'forum', 'Forum');

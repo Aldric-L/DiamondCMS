@@ -1,17 +1,5 @@
 <?php
 
-function getNActionsForum($db){
-    $req2 = $db->prepare('SELECT id FROM d_forum_com');
-    //On execute la requete
-    $req2->execute();
-    //On récupère tout
-    $nb_coms = $req2->fetchAll();
-    //On ferme la requete
-    $req2->closeCursor();
-
-    return sizeof($nb_coms);
-}
-
 function getNumberErrorLog(){
     $descFic = fopen (ROOT . 'logs/errors.log', "r");
     $errors = array();
@@ -21,19 +9,6 @@ function getNumberErrorLog(){
     }
     fclose ($descFic);
     return sizeof($errors);
-}
-
-function getNumberTickets($db){
-  $req2 = $db->prepare('SELECT id FROM d_support_tickets');
-
-  //On execute la requete
-  $req2->execute();
-  //On récupère tout
-  $tickets = $req2->fetchAll();
-  //On ferme la requete
-  $req2->closeCursor();
-
-  return sizeof($tickets);
 }
 
 function analiserLog($controleur_def, $limit=0){

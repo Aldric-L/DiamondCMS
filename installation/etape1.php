@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+<<<<<<< HEAD
         <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>installation/bootstrap.css"/>
 		    <link rel="stylesheet" type="text/css" href="//<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>installation/sources.css" />
         <title>Installation de Diamond CMS</title>
@@ -75,3 +76,12 @@
         <script src="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/global.js"></script>
     </body>
 </html>
+=======
+		    <link rel="stylesheet" type="text/css" href="sources.css" />
+        <title>Diamond CMS</title>
+    </head>
+
+    <body>
+      <h1>LALALALALA</h1>
+    </body>
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232

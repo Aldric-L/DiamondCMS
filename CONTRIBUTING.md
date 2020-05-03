@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ****************************************************|- LICENCE (CONTRIBUTIONS) -|****************************************************
 Les contributions au projet DiamondCMS doivent être soumises à Aldric L. avant toute publication. 
 Quelque soit la taille de celles-ci, le projet reste son entière propriété et la licence générale reste inchangée.
@@ -17,3 +18,27 @@ Attention: Les addons ne sont pas limités en terme de permissions : un addon pe
 
 - Pour les thèmes, la seule contrainte est d'inclure un fichier (ini) à la racine du thème indiquant la version du thème, la version du CMS supportée, et le nom du thème. Une licence peut être inclue (à condition évidemment qu'elle respecte la licence sus-énoncée).
 
+=======
+Les contributions sont soumises à cette licence.
+
+************************************************|- LICENCE (CONTRIBUTIONS) -|************************************************
+
+La présente licence s'applique uniquement aux "contributions" proposées par des services comme GitLab ou GitHub.
+Ce service propose aux utilisateurs de pouvoir proposer des améliorations concrètes à un projet.
+Ces améliorations peuvent être très légères comme très importantes.
+
+Cette License définit clairement :
+
+    - Tout ajout au projet doit être gracieux.
+    
+    - DiamondCMS se réserve le droit de refuser ces ajouts.
+    
+    - Tous les ajouts sont l'entière propriété de DiamondCMS.
+    
+    - Les ajouts peuvent être commercialisés par DiamondCMS sans aucun préavis ni versement.
+    
+Cette License comme le projet est la propriété de GougDEV.
+Dernière modification : 27/09/2016.
+
+************************************************|- LICENCE (CONTRIBUTIONS) -|************************************************
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  Feuille de Style pour le forum
  Exclusivement réservé à une utilisation normale de DiamondCMS
@@ -112,17 +113,15 @@ a.no {
   color: #197D62;
   text-align: center;
   font-family: "Bree Serif";
-}
-
-.explicp {
+=======
+#explicforum {
   text-align: center;
-  font-family: "Bree Serif";
-}
-/* END EXPLICFORUM */
-
-#red {
-  font-family: "Bree Serif";
-  font-size: 1.2em;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 50%;
+  margin-top: 3em;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 #firstpost {
@@ -133,6 +132,38 @@ a.no {
   margin-top: 3em;
   margin-left: 5%;
   margin-right: 5%;
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
+}
+
+.explicp {
+  text-align: center;
+  font-family: "Bree Serif";
+}
+<<<<<<< HEAD
+/* END EXPLICFORUM */
+
+=======
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
+#red {
+  font-family: "Bree Serif";
+  font-size: 1.2em;
+}
+
+<<<<<<< HEAD
+#firstpost {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 90%;
+  margin-top: 3em;
+  margin-left: 5%;
+  margin-right: 5%;
+=======
+#explicforum h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 }
 
 #posts {
@@ -150,16 +181,27 @@ a.no {
   #posts p{
     font-size: 13px;
   }
+<<<<<<< HEAD
 }*/
 h2{
+=======
+}
+#posts h2{
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
   color: #197D62;
   text-align: center;
   font-family: "Bree Serif";
 }
 
+<<<<<<< HEAD
 /*#posts a{
   /*font-family: "Trebuchet MS";*/
   /*text-decoration: none;
+=======
+#posts a{
+  /*font-family: "Trebuchet MS";*/
+  text-decoration: none;
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
   font-size: 1.2em;
   color: black;
 }
@@ -167,11 +209,16 @@ h2{
 #bordure{
   text-align: center;
   border-right: 2px solid #197D62;
+<<<<<<< HEAD
 }*/
 .border{
   width: 130px;
   border-right: 2px solid #197D62;
 }
+=======
+}
+
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 .contentpost{
   padding: 10px;
 }

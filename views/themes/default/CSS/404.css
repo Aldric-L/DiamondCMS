@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  Feuille de Style pour la page 404
  Exclusivement réservé à une utilisation normale de DiamondCMS
@@ -8,6 +9,14 @@
   width: 30%;
   margin-top: 8em;
   margin-bottom: 8em;
+=======
+#erreur404content {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 30%;
+  margin-top: 8em;
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
   margin-left: 35%;
   margin-right: 35%;
 }
@@ -18,11 +27,14 @@
   font-family: "Bree Serif";
 }
 
+<<<<<<< HEAD
 .fa-6 {
   color: #197D62;
   font-size: 20em;
 }
 
+=======
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 #erreur404content a{
   color: #197D62;
   font-family: "Bree Serif";

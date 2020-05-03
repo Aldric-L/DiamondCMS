@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  *
  * Ces fonctions sont quasiment toutes dépréciées :
  * Désormais, il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
@@ -18,6 +19,15 @@
  */
 function getPosts($db, $id_scat, $min, $limite){
     $req = $db->prepare('SELECT id, titre_post, user, resolu, content_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_p, id_scat, nb_rep FROM d_forum WHERE id_scat = ' . $id_scat . ' ORDER BY date_post DESC LIMIT :min, :limite ');
+=======
+ * getPosts - Fonction pour recupéré les derniers posts
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getPosts($db, $min, $limite){
+    $req = $db->prepare('SELECT id, titre_post, user, last_user, resolu, content_post, DATE_FORMAT(date_last_post, \'%d/%m/%Y à %Hh:%imin\') AS date_last_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post FROM d_forum ORDER BY date_last_post LIMIT :min, :limite ');
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 
     //On passe les paramètres
     $req->bindParam(':min', $min, PDO::PARAM_INT);
@@ -29,6 +39,7 @@ function getPosts($db, $id_scat, $min, $limite){
     $post = $req->fetchAll();
     //On ferme la requete
     $req->closeCursor();
+<<<<<<< HEAD
     foreach ($post as $k => $p){
       $post[$k]['date_post'] = $post[$k]['date_p'];
     }
@@ -67,6 +78,20 @@ function getNPosts($db, $id_scat){
  */
 function getPost($db, $id_post){
     $req = $db->prepare('SELECT id, titre_post, user, resolu, nb_rep, content_post, id_scat, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post FROM d_forum WHERE id = :id_post ORDER BY date_post');
+=======
+
+    return $post;
+}
+
+/**
+ * getPost - Fonction pour recupéré un post
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getPost($db, $id_post, $min, $limite){
+    $req = $db->prepare('SELECT id, titre_post, user, last_user, resolu, content_post, DATE_FORMAT(date_last_post, \'%d/%m/%Y à %Hh:%imin\') AS date_last_post, DATE_FORMAT(date_post, \'%d/%m/%Y\') AS date_post FROM d_forum WHERE id = :id_post ORDER BY date_last_post');
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 
     //On passe les paramètres
     $req->bindParam(':id_post', $id_post, PDO::PARAM_INT);
@@ -74,7 +99,11 @@ function getPost($db, $id_post){
     //On execute la requete
     $req->execute();
     //On récupère tout
+<<<<<<< HEAD
     $post = $req->fetch();
+=======
+    $post = $req->fetchAll();
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
     //On ferme la requete
     $req->closeCursor();
 
@@ -82,6 +111,7 @@ function getPost($db, $id_post){
 }
 
 /**
+<<<<<<< HEAD
  * getComs - Fonction pour recupérer les commentaires par post
  * @author Aldric.L
  * @deprecated il convient d'utiliser les fonctions de simplification du fichier core.php (select, insert, ..) pour dialoguer avec la BDD
@@ -93,6 +123,20 @@ function getComs($db, $id_post){
 
     //On passe les paramètres
     $req2->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+=======
+ * getComs - Fonction pour recupéré les commentaires par post
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ * @return array
+ */
+function getComs($db, $id_post, $min, $limite){
+    $req2 = $db->prepare('SELECT id, content_com, user, DATE_FORMAT(date_com, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_com LIMIT :min, :limite ');
+
+    //On passe les paramètres
+    $req2->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+    $req2->bindParam(':min', $min, PDO::PARAM_INT);
+    $req2->bindParam(':limite', $limite, PDO::PARAM_INT);
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232
 
     //On execute la requete
     $req2->execute();
@@ -100,6 +144,7 @@ function getComs($db, $id_post){
     $com_post = $req2->fetchAll();
     //On ferme la requete
     $req2->closeCursor();
+<<<<<<< HEAD
     return $com_post;
 }
 
@@ -261,3 +306,28 @@ function newPost($db, $title, $pseudo, $content, $scat){
 
       return $post;
   }
+=======
+
+    return $com_post;
+}
+/**
+ * newCom - Fonction pour poster un commentaire
+ * @author Aldric.L
+ * @copyright Copyright 2016-2017 Aldric L.
+ */
+function newCom($db, $id_post, $pseudo, $content){
+  $req = $db->prepare('SELECT id, content_com, user, DATE_FORMAT(date_com, \'%d/%m/%Y\ à %Hh:%imin\') AS date_com FROM d_forum_com WHERE id_post = :id_post ORDER BY date_com LIMIT :min, :limite ');
+
+  //On passe les paramètres
+  $req->bindParam(':id_post', $id_post, PDO::PARAM_INT);
+  $req->bindParam(':min', $min, PDO::PARAM_INT);
+  $req->bindParam(':limite', $limite, PDO::PARAM_INT);
+
+  //On execute la requete
+  $req->execute();
+  //On récupère tout
+  $com_post = $req2->fetchAll();
+  //On ferme la requete
+  $req2->closeCursor();
+}
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232

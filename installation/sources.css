@@ -1,4 +1,5 @@
 h1{
+<<<<<<< HEAD
   font-family: "BreeSerif";
   text-align: center;
 }
@@ -19,3 +20,14 @@ button.green{
   background-color: #197d62;
   border-color: #197d62;
 }
+=======
+  font-family: "ChunkFive";
+  text-align: center;
+}
+@font-face {
+  font-family:'ChunkFive';
+  src: url('fonts/ChunkFive.otf') format('truetype')
+  font-weight:normal;
+  font-style:normal
+}
+>>>>>>> f73348d50b56501cae02d84fa1249082fe8b0232

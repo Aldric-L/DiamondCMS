@@ -1,0 +1,71 @@
+#explicforum {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 50%;
+  margin-top: 3em;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.explicp {
+  text-align: center;
+  font-family: "Bree Serif";
+}
+#red {
+  font-family: "Bree Serif";
+  font-size: 1.2em;
+}
+
+#explicforum h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+#news {
+  width: 50%;
+  margin-top: 2em;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+#news h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+#news a{
+  font-family: "Trebuchet MS";
+  text-decoration: none;
+  font-size: 1.2em;
+  color: black;
+}
+
+/*#user {
+  border-right: 3px solid #197D62;
+}*/
+
+table{
+  border-spacing: 5px 10px;
+  margin: auto;
+}
+
+/*td {
+  border: 1px solid #000;
+  padding: 5px;
+}*/
+
+.bodure{
+  border-right: 2px solid #197D62;
+  padding: 10px;
+}
+
+.contentpost{
+  padding: 10px;
+}
+
+tr{
+  cursor:pointer;
+}

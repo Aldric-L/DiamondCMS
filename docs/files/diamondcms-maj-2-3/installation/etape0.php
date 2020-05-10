@@ -116,7 +116,8 @@ function read($tab){
       <center>
       <img class="img-responsive" width="550" style="margin: 0;" src="//<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>/installation/diamondcms.png">
       <h1>Merci d'avoir choisi DiamondCMS pour votre site internet !</h1>
-      <h2>L'installation de votre site internet va commencer. Pour la mener à bien, munissez-vous d'une base de données MySQL et de quelques minutes !<br></h2>
+      <h2>L'installation de votre site internet va commencer. Pour la mener à bien, munissez-vous d'une base de données MySQL et de quelques minutes !<br><br>
+      <em>Une documentation pour vous guider est disponible <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Installation">ici.</a></em></h2>
       <div style="margin-left: 15%; margin-right: 15%;">
         <br><hr>
         <p><?php if (intval(substr(phpversion(), 0, 1)) <= 4 || 

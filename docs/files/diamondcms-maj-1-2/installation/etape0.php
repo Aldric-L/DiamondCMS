@@ -149,7 +149,7 @@ function read($tab){
         <p><strong>Succès !</strong> Votre serveur WEB est bien compatible, l'installation de DiamondCMS peut continuer.</p>
       <?php }else { ?>
         <p><strong>Erreur !</strong> La configuration de votre serveur WEB est incompatible avec DiamondCMS.</p>
-        <p>Vous devez ajouter dans votre configuration d'Apache la directive AllowOverride All <br>(Plus d'informations ici : https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648).<br>
+        <p>Vous devez ajouter dans votre configuration d'Apache la directive AllowOverride All et vérifier qu'un fichier .htaccess est bien présent à la racine du site.<br>(Plus d'informations ici : https://www.aidoweb.com/tutoriaux/fichier-htaccess-qui-ne-fonctionne-pas-solutions-configuration-apache-648).<br>
         <em>Pour poursuivre, veuillez corriger cette erreur et actualiser la page.</em></p>
       <?php } ?>
       <?php if (empty($errors_chmod)){ ?>
@@ -179,7 +179,7 @@ function read($tab){
       <em>Pour poursuivre, veuillez corriger ces erreur et actualiser la page.</em></p>
       <?php } ?>
         <br>
-                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod)){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
+                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod) || !array_key_exists('ENV_HTACCESS_ALLOWED', $_SERVER)){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
         <?php } ?>
       </div>
       </center>

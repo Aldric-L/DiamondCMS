@@ -180,7 +180,7 @@ function read($tab){
       <em>Pour poursuivre, veuillez corriger ces erreur et actualiser la page.</em></p>
       <?php } ?>
         <br>
-                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod) || !array_key_exists('ENV_HTACCESS_ALLOWED', $_SERVER)){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
+                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod)){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
         <?php } ?>
       </div>
       </center>

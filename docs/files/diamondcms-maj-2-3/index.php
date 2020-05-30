@@ -17,6 +17,8 @@
   define('WEBROOT', str_replace('index.php','', $_SERVER['SCRIPT_NAME']));
   define('ROOT', str_replace('index.php','', $_SERVER['SCRIPT_FILENAME']));
 
+  define('DCMS_VERSION', '1.0Be');
+  define('DCMS_INT_VERSION', 3);
 
   // OU define('DCMS_TYPE', 'Extended');
   define('DCMS_TYPE', 'Extended');

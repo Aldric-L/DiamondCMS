@@ -1,4 +1,4 @@
-<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes, $outdated, $version;  ?>
+<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes, $outdated, $version, $bc;  ?>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -99,6 +99,16 @@
             </div>
             <!-- /.row -->
             <div class="row">
+                <div class="col-lg-12">
+				<?php 
+					foreach ($bc as $k => $b){
+						if ($k == DCMS_INT_VERSION || $k == "all"){ ?>
+							<div class="alert alert-<?= $b['type']; ?> alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><?= $b['msg']; ?>
+							</div>
+						<?php } ?>
+                <?php } ?>			
+				</div>
                 <div class="col-lg-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">

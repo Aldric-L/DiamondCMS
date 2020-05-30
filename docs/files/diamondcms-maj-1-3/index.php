@@ -17,8 +17,6 @@
   define('WEBROOT', str_replace('index.php','', $_SERVER['SCRIPT_NAME']));
   define('ROOT', str_replace('index.php','', $_SERVER['SCRIPT_FILENAME']));
 
-  define('DCMS_VERSION', '1.0Be');
-  define('DCMS_INT_VERSION', 3);
 
   // OU define('DCMS_TYPE', 'Extended');
   define('DCMS_TYPE', 'Extended');
@@ -49,6 +47,10 @@
 
   //Si le site n'est pas installé, on charge le dossier installation
   if ($Serveur_Config['is_install'] != true){
+    // On initie peut-etre un test de htaccess 
+    if (isset($param[0]) && isset($param[1]) && !empty($param[0]) && !empty($param[1]) && $param[0] == "installation" && $param[1] == "testhtaccess"){
+      die ('Htaccess fonctionnel');
+    }
     if (intval($Serveur_Config['install_step']) <= 4){
       require_once(ROOT . 'installation/etape' . $Serveur_Config['install_step'] . '.php');
     }

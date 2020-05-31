@@ -2,6 +2,7 @@ Bienvenue sur le dépot officiel de DiamondCMS.
 Ici vous trouverez bien-sûr les sources et une documentation. 
 
 **Ne téléchargez pas tout le repository ! **
+
 Téléchargez ce dossier compressé : https://aldric-l.github.io/DiamondCMS/files/diamondcms-last.zip
 
 
@@ -13,6 +14,7 @@ Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ai
 
 
 -- Changelog --
+
 Passage au Build E :
 * Correction des problèmes de l'installateur (notamment pour l'URL rewriting et pour l'installation de la BDD)
 * Ajout d'une fonction de broadcast

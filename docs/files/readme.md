@@ -8,4 +8,4 @@ Voici l'index des versions :
 
 - 1.0 Béta Build C - 1 - Déployée
 - 1.0 Béta Build D - 2 - Déployée
-- 1.0 Béta Build E - 3 - Déployée
+- 1.0 Béta Build E - 3 - Déployée (31 mai 2020)

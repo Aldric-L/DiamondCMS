@@ -1,4 +1,11 @@
 <?php 
+//Si l'utilisateur n'a pas la permission de voir cette page
+//Cette page est réservée au grade diamond_master
+if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->getLevel() <= 4){ 
+    $controleur_def->loadViewAdmin('admin/onlyforadmins', 'accueil', 'Interdit');
+    die;
+}
+
 global $cm; 
 //Si on reçoit des informations dans la variable $_POST (Ajout d'une catégorie)
 if (isset($_POST) && !empty($_POST)){

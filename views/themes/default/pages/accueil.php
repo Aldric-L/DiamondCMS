@@ -51,7 +51,7 @@
   </div>
   <?php } ?>
   <hr>
-<?php if (defined("DServerLink") && DServerLink && !empty($servers)){ ?>
+<?php if (defined("DServerLink") && DServerLink && !empty($n_serveurs)){ ?>
 <div class="servers">
   <div class="container">
     <div class="rows">
@@ -68,11 +68,11 @@
             <p id="etat_serveur_<?php echo $i; ?>"></p>
             <p><a id="link_serveur_<?php echo $i; ?>"class="btn btn-success acc" href="" role="button">Voir plus &raquo;</a></p>
           </center><br /></div>
-          <div class="col-sm-4 request_depend"><br /><img id="img_serveur_<?php echo $i; ?>" class="img-rounded img-centered" src="" alt="<?php echo $servers[$i-1]['Description'];?>"></div>
+          <div class="col-sm-4 request_depend"><br /><img id="img_serveur_<?php echo $i; ?>" class="img-rounded img-centered" src="" alt=""></div>
           <div class="col-sm-2 request_depend"><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div><br />
         <?php }else { ?>
           <div class="col-sm-2 request_depend"></div>
-          <div class="col-sm-4 request_depend"><br /><img id="img_serveur_<?php echo $i; ?>" class="img-rounded img-centered" src="" alt="<?php echo $servers[$i-1]['Description'];?>"></div>
+          <div class="col-sm-4 request_depend"><br /><img id="img_serveur_<?php echo $i; ?>" class="img-rounded img-centered" src="" alt=""></div>
           <div class="col-sm-4 request_depend"><center>
             <h2 class="text-center" id="serveur_name_<?php echo $i; ?>"></h2>
             <p id="desc_serveur_<?php echo $i; ?>"></p>

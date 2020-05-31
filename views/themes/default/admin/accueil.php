@@ -1,4 +1,4 @@
-<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes, $outdated;  ?>
+<?php global $nb_coms, $errors, $nb_tickets, $errors_content, $Serveur_Config, $all_addons, $servers, $n_serveurs, $themes, $config, $nb_ventes, $outdated, $version, $bc;  ?>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -99,6 +99,16 @@
             </div>
             <!-- /.row -->
             <div class="row">
+                <div class="col-lg-12">
+				<?php 
+					foreach ($bc as $k => $b){
+						if ($k == DCMS_INT_VERSION || $k == "all"){ ?>
+							<div class="alert alert-<?= $b['type']; ?> alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><?= htmlspecialchars($b['msg']); ?>
+							</div>
+						<?php } ?>
+                <?php } ?>			
+				</div>
                 <div class="col-lg-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -109,7 +119,7 @@
                             <strong>Version du CMS :</strong> <?php echo DCMS_VERSION; ?><br />
                             <strong>Installé le : </strong><?php echo $Serveur_Config["date_install"]; ?> <br>
                             <?php if($outdated){ ?>
-                                <strong><span style="color: red;">Attention !</span> DiamondCMS n'est plus à jour.</strong> <a href="https://aldric-l.github.io/DiamondCMS/">Cliquez-ici pour en savoir plus.</a>
+                                <strong><span style="color: red;">Attention !</span> DiamondCMS n'est plus à jour.</strong> <a href="https://aldric-l.github.io/DiamondCMS/files/diamondcms-maj-<?=DCMS_INT_VERSION; ?>-<?= $version; ?>.zip">Télécharger l'archive de la Mise à jour.</a>
                             <?php }else { ?>
                                 DiamondCMS est à jour
                             <?php } ?>

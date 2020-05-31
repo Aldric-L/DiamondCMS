@@ -6,8 +6,11 @@ $(".testbdd").click(function(){
     data : { db: $('#db').val(), host: $('#host').val(), usr: $('#usr').val(), psw: $('#psw').val(), port: $('#port').val()},
     dataType : 'html',
     success: function (data_rep) {
-      if (data_rep != ""){
+      if (data_rep != "" && data_rep != "notable"){
         alert("Erreur, impossible de se connecter à la BDD. Voici l'erreur levée : " + data_rep);
+      }else if (data_rep == "notable") {
+        alert('Informations valides, vous pouvez continuer. Attention, la base de données n\'existe pas. DiamondCMS va tenter de la créer.');
+        $('#installbdd').attr('disabled', false);
       }else {
           alert('Informations valides, vous pouvez continuer.');
           $('#installbdd').attr('disabled', false);

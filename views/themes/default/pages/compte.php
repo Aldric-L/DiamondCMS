@@ -25,9 +25,7 @@ if (empty($infos) || $not_found){?>
   <h1 class="text-center">Informations sur le compte de <?php echo $pseudo; ?></h1>
   <br /><br />
   <div class="row">
-    <div class="col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2"><!--
-        <img class="img-responsive img-rounded" src="<?php echo $Serveur_Config['api_url']; ?>skin.php?id=<?php echo $Serveur_Config['id_cms']; ?>&u=<?php echo $pseudo; ?>&s=500">
-        -->
+    <div class="col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2">
         <p style="text-align: right;"><br><img class="" src="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>getprofileimg/<?php echo $pseudo; ?>/200"></p>
     </div>
     <div class="col-sm-4 col-lg-4">

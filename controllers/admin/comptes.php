@@ -89,7 +89,7 @@ if (isset($param[2]) && !empty($param[2]) && $param[2] == "permissions"){
         }
     }
     foreach ($permissions as $k => $p){
-        if ( $permissions[$k]['nb_users'] != 0){
+        if ( $permissions[$k]['nb_users'] != 0 || $permissions[$k]['name'] == "Membre" ||  $permissions[$k]['id'] == 1 ||  $permissions[$k]['id'] == 6 || $permissions[$k]['name'] == "diamond_master" ){
             $permissions[$k]['can_be_deleted'] = false;
         }else {
             $permissions[$k]['can_be_deleted'] = true;

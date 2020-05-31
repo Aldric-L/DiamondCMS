@@ -122,5 +122,12 @@ if (!empty($version)){
   }
 }
 
+//Système de broadcast
+$bc = array();
+$bc_raw = @file_get_contents('https://aldric-l.github.io/DiamondCMS/broadcast.ini');
+if ($bc_raw != false && !empty($bc_raw)){
+  $bc = @parse_ini_string($bc_raw, true);
+}
+
 $controleur_def->loadJS('admin/accueil');
 $controleur_def->loadViewAdmin('admin/accueil', 'accueil', 'Accueil');

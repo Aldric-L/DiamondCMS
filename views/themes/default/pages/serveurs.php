@@ -32,7 +32,11 @@ if ($empty == true){?>
           <tbody>
         <?php foreach ($players[$server_id]['results'] as $p){
           echo '<tr>';
-          echo '<td><img width=26 height=26 src="' . $Serveur_Config['api_url'] . 'face.php?id='. $Serveur_Config['id_cms'] . '&u='. $p . '&s=26">  ' . $p . '</td>';
+          if (defined("DMcProfileImg") && DMcProfileImg){
+            echo '<td><img width=26 height=26 src="' . $Serveur_Config['protocol'] . '://' . $_SERVER['HTTP_HOST'] . WEBROOT . 'getprofileimg/'. $p . '/26/26">  ' . $p . '</td>';
+          }else {
+            echo '<td>' . $p . '</td>';
+          }
           echo '<td><span style="color: green">Connecté</span></td>';
           echo '</tr>';
         }

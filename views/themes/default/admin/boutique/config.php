@@ -3,7 +3,9 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Boutique - Configuration générale</h1>
-            <h5>DiamondCMS est livré avec une boutique qu'il convient de paramètrer finement pour pouvoir dégager, de manière sécurisée, des revenus de vos serveurs.</h5>
+            <h5>DiamondCMS est livré avec une boutique qu'il convient de paramètrer finement pour pouvoir dégager, de manière sécurisée, des revenus de vos serveurs.<br><br>
+            <strong>Pour accèder à la documentation : <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Boutique">Cliquez-ici</a></strong>
+            </h5>
         </div>
     </div>
     <br>

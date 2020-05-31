@@ -1,7 +1,8 @@
 <?php
+// ---------------- EXTENSIONS
 $erreur_exts = ""; 
 if (!extension_loaded("curl")){
-    $erreur_exts .= "curl";
+    $erreur_exts .= "curl ";
 }
 if (!extension_loaded("gd")){
     $erreur_exts .= "gd ";
@@ -22,6 +23,17 @@ if (!extension_loaded("session")){
   $erreur_exts .= "session ";
 }
 
+//-------------------- HTACCESS
+$err_htacces = false;
+//On commence par vérifier selon une procédure "traditionnelle"
+if(!array_key_exists('ENV_HTACCESS_ALLOWED', $_SERVER)){
+  //Toutefois, celle-ci a un fort taux d'échec, notamment sur OVH, de ce fait, on utilise une procédure "maison", prévue dans l'index.php
+  if (@file_get_contents( 'http://' . $_SERVER['HTTP_HOST'] . WEBROOT . "/installation/testhtaccess/") != "Htaccess fonctionnel" && @file_get_contents( 'https://' . $_SERVER['HTTP_HOST'] . WEBROOT . "/installation/testhtaccess/") != "Htaccess fonctionnel"){
+    $err_htacces = true;
+  }
+}
+
+// ------------------- CHMOD
 $errors_chmod = array();
 function list_dir($name) {
   global $errors_chmod;
@@ -43,7 +55,7 @@ function ch_dir($name) {
       if(is_dir($name . $file) && !in_array($file, array(".","..")) && ( substr(sprintf('%o', fileperms($name . $file)), -4) == "0777" || substr(sprintf('%o', fileperms($name . $file)), -4) == "0666")) {
         ch_dir($name  . $file . '/');
       }else if(!in_array($file, array(".","..")) && substr(sprintf('%o', fileperms($name . $file)), -4) != "0777" && substr(sprintf('%o', fileperms($name . $file)), -4) != "0666") {
-			  chmod($name . $file, 0777);
+			  @chmod($name . $file, 0777);
 	    }
     }
     closedir($dir);
@@ -57,7 +69,7 @@ foreach ($files as $f){
 }
 foreach ($files as $f){
     if (substr(sprintf('%o', fileperms($f)), -4) != "0777" && substr(sprintf('%o', fileperms($f)), -4) != "0666"){
-        chmod($f, 0777);
+        @chmod($f, 0777);
         if (substr(sprintf('%o', fileperms($f)), -4) != "0777" && substr(sprintf('%o', fileperms($f)), -4) != "0666"){
           array_push($errors_chmod, array($f, substr(sprintf('%o', fileperms($f)), -4), "0777 ou 0666"));
         }
@@ -82,7 +94,15 @@ function read($tab){
 				echo "<th>$t</th>";
 		}
 	}
-	echo "</tr>";
+  echo "</tr>";
+}
+//Vérification que des fichiers inutiles du repository n'ont pas été téléchargés
+$github_files = array(ROOT . 'docs/');
+$errors_gh = array();
+foreach ($github_files as $gf){
+  if (file_exists($gf)){
+    array_push($errors_gh, array($gf, "A supprimer manuellement"));
+  }
 }
  ?>
 <!DOCTYPE html>
@@ -116,7 +136,8 @@ function read($tab){
       <center>
       <img class="img-responsive" width="550" style="margin: 0;" src="//<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>/installation/diamondcms.png">
       <h1>Merci d'avoir choisi DiamondCMS pour votre site internet !</h1>
-      <h2>L'installation de votre site internet va commencer. Pour la mener à bien, munissez-vous d'une base de données MySQL et de quelques minutes !<br></h2>
+      <h2>L'installation de votre site internet va commencer. Pour la mener à bien, munissez-vous d'une base de données MySQL et de quelques minutes !<br><br>
+      <em style="color: #197d62;"><strong>Une documentation pour vous guider est disponible <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Installation">ici.</a></em></strong></h2>
       <div style="margin-left: 15%; margin-right: 15%;">
         <br><hr>
         <p><?php if (intval(substr(phpversion(), 0, 1)) <= 4 || 
@@ -145,7 +166,7 @@ function read($tab){
         <p>Vous devez modifier ces droits vous-même : DiamondCMS a déjà essayé et n'a pas la permission de le faire automatiquement.<br>
         <em>Pour poursuivre, veuillez corriger ces erreur et actualiser la page.</em></p>
       <?php } ?>
-      <?php if (array_key_exists('ENV_HTACCESS_ALLOWED', $_SERVER)){ ?>
+      <?php if (!$err_htacces){ ?>
         <p><strong>Succès !</strong> Votre serveur WEB est bien compatible, l'installation de DiamondCMS peut continuer.</p>
       <?php }else { ?>
         <p><strong>Erreur !</strong> La configuration de votre serveur WEB est incompatible avec DiamondCMS.</p>
@@ -178,8 +199,29 @@ function read($tab){
 	  <strong>Il est très important que vous appliquiez les droits de manière récursive, sur les dossiers, sous-dossiers, et fichiers.</strong><br>
       <em>Pour poursuivre, veuillez corriger ces erreur et actualiser la page.</em></p>
       <?php } ?>
+      <?php if (!empty($errors_gh)){ ?>
+      <hr>
+        <p><strong>Avertissement !</strong> Vous avez téléchargé des fichiers inutiles avec DiamondCMS.</p>
+        <div style="margin-left: 15%; margin-right: 15%;">
+        <table class="table">
+            <thead>
+                <tr>
+                <th>Adresse du dossier</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($errors_gh as $e){ ?>
+                    <tr>
+                        <?Php read($e); ?>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        </div>
+      <?php } ?>
         <br>
-                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod)){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
+                <p><button <?php if (!empty($erreur_exts) || !empty($errors_chmod) || $err_htacces){ ?> disabled <?php } ?> class="btn btn-lg btn-success green" id="next_button" data="//<?= $_SERVER['HTTP_HOST']; ?><?= WEBROOT; ?>installation/next.php">Passer à l'étape suivante</button></p>
         <?php } ?>
       </div>
       </center>

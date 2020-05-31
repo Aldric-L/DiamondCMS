@@ -17,7 +17,7 @@
                              <p class="title">Vous ne comprenez pas ces erreurs ?</p><br />
                              <p class="text-justify">Vous pouvez consulter une documentation de toutes les erreurs émises par le CMS pour mieux les comprendre et réparer les possibles problèmes qu'elles révèlent.</p>
                              <hr>
-                             <p><strong class="">Documentation des erreurs :</strong> <em>Disponible d'ici une prochaine mise à jour.</em><br/></p>
+                             <p><strong class="">Documentation des erreurs :</strong> <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Erreurs-et-notifications">Cliquez-ici</a><br/></p>
                         </div>
                     </div>
         </div>

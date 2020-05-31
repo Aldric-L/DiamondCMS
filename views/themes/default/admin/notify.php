@@ -19,7 +19,7 @@
                              Ainsi, si vous ne connaissez pas ces notifications, c'est qu'il est probable qu'un autre administrateur ait-été notifié avant vous.
                              <br>Si malgré cette explication, vous souhaitez en savoir plus, vous pouvez consulter la documentation à propos des notifications du CMS.</p>
                              <hr>
-                             <p><strong class="">Documentation des erreurs :</strong> <em>Disponible d'ici une prochaine mise à jour.</em><br/></p>
+                             <p><strong class="">Documentation des notifications :</strong> <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Erreurs-et-notifications">Cliquez-ici</a><br/></p>
                         </div>
                     </div>
         </div>

@@ -235,6 +235,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->getLevel() > 4){ ?>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Configuration du CMS<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -265,12 +266,14 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php } ?>
                         <li>
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/images/"><i class="fa fa-image"></i> Gestionnaire d'images</a>
                         </li>
                         <li>
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>admin/contact/"><i class="fa fa-inbox"></i> Contact</a>
                         </li>
+                        <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->getLevel() > 4){ ?>
                         <li>
                             <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Boutique <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -292,6 +295,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php } ?>
                         <li>
                             <a href="<?php echo $Serveur_Config['protocol']; ?>://<?= $_SERVER['HTTP_HOST']; ?><?=WEBROOT; ?>"><i class="fa fa-arrow-left fa-fw"></i> Retour au site</a>
                         </li>

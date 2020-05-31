@@ -3,7 +3,9 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Configuration de DiamondCMS</h1>
-            <h5>Sur cette page, les principaux réglages de votre site internet sont modifiables.</h5>
+            <h5>Sur cette page, les principaux réglages de votre site internet sont modifiables.<br><br>
+            <strong>Pour accèder à la documentation : <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Boutique">Cliquez-ici</a></strong>
+            </h5>
         </div>
     </div>
     <br />

@@ -30,7 +30,7 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2, $diamond_master=FAL
             'role' => 6
           ));
         }else {
-          $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img)');
+          $req = $db->prepare('INSERT INTO d_membre (pseudo, email, password, salt, news, date_inscription, ip, profile_img, role) VALUES(:pseudo, :email, :password, :salt, :news, :date_inscription, :ip, :profile_img, :role)');
           $req->execute(array(
             'pseudo' => $pseudo,
             'email' => $email,
@@ -39,7 +39,8 @@ function addMembre($db, $pseudo, $email, $news, $psw, $psw2, $diamond_master=FAL
             'news' => $news,
             'date_inscription' => date('Y-m-d H:i:s'),
             'ip' => $_SERVER["REMOTE_ADDR"],
-            'profile_img' => "profiles/no_profile.png"
+            'profile_img' => "profiles/no_profile.png",
+            'role' => 1
           ));
         }
       }else {

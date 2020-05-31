@@ -20,7 +20,11 @@ jQuery(function ($){
         console.log("#etat_serveur_".concat(i));
 
         if (json_result[i]['results'] == false){
-          $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
+          if (json_result[i]['enabled'] == "true"){
+            $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
+          }else {
+            $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Désactivé</span>');
+          }
         }else {
           $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: green;">Connecté</span>');
         }

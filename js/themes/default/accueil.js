@@ -27,9 +27,15 @@ $(document).ready(function(e) {
       }
       //$("#img_serveur_".concat(i)).attr('src', lien_base+"views/uploads/img/" + json_result[i]['img']);
       if (json_result[i]['results'] == false){
-        $("#slots_serveur_".concat(i)).html('Slots : <span style="color: red;">Déconnecté</span>');
-        $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
-        $("#link_serveur_".concat(i)).attr('disabled', "");
+        if (json_result[i]['enabled'] == "true"){
+          $("#slots_serveur_".concat(i)).html('Slots : <span style="color: red;">Déconnecté</span>');
+          $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Déconnecté</span>');
+          $("#link_serveur_".concat(i)).attr('disabled', "");
+        }else {
+          $("#slots_serveur_".concat(i)).html('Slots : <span style="color: red;">Désactivé</span>');
+          $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: red;">Désactivé</span>');
+          $("#link_serveur_".concat(i)).attr('disabled', "");
+        }
       }else {
         $("#slots_serveur_".concat(i)).html('Slots : ' + json_result[i]['results']['Players'] + " / " + json_result[i]['results']['MaxPlayers']);
         $("#etat_serveur_".concat(i)).html('Etat du serveur : <span style="color: green;">Connecté</span>');

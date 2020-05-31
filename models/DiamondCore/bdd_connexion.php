@@ -8,10 +8,14 @@
 //Cette class permet de créer une connexion en PDO
   class BDD {
     private $bdd_Config = array();
+    private $forceinstall = false;
+    private $noerr = false;
 
     //On récupère les identifiants pour la BDD (venants d'un fichier)
-    function __construct($bdd_file){
+    function __construct($bdd_file, $noerr=false, $forceinstall=false){
         $this->bdd_Config = $bdd_file;
+        $this->forceinstall = $forceinstall;
+        $this->noerr = $noerr;
     }
 
     /**
@@ -69,13 +73,20 @@
              PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
              PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
           ];
-          $dsn = sprintf('mysql:host=%s;port=%p;dbname=%s;charset=%s', $host, $port, $db, $charset);
-          try {
+          if ($this->forceinstall){
+            $dsn = sprintf('mysql:host=%s;port=%p;charset=%s', $host, $port, $charset);
             $pdo = new PDO($dsn, $user, $pwd, $options);
-          }catch (PDOException $e) {
-             define("EXCEPTION", $e);
-             require_once(ROOT . "installation/bdd_urgence.php");
-             die;
+          }else {
+            $dsn = sprintf('mysql:host=%s;port=%p;dbname=%s;charset=%s', $host, $port, $db, $charset);
+            try {
+              $pdo = new PDO($dsn, $user, $pwd, $options);
+            }catch (PDOException $e) {
+               if (!$this->noerr){
+                  define("EXCEPTION", $e);
+                  require_once(ROOT . "installation/bdd_urgence.php");
+                  die;
+               }
+            }
           }
        }
        return $pdo;

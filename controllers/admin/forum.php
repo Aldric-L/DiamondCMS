@@ -1,4 +1,11 @@
 <?php 
+//Si l'utilisateur n'a pas la permission de voir cette page
+//Cette page est réservée au grade diamond_master
+if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']->getLevel() <= 4){ 
+    $controleur_def->loadViewAdmin('admin/onlyforadmins', 'accueil', 'Interdit');
+    die;
+}
+
 $config = $Serveur_Config;
 
 // Si on passe en mode XHR pour activer ou désactiver la page
@@ -83,7 +90,6 @@ foreach($cats as $k => $c){
 }
 $scats = simplifySQL\select($controleur_def->bddConnexion(), false, "d_forum_sous_cat", "*", false, "id_cat");
 foreach ($scats as $k => $s){
-    echo "Traitement de " . $s['id'];
     foreach($cats as $p => $c){
         if (intval($cats[$p]['id']) == intval( $scats[$k]['id_cat'])){
             $scats[$k]['cat_name'] = $cats[$p]['titre'];

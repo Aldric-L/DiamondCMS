@@ -34,7 +34,7 @@
       <center>
       <img class="img-responsive" width="500" style="margin: 0;" src="//<?php echo $_SERVER['HTTP_HOST'];?><?php echo WEBROOT;?>/installation/diamondcms.png">
       <h1>Etape 1 : Acceptation des licences</h1>
-      <h2>DiamondCMS est un projet gratuit et open-source. <br> Toutefois, pour pouvoir poursuivre l'installation, vous devez accepter ces licences et nos conditions d'utilisation.<br></h2>
+      <h2>DiamondCMS est un projet gratuit et open-source. <br> Toutefois, pour pouvoir poursuivre l'installation, vous devez accepter ces licences et les conditions d'utilisation.<br></h2>
       <div style="padding-top: 10px;margin-left: 15%; margin-right: 15%;">
         <h3>Conditions générales d'utilisation</h3>
         <div class="embed-responsive embed-responsive-4by3" style="padding-bottom: 200px">

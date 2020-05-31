@@ -69,7 +69,9 @@ if (isset($param[3]) && !empty($param[3]) && isset($param[4]) && !empty($param[4
             && intval($_SESSION['user']->getRole()) > intval($controleur_def->getRoleLevel($controleur_def->bddconnexion(),$role_id['role']))){
                 //On vérifie si on ne veut pas aussi débanir l'utilisateur
                 if (simplifySQL\update($controleur_def->bddConnexion(), "d_membre", array(array("profile_img", "=", "profiles/no_profile.png")), array(array("id", "=", intval($param[4]))))){
-                    @unlink(ROOT . 'views/uploads/img/' . $compte['profile_img']);
+                    if ($compte['profile_img'] != "profiles/no_profile.png"){
+                        @unlink(ROOT . 'views/uploads/img/' . $compte['profile_img']);
+                    }
                     die ('Success');
                 }
                 die('SQL Error');

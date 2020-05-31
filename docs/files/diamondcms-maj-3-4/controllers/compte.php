@@ -12,6 +12,8 @@ if (isset($_SESSION['user']) &&
             $controleur_def->addError(500 + intval($upload));
         }else {
           $filename = $upload;
+          $_SESSION['user']->reload($controleur_def->bddConnexion());
+          $img_old = $_SESSION['user']->getInfo()['profile_img'];
             if (simplifySQL\update(
                       $controleur_def->bddConnexion(), 
                       "d_membre", 
@@ -22,9 +24,10 @@ if (isset($_SESSION['user']) &&
                       ), 
                       array( array("id", "=", $_SESSION['user']->getId() ) )
                       ) != false){
-
-              if (@unlink(ROOT . 'views/uploads/img/' . $_SESSION['user']->getInfo()['profile_img']) == false){
-                  $controleur_def->addError(540);
+              if ($img_old != "profiles/no_profile.png"){
+                if (@unlink(ROOT . 'views/uploads/img/' . $img) == false){
+                    $controleur_def->addError(540);
+                }
               }
 
               $_SESSION['user']->reload($controleur_def->bddConnexion());

@@ -104,7 +104,7 @@
 					foreach ($bc as $k => $b){
 						if ($k == DCMS_INT_VERSION || $k == "all"){ ?>
 							<div class="alert alert-<?= $b['type']; ?> alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><?= $b['msg']; ?>
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><?= htmlspecialchars($b['msg']); ?>
 							</div>
 						<?php } ?>
                 <?php } ?>			

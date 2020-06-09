@@ -1,10 +1,10 @@
 {
-all:{
-type: "info",
-msg: "DiamondCMS est encore en béta : nous avons besoin de vos retours pour l'améliorer. RDV sur cette page pour nous contacter : https://github.com/Aldric-L/DiamondCMS/issues"
+"all":{
+"type": "info",
+"msg": "DiamondCMS est encore en béta : nous avons besoin de vos retours pour l'améliorer. RDV sur cette page pour nous contacter : https://github.com/Aldric-L/DiamondCMS/issues"
 },
-2: {
-type: "warning",
-msg: "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
+"2": {
+"type": "warning",
+"msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
 }
 }

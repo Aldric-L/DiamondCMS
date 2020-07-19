@@ -1,7 +1,7 @@
 <?php
 
   /**
-   * DiamondCMS - Vertion beta gratuite
+   * DiamondCMS - Version beta gratuite
    * @version 1.0 Build E 
    * Développé et maintenu par Aldric L.
    * @author Aldric L.

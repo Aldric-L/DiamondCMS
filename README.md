@@ -5,6 +5,8 @@
 Bienvenue sur le dépot officiel de DiamondCMS.
 Ici vous trouverez bien-sûr les sources et une documentation. 
 
+**Le projet dispose aussi d'un site vitrine où vous retrouverez plus d'informations : https://aldric-l.github.io/DiamondCMS/**
+
 ## Téléchargement
 
 

@@ -1,0 +1,29 @@
+/*
+ Feuille de Style pour la page 404
+ Exclusivement réservé à une utilisation normale de DiamondCMS
+ Copyright Aldric L. (GougDEV)
+*/
+#erreur404content {
+  text-align: center;
+  width: 30%;
+  margin-top: 8em;
+  margin-bottom: 8em;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+#erreur404content h1 {
+  font-size: 70px;
+  color: #197D62;
+  font-family: "Bree Serif";
+}
+
+.fa-6 {
+  color: #197D62;
+  font-size: 20em;
+}
+
+#erreur404content a{
+  color: #197D62;
+  font-family: "Bree Serif";
+}

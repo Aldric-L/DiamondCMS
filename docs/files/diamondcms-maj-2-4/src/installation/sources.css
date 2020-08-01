@@ -1,0 +1,21 @@
+h1{
+  font-family: "BreeSerif";
+  text-align: center;
+}
+@font-face {
+  font-family:'BreeSerif';
+  src: url('fonts/BreeSerif-Regular.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+@font-face {
+  font-family:'Raleway-Light';
+  src: url('fonts/Raleway-Light.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+
+button.green{
+  background-color: #197d62;
+  border-color: #197d62;
+}

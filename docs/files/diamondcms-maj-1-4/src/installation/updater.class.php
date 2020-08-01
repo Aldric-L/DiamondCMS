@@ -51,7 +51,6 @@ final class Updater {
     }
 
     public function instance($path){
-        require_once ($path . "update.php");
         foreach ($this->available_majs as $m){
             if ($m['path'] == $path){
                 $this->cur_maj = $m;

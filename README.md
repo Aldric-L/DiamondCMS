@@ -8,7 +8,7 @@ Ici vous trouverez bien-sûr les sources et une documentation.
 ## Téléchargement
 
 
-**Attention : Ne téléchargez pas tout le repository ! **
+**Attention : Ne téléchargez pas tout le repository !**
 
 Téléchargez seulement ce dossier compressé : https://aldric-l.github.io/DiamondCMS/files/diamondcms-last.zip
 
@@ -19,15 +19,17 @@ Une documentation est disponible pour vous aider lors de l'installation et de l'
 Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 
-N'hésitez pas à nous contacter pat les issues github si besoin !
+*N'hésitez pas à nous contacter pat les issues github si besoin !*
 
-Version actuelle : 1.1 Béta - Build A
+Version actuelle : **1.1 Béta - Build A**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 
 
--- Changelog --
-1.1 Buil A :
+**Changelog**
+
+
+*1.1 Buil A :*
 - Réfection du forum et de la boutique
 - Correction de failles de sécurité notamment avec les sessions
 - Création d'un tracker d'erreurs
@@ -38,7 +40,7 @@ Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ai
 - Mise en oeuvre de mesures écologiques en réduisant les appels de mise à jour
 
 
-1.0 Build E :
+*1.0 Build E :*
 * Correction des problèmes de l'installateur (notamment pour l'URL rewriting et pour l'installation de la BDD)
 * Ajout d'une fonction de broadcast
 * Protection des roles Membre et diamond_master

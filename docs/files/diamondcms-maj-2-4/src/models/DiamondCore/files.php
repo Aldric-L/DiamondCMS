@@ -130,7 +130,7 @@ function uploadFile($file, $folder=null, $rename=true, $path=ROOT . "views/uploa
 
     //Déplacement
     $u_id = uniqid();
-    $primary_name = clearString($_FILES[$file]['name'], true, true);
+    $primary_name = clearString($_FILES[$file]['name'], true, false);
     if ($folder != null){
         if ($rename == false){
             $deplacement = move_uploaded_file($_FILES[$file]['tmp_name'], 

@@ -29,7 +29,7 @@ Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ai
 **Changelog**
 
 
-*1.1 Buil A :*
+*1.1 Build A :*
 - Réfection du forum et de la boutique
 - Correction de failles de sécurité notamment avec les sessions
 - Création d'un tracker d'erreurs

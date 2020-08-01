@@ -7,6 +7,8 @@ Ici vous trouverez bien-sûr les sources et une documentation.
 
 **Le projet dispose aussi d'un site vitrine où vous retrouverez plus d'informations : https://aldric-l.github.io/DiamondCMS/**
 
+*Nous avons aussi une démo ici : https://aldric-l.github.io/DiamondCMS/demo.html*
+
 ## Téléchargement
 
 

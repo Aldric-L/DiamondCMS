@@ -19,7 +19,7 @@
                         <?php if ($Serveur_Config['en_minecraft_profile']){ ?>
                           <h2 style="margin-left: 0%;"><?php echo $n['name']; ?> le <?php echo $n['date']; ?> par  <img width="32" height="32" src="<?php echo $Serveur_Config['api_url']; ?>face.php?id=356a192b7913b04c54574d18c28d46e6395428ab&amp;u=<?php echo $n['user']; ?>&amp;s=32" alt="photo de profil de <?php echo $n['user']; ?>"> <?php echo $n['user']; ?></h2>
                         <?php }else { ?>
-                          <h2 style="margin-left: 0%;"><?php echo $n['name']; ?> le <?php echo $n['date']; ?> par  <img width="32" height="32" src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'views/uploads/img/profiles/'; ?><?php echo $n['img_profile']; ?>" alt="photo de profil de <?php echo $n['user']; ?>"> <?php echo $n['user']; ?></h2>
+                          <h2 style="margin-left: 0%;"><?php echo $n['name']; ?> le <?php echo $n['date']; ?> par  <img width="32" height="32" src="<?php echo $Serveur_Config['protocol']; ?>://<?php echo $_SERVER['HTTP_HOST'] . WEBROOT . 'views/uploads/img/'; ?><?php echo $n['img_profile']; ?>" alt="photo de profil de <?php echo $n['user']; ?>"> <?php echo $n['user']; ?></h2>
                           <?php } ?>
                         <p class="text-justify"><?php echo substr($n['content_new'], 0, 200);?></p>
                     </a>

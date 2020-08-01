@@ -21,7 +21,7 @@ Une documentation est disponible pour vous aider lors de l'installation et de l'
 Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 
-*N'hésitez pas à nous contacter pat les issues github si besoin !*
+*N'hésitez pas à nous contacter par les issues github si besoin !*
 
 Version actuelle : **1.1 Béta - Build A**
 

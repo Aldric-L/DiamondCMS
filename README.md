@@ -1,21 +1,48 @@
+![DiamondCMS](https://aldric-l.github.io/DiamondCMS/img/logo.png)
+# DiamondCMS
+
+
 Bienvenue sur le dépot officiel de DiamondCMS.
 Ici vous trouverez bien-sûr les sources et une documentation. 
 
-**Ne téléchargez pas tout le repository ! **
+**Le projet dispose aussi d'un site vitrine où vous retrouverez plus d'informations : https://aldric-l.github.io/DiamondCMS/**
 
-Téléchargez ce dossier compressé : https://aldric-l.github.io/DiamondCMS/files/diamondcms-last.zip
+## Téléchargement
 
 
+**Attention : Ne téléchargez pas tout le repository !**
+
+Téléchargez seulement ce dossier compressé : https://aldric-l.github.io/DiamondCMS/files/diamondcms-last.zip
+
+
+## Documentation
+
+Une documentation est disponible pour vous aider lors de l'installation et de l'utilisation de DiamondCMS.
 Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
-Version actuelle : 1.0 Béta - Build E 
+
+*N'hésitez pas à nous contacter par les issues github si besoin !*
+
+Version actuelle : **1.1 Béta - Build A**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 
 
--- Changelog --
+**Changelog**
 
-Passage au Build E :
+
+*1.1 Build A :*
+- Réfection du forum et de la boutique
+- Correction de failles de sécurité notamment avec les sessions
+- Création d'un tracker d'erreurs
+- Création d'un système de pages
+- Animation de la page d'accueil en javascript
+- Adaptation au DiamondCore 3.0
+- Création d'un broadcast asynchrone en accueil admin
+- Mise en oeuvre de mesures écologiques en réduisant les appels de mise à jour
+
+
+*1.0 Build E :*
 * Correction des problèmes de l'installateur (notamment pour l'URL rewriting et pour l'installation de la BDD)
 * Ajout d'une fonction de broadcast
 * Protection des roles Membre et diamond_master

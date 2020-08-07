@@ -1,14 +1,23 @@
 {
+
 "all":{
-"type": "info",
-"msg": "DiamondCMS est encore en béta : nous avons besoin de vos retours pour l'améliorer. RDV sur cette page pour nous contacter : https://github.com/Aldric-L/DiamondCMS/issues"
+    "type": "info",
+    "msg": "DiamondCMS est encore en béta : nous avons besoin de vos retours pour l'améliorer. RDV sur cette page pour nous contacter : https://github.com/Aldric-L/DiamondCMS/issues"
 },
+
 "2": {
-"type": "warning",
-"msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
-}
+    "type": "warning",
+    "msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
+},
+
 "3": {
-"type": "warning",
-"msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
+    "type": "warning",
+    "msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
+},
+
+"4": {
+    "type": "warning",
+    "msg": "Une mise à jour mineure est disponible pour le https. Pensez à l'installer !"
 }
+
 }

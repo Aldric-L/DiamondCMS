@@ -2,7 +2,7 @@
 
   /**
    * DiamondCMS - Version beta gratuite
-   * @version 1.1 (Build B) - Développement
+   * @version 1.1 (Build B)
    * Développé et maintenu par Aldric L.
    * @author Aldric L.
    * Début de la license 2016

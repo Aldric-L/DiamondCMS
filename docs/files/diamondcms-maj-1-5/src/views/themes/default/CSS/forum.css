@@ -1,0 +1,177 @@
+/*
+ Feuille de Style pour le forum
+ Exclusivement réservé à une utilisation normale de DiamondCMS
+ Copyright Aldric L. (GougDEV)
+*/
+.content-container-forum {
+  margin-left: 18%;
+  margin-right: 18%;
+  width: 64%;
+  /*border: 1.8px dotted #197d62;
+  /*border-radius: 20px;*/
+  height: 100%;
+  background-color: white;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.content-container-forum p {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+.content-container-forum h1 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container-forum h2 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container-forum h3 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container-forum h4 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container-forum h5 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+}
+.forum-a {
+  text-decoration: none;
+  color: black;
+}
+.table-forum {
+  margin-left: 4%;
+  max-width: 96%;
+  font-size: 20px;
+}
+.table-forum-com {
+  margin-left: 10%;
+  max-width: 90%;
+  font-size: 15px;
+}
+#f_cat {
+  color: #197d62;
+  background-color: #E5E5E5;
+  border-radius: 10px;
+  width: 100%;
+  height: 60px;
+}
+#f_cat h3{
+  padding-top: 10px;
+  font-size: 30px;
+  color: #197d62;
+}
+#f_com {
+  margin-left: 8%;
+  color: #197d62;
+  background-color: #E5E5E5;
+  border-radius: 10px;
+  width: 92%;
+  height: 45px;
+}
+#f_com h3{
+  padding-top: 12.5px;
+  font-size: 20px;
+  color: #197d62;
+}
+#f_sous_cat {
+  padding-left: 4px;
+  padding-top: 5px;
+  padding-bottom: 0px;
+  font-size: 20px;
+}
+hr {
+  margin-top: 5px;
+}
+a.no {
+  color: #197d62;
+  text-decoration: none;
+}
+
+/* EXPLICFORUM */
+#explicforum {
+  text-align: center;
+  /*border: 3px solid;
+  border-radius: 69px;*/
+  width: 50%;
+  /*margin-top: 3em;*/
+  margin-left: 25%;
+  margin-right: 25%;
+
+}
+
+#explicforum h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+.explicp {
+  text-align: center;
+  font-family: "Bree Serif";
+}
+/* END EXPLICFORUM */
+
+#red {
+  font-family: "Bree Serif";
+  font-size: 1.2em;
+}
+
+#firstpost {
+  text-align: center;
+  border: 3px solid;
+  border-radius: 69px;
+  width: 90%;
+  margin-top: 3em;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#posts {
+  width: 40%;
+  margin-top: 2em;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+@media all and (max-width: 1024px){
+
+  #posts {
+    width: 35%;
+    margin-top: 2em;
+  }
+  #posts p{
+    font-size: 13px;
+  }
+}*/
+h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+/*#posts a{
+  /*font-family: "Trebuchet MS";*/
+  /*text-decoration: none;
+  font-size: 1.2em;
+  color: black;
+}
+
+#bordure{
+  text-align: center;
+  border-right: 2px solid #197D62;
+}*/
+.border{
+  width: 130px;
+  border-right: 2px solid #197D62;
+}
+.contentpost{
+  padding: 10px;
+}

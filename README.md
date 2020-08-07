@@ -30,6 +30,9 @@ Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ai
 
 **Changelog**
 
+*1.1 Build B (et non E comme c'est écrit dans un commit !) :*
+- Dépreciation du réglage protocol
+- Déploiement des erreurs inline
 
 *1.1 Build A :*
 - Réfection du forum et de la boutique

@@ -1,0 +1,11 @@
+Attention ! Vous avez téléchargé une mise à jour de DiamondCMS, et non le CMS en lui-même.
+Cette mise à jour est une mise à jour d'importance qui nécessite plusieurs opérations.
+Cette archive permet de passer de la 1.0 à la 1.1 build C
+
+
+(Etape 0 conseillée : Supprimer les dossiers models, controllers, et installation de la racine de votre site internet afin de ne pas conserver de doublons, de fichiers inutiles ou de conflits).
+Etape 1 : Glisser déposer TOUS les fichiers du dossier src vers la racine de votre site internet (vous devez écraser les anciens fichiers).
+Etape 2 : Rendre à DiamondCMS les droits sur TOUS ses fichiers DE MANIERE RECURSIVE (CHMOD 777, cf documentation sur l'installation)
+Etape 3 : Vous rendre sur la page installation/updater.php (normallement vous y êtes redirigé automatiquement), et suivre les instructions.
+
+Merci d'utiliser DiamondCMS. N'hésitez pas à nous contacter si besoin par les issues Github.

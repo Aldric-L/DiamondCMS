@@ -6,7 +6,7 @@
 },
 
 "2": {
-    "type": "warning",
+    "type": "danger",
     "msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
 },
 
@@ -17,7 +17,11 @@
 
 "4": {
     "type": "warning",
-    "msg": "Une mise à jour mineure est disponible pour le https. Pensez à l'installer !"
+    "msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
+},
+"5": {
+    "type": "warning",
+    "msg": "Pensez à mettre à jour votre version de DiamondCMS pour bénéficier de nos nouvelles fonctionnalités !"
 }
 
 }

@@ -272,6 +272,11 @@ final class Manager extends Controleur {
        * @return void
        */
       public function loadPage($page_name=NULL){
+        if (@file_exists(ROOT . "installation/blocked.dcms")){
+          define('DIAMOND_BLOCKED', true);
+          require_once(ROOT . 'installation/infodiamondcms.php'); die;
+        }
+        
         if (isset($page_name) && !empty($page_name)){
           $result = simplifySQL\select($this->bddConnexion(), true, "d_pages", "*", array(array("name_raw", "=", $page_name)));
           if (is_array($result)){

@@ -30,6 +30,11 @@ Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ai
 
 **Changelog**
 
+*1.1 Build C :*
+- Patch de nombreux bugs non-critiques comme des erreurs d'affichage, et des problèmes sur le support et le forum.
+- Code refactoring du CSS pour le rendre enfin lisible
+- Sécurisation du CMS
+
 *1.1 Build B (et non E comme c'est écrit dans un commit !) :*
 - Dépreciation du réglage protocol
 - Déploiement des erreurs inline

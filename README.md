@@ -23,7 +23,7 @@ Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 *N'hésitez pas à nous contacter par les issues github si besoin ! Une template est disponible pour signaler un bug et pour demander de l'aide.*
 
-Version actuelle : **1.1 Béta - Build A**
+Version actuelle : **1.1 Béta - Build C**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 

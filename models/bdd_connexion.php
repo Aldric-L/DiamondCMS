@@ -65,10 +65,10 @@
              PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
           ];
           if ($this->forceinstall){
-            $dsn = sprintf('mysql:host=%s;port=%p;charset=%s', $host, $port, $charset);
+            $dsn = sprintf('mysql:host=%s;port=%s;charset=%s', $host, $port, $charset);
             $pdo = new PDO($dsn, $user, $pwd, $options);
           }else {
-            $dsn = sprintf('mysql:host=%s;port=%p;dbname=%s;charset=%s', $host, $port, $db, $charset);
+            $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=%s', $host, $port, $db, $charset);
             try {
               $pdo = new PDO($dsn, $user, $pwd, $options);
             }catch (PDOException $e) {
@@ -104,7 +104,7 @@
          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
          PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
       ];
-      $dsn = sprintf('mysql:host=%s;port=%p;dbname=%s;charset=%s', $host, $port, $db, $charset);
+      $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=%s', $host, $port, $db, $charset);
       $pdo = new PDO($dsn, $user, $pwd, $options);
       return $pdo;
    }

@@ -1,0 +1,361 @@
+@charset "UTF-8";
+/*
+ Feuille de Style générale, inclue dans toutes des pages
+ Exclusivement réservée à une utilisation normale de DiamondCMS
+ Copyright Aldric L. 
+*/
+/*
+Le CSS est en cours de refactoring : il faut le rendre plus réutilisable et plus propre de manière urgente.
+Opération démarrée en 2020 - v1.1 BC
+
+Pour résumer :
+- Pour du gras et du vert : .bold
+- Avec bree serif : .bree-serif
+- pour des boutons verts : .btn-green (et non acc !)
+*/
+
+
+/* Ces polices sont stockées "au cas où", mais on préfère les charger depuis l'API google font dans le header
+@font-face {
+  font-family:'BreeSerif';
+  src: url('fonts/BreeSerif-Regular.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+@font-face {
+  font-family:'Raleway-Light';
+  src: url('fonts/Raleway-Light.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal
+}
+*/
+
+
+body {
+  line-height: 1.6;
+  -ms-overflow-style: scrollbar;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Titre de page */
+#fh5co-page-title {
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+  margin-bottom: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+#fh5co-page-title .overlay {
+  z-index: 8;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+}
+#fh5co-page-title .text {
+  position: relative;
+  z-index: 9;
+  color: #ffffff !important;
+  padding-left: 10%;
+}
+#fh5co-page-title .text h1 {
+  color: #197d62 !important;
+  font-weight: bold;
+}
+#fh5co-page-title a {
+  color: #197d62;
+  text-decoration: none;
+}
+
+/* *************** Divers ******************** */
+
+/* Boutons */
+.btn-green {
+  background-color: #197d62;
+  color: white;
+  border-color: #197d62;
+}
+
+.btn-green:hover {
+  background-color: #13604A;
+  color: white;
+  border-color: #13604A;
+}
+/* Anciens boutons à ne plus utiliser */
+.acc {
+  border-color: #197d62;
+  background-color: #197d62;
+}
+.acc:hover {
+  border-color: #197d62;
+  background-color: #197d62;
+  opacity:0.8;
+}
+/* Fin boutons */
+
+.bree-serif {
+  font-family: 'Bree Serif', serif;
+  color: #197d62;
+}
+
+.bold {
+  color: #197d62;
+  font-weight: bold;
+}
+
+.green {
+  color: #197d62;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Bree Serif';
+}
+p {
+  color: black;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+}
+
+.arr {
+  border-radius: 15px;
+}
+
+.no {
+  text-decoration: none;
+  color: white;
+}
+.no::hover {
+  text-decoration: none;
+  color: white;
+}
+.modal-header{
+  background-color: #E5E5E5;
+}
+
+/* EXPLIC - Utilisé dans les textes en haut des pages boutiques et forum */
+
+@media (min-width: 1500px){
+  #explic {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+}
+
+@media (max-width: 1500px){
+  #explic {
+    text-align: center;
+    width: 64%;
+    margin-left: 18%;
+    margin-right: 18%;
+  }
+}
+@media (max-width: 1400px){
+  #explic {
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+@media (max-width: 1200px){
+  #explic {
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+@media (max-width: 1000px){
+  #explic {
+    text-align: center;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
+#explic h2{
+  color: #197D62;
+  text-align: center;
+  font-family: "Bree Serif";
+}
+
+.explicp {
+  text-align: center;
+  font-family: "Bree Serif";
+}
+/* END EXPLICFORUM */
+
+/*End Global */
+
+/*Content Container, utilisé pour mettre en forme les pages */
+.content-container {
+  margin-left: 9%;
+  margin-right: 9%;
+  width: 82%;
+  border-left: 1.8px dotted #197d62;
+  border-right: 1.8px dotted #197d62;
+  height: 100%;
+  background-color: white;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+.content-container > p  {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+.content-container > span  {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+.content-container > table {
+  margin-left: 4%;
+  margin-right: 4%;
+  width: 92%;
+}
+.content-container h1 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h2 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h3 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h4 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.content-container h5 {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+@media (max-width: 1200px){
+  .content-container {
+    margin-left: 9%;
+    margin-right: 9%;
+    height: 100%;
+  }
+}
+@media (max-width: 992px){
+  .content-container {
+    margin-left: 9%;
+    margin-right: 9%;
+    height: 100%;
+  }
+}
+@media (max-width: 768px){
+  .content-container {
+    margin-left: 9%;
+    margin-right: 9%;
+    height: 100%;
+  }
+}
+/*END content-container */
+
+/*NavBar */
+@media (max-width: 979px){
+  .navbar-fixed-top, .navbar-fixed-bottom {
+    position: fixed;
+  }
+}
+.navbar {
+  height: 90px;
+  background: #E5E5E5;
+  background-image: none;
+  background-repeat: repeat-x;
+  border: none;
+  filter: none;
+}
+.navbar-brand:hover {
+  color: black;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a:hover {
+  color: #197d62;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.navbar-inverse .navbar-brand {
+  color: #197d62;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-size: 2.5em;
+	text-transform: uppercase;
+  font-family: "Bree Serif";
+  vertical-align: top;  
+}
+.navbar-nav {
+  letter-spacing: 1px;
+}
+li.dropdown.open > a.dropdown-toggle {
+  padding-top: 20px;
+}
+li.dropdown.open > a.dropdown-toggle:hover {
+  padding-top: 20px;
+}
+li.dropdown.open.compte > a.dropdown-toggle {
+  padding-top: 0px;
+}
+li.dropdown.open.compte > a.dropdown-toggle:hover {
+  padding-top: 0px;
+}
+li.dropdown.compte > a.dropdown-toggle {
+  padding-top: 10px;
+}
+@media (min-width: 1400px){
+  .navbar{
+    padding-left: 14%;
+    padding-right: 14%;
+  }
+  .navbar-brand {
+    display: block;
+  }
+}
+@media (min-width: 1200px){
+  .navbar{
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+  .navbar-brand {
+    display: block;
+  }
+}
+@media (max-width: 1200px){
+  .navbar{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar-brand {
+    display: none;
+  }
+}
+.navbar-nav > li > .compte {
+  margin-right: 9px;
+}
+
+li.dropdown.open > a.server:focus {
+  padding-top: 20px;
+}
+
+/* END navbar */

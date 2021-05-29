@@ -26,6 +26,29 @@
 "6": {
     "type": "info",
     "msg": "La nouvelle mise à jour n'est pas nécessaire si vous utilisez toujours PHP7 et non 8 !"
+},
+"2": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
+},
+"3": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
+},
+"4": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
+},
+"5": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
+},
+"6": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
+},
+"7": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour a boutique."
 }
-
 }

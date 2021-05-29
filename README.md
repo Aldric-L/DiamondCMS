@@ -23,12 +23,18 @@ Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 *N'hésitez pas à nous contacter par les issues github si besoin ! Une template est disponible pour signaler un bug et pour demander de l'aide.*
 
-Version actuelle : **1.1 Béta - Build D**
+Version actuelle : **1.1 Béta - Build E**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 
 
 **Changelog**
+
+*1.1 Build E :**
+- Patch critique PayPal
+- Patch critique TinyMCE
+- Ajout d'un phpinfo pour faciliter le dépannage
+
 *1.1 Build D :*
 - Patch des issues
 - Support de PHP8

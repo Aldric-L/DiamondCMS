@@ -9,7 +9,7 @@
   <div id="f_cat"><h3 class="green"><?php echo $cat['titre']; ?> -> <?php echo $sous_cat['titre']; ?></h3></div>
   <?php if (empty($posts)){ ?>
     <br><p>Aucun sujet a été trouvé dans cette catégorie ! Créez-en un !</p>
-  <?php } ?>
+  <?php }else { ?>
   <table class="table table-forum">
     <?php
     
@@ -19,7 +19,8 @@
       echo '</td>'; 
       echo '<td>' . $post['nb_rep'] . ' réponses</td>';
       echo '</a></tr>';
-    }    
+    }  
+  }
     ?>
   </table>
 <?php global $pages, $cur_page; if ($pages != 1 && $pages > 0 && $pages != 0){

@@ -1,0 +1,5 @@
+Attention ! Vous avez téléchargé une mise à jour de DiamondCMS, et non le CMS en lui-même.
+Pour installer cette mise à jour, vous devez simplement remplacer les fichiers ci-dessous : pour cela glissez-déposez ces fichiers.
+Attention, n'oubliez pas de mettre ces fichiers en CHMOD 777 (ou 666).
+
+Cette archive permet de passer du Build D au Build E (v1.1)

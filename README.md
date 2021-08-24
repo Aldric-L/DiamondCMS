@@ -23,12 +23,14 @@ Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 *N'hésitez pas à nous contacter par les issues github si besoin ! Une template est disponible pour signaler un bug et pour demander de l'aide.*
 
-Version actuelle : **1.1 Béta - Build E**
+Version actuelle : **1.1 Béta - Build F**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 
 
 **Changelog**
+*1.1 Build F :**
+- Ajout de la fonctionnalité boutique externe et facilitation de la mise en place de contenus hors CMS
 
 *1.1 Build E :**
 - Patch critique PayPal

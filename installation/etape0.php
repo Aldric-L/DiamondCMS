@@ -1,9 +1,9 @@
 <?php
 // ---------------- EXTENSIONS
 $erreur_exts = ""; 
-if (!extension_loaded("curl")){
+/*if (!extension_loaded("curl")){
     $erreur_exts .= "curl ";
-}
+}*/
 if (!extension_loaded("gd")){
     $erreur_exts .= "gd ";
 }
@@ -141,8 +141,10 @@ foreach ($github_files as $gf){
       <div style="margin-left: 15%; margin-right: 15%;">
         <br><hr>
         <p><?php if (intval(substr(phpversion(), 0, 1)) <= 6 || 
-        ( intval( substr(phpversion(), 0, 1) ) == 7 && intval( substr( phpversion(), 2, 1 ) ) < 3) ){ ?>
+        ( intval( substr(phpversion(), 0, 1) ) == 7 && intval( substr( phpversion(), 2, 1 ) ) <= 3) ){ ?>
           <span style="color: red;"> <strong>Impossible de poursuivre l'installation : Version de PHP incompatible</strong> </span>
+		  <br>Vous devez disposer d'au moins PHP7.4 pour poursuivre.
+		  <br><em>Version actuelle : <?= phpversion(); ?></em>
         <?php }else { ?> 
         Vous installez la version <strong><?= DCMS_VERSION; ?></strong> de DiamondCMS.</br>
         <?php if (DCMS_TYPE == "Extended"){ ?>
@@ -155,13 +157,10 @@ foreach ($github_files as $gf){
         <hr>
         <?php if (empty($erreur_exts)){ ?>
         <p><strong>Succès !</strong> Votre installation de PHP est parfaite, l'installation de DiamondCMS peut continuer.</p>
-        <?php if (PHP_VERSION_ID < 50600){ ?>
-            <p><em>Attention toutefois à votre version de PHP qui est antérieure à PHP 7. Songez à la mettre à jour pour des questions de sécurité et de support.</em></p>
-        <?php } ?>
       <?php }else { ?>
         <p><strong>Erreur !</strong> Votre installation de PHP est incomplète : DiamondCMS nécessite les extensions suivantes : <?= $erreur_exts; ?>.</p>
         <p>Vous devez modifier ces droits vous-même : DiamondCMS a déjà essayé et n'a pas la permission de le faire automatiquement.<br>
-        <em>Pour poursuivre, veuillez corriger ces erreur et actualiser la page.</em></p>
+        <em>Pour poursuivre, veuillez corriger ces erreurs et actualiser la page.</em></p>
       <?php } ?>
       <?php if (!$err_htacces){ ?>
         <p><strong>Succès !</strong> Votre serveur WEB est bien compatible, l'installation de DiamondCMS peut continuer.</p>

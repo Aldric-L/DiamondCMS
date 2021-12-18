@@ -140,8 +140,8 @@ foreach ($github_files as $gf){
       <em style="color: #197d62;"><strong>Une documentation pour vous guider est disponible <a href="https://github.com/Aldric-L/DiamondCMS/wiki/Installation">ici.</a></em></strong></h2>
       <div style="margin-left: 15%; margin-right: 15%;">
         <br><hr>
-        <p><?php if (intval(substr(phpversion(), 0, 1)) <= 4 || 
-        ( intval( substr(phpversion(), 0, 1) ) == 5 && intval( substr( phpversion(), 2, 1 ) ) < 6) ){ ?>
+        <p><?php if (intval(substr(phpversion(), 0, 1)) <= 6 || 
+        ( intval( substr(phpversion(), 0, 1) ) == 7 && intval( substr( phpversion(), 2, 1 ) ) < 3) ){ ?>
           <span style="color: red;"> <strong>Impossible de poursuivre l'installation : Version de PHP incompatible</strong> </span>
         <?php }else { ?> 
         Vous installez la version <strong><?= DCMS_VERSION; ?></strong> de DiamondCMS.</br>

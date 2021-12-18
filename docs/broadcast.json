@@ -29,26 +29,34 @@
 },
 "2": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
 },
 "3": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
 },
 "4": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
 },
 "5": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
 },
 "6": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
 },
 "7": {
     "type": "danger",
-    "msg": "Mise à jour critique à installer pour a boutique."
+    "msg": "Mise à jour critique à installer pour la boutique."
+}
+"8": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour la boutique."
+}
+"9": {
+    "type": "danger",
+    "msg": "Mise à jour critique à installer pour le lien avec les serveurs steam."
 }
 }

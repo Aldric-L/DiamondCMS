@@ -18,21 +18,27 @@ Téléchargez seulement ce dossier compressé : https://aldric-l.github.io/Diamo
 ## Documentation
 
 Une documentation est disponible pour vous aider lors de l'installation et de l'utilisation de DiamondCMS.
+**Attention : DiamondCMS nécessite PHP7.4 au moins pour fonctionner.**
 Documentation : https://github.com/Aldric-L/DiamondCMS/wiki
 
 
 *N'hésitez pas à nous contacter par les issues github si besoin ! Une template est disponible pour signaler un bug et pour demander de l'aide.*
 
-Version actuelle : **1.1 Béta - Build F**
+Version actuelle : **1.1 Béta - Build G**
 
 Lien pour accèder aux anciennes versions et aux dossiers de mise à jour (et ainsi accèder aux mises à jour en développement) : https://github.com/Aldric-L/DiamondCMS/tree/master/docs/files
 
 
 **Changelog**
-*1.1 Build F :**
+*1.1 Build G :*
+- Patch de DiamondServerLink qui était défaillant depuis les MAJ de Steam.
+- Ajout de la fonctionnalité d'envoyer des commandes RCON vers les serveurs depuis le panel admin.
+- Ajout d'un log Rcon
+
+*1.1 Build F :*
 - Ajout de la fonctionnalité boutique externe et facilitation de la mise en place de contenus hors CMS
 
-*1.1 Build E :**
+*1.1 Build E :*
 - Patch critique PayPal
 - Patch critique TinyMCE
 - Ajout d'un phpinfo pour faciliter le dépannage

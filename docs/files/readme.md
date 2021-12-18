@@ -2,7 +2,7 @@
 
 ## Mode d'emploi
 
-Bienvenue sur la page consacrée aux installateurs de mise à jour de DiamondCMS. Pour installer la mise à jour que vous cherchez vous devez vous munir de deux informations : le *numéro de version actuel* (vous le trouvez sur la page d'accueil de votre panel admin) et le *numéro de la dernière version* que vous trouvez plus bas. Vous téléchargez alors le fichier zip nommé *"[diamondcms-maj-numéro de votre version]-[numéro de la dernière version].zip"*. Une fois l'archive téléchargée, extrayez là. Vous trouverez les instructions dans le fichier "instructions.txt" fourni dans le dossier que vous avez téléchargé. 
+Bienvenue sur la page consacrée aux installateurs de mise à jour de DiamondCMS. Pour installer la mise à jour que vous cherchez vous devez vous munir de deux informations : le *__numéro de version actuel__* (vous le trouvez sur la page d'accueil de votre panel admin) et le *__numéro de la dernière version__* que vous trouvez plus bas. Vous téléchargez alors le fichier zip nommé *"diamondcms-maj-[numéro de votre version]-[numéro de la dernière version].zip"*. Une fois l'archive téléchargée, extrayez là. Vous trouverez les instructions dans le fichier "instructions.txt" fourni dans le dossier que vous avez téléchargé. 
 
 
 Ne vous inquiétez pas, vous ne perderez pas votre configuration et votre personnalisation. Les mise à jour ne nécessite que quelques minutes. Il est particulièrement important de conserver une version récente du CMS pour se prémunir des failles de sécurité et des problèmes de compatibilité. 

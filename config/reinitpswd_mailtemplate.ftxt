@@ -1,0 +1,6 @@
+<h3 class="text-center" style="text-align: center;"><img src="https://aldric-l.github.io/DiamondCMS/img/logo.png" alt="" /><br /><br />R&eacute;initialisez votre mot de passe<br />sur le site de {SERVER_NAME}</h3>
+<p>&nbsp;</p>
+<p class="text-justify" style="text-align: justify;">Vous recevez ce message car le compte associ&eacute; &agrave; votre adresse email a fait l'objet d'une demande de r&eacute;initialiation de mot de passe sur le site de {SERVER_NAME}. Pour conclure cette op&eacute;ration, veuillez vous rendre sur la page : <a href="{LINK}endReinit/">{LINK}endReinit/</a> et saisir le code ci-dessous.</p>
+<h3 class="text-center" style="text-align: center;">{CODE}</h3>
+<p>&nbsp;</p>
+<p class="text-justify" style="text-align: justify;"><em>Vous n'&ecirc;tes pas &agrave; l'origine de cette action ? Pas de panique, <strong>r&eacute;initialisez quand m&ecirc;me votre mot de passe</strong> comme si vous &eacute;tiez &agrave; l'origine de l'op&eacute;ration, puis changez votre email dans les options de votre compte. En cas de doute, n'hesitez pas &agrave; contacter notre support client.</em></p>

@@ -59,4 +59,8 @@
     "type": "danger",
     "msg": "Mise à jour critique à installer pour le lien avec les serveurs steam."
 }
+"10": {
+    "type": "danger",
+    "msg": "DiamondCMS Alpha v2 est sorti ! Profitez en pour mettre à jour votre système."
+}
 }

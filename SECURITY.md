@@ -4,8 +4,11 @@
 
 | Version     | Supported          |
 | -------     | ------------------ |
+| 2.0 Build X | :white_check_mark: |
 | 1.1 Build X | :white_check_mark: |
 | < 1.1       | :x:                |
+
+Attention : Il est fortement recommandé de passer sur la version 2.0 même si la 1.1 reste supportée, de nombreuses failles potentielles pourrait menacer la sécurité de vos installations.
 
 ## Signaler un problème de sécurité (Reporting a Vulnerability)
 

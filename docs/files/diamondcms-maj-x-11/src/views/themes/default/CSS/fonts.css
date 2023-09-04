@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css2?family=Raleway');
+
+:root {
+   --main-title-fontfamily : "Bree Serif";
+   --main-title-fontfamily-link : "https://fonts.googleapis.com/css2?family=Bree+Serif";
+   --main-text-fontfamily : "Raleway";
+   --main-text-fontfamily-link : "https://fonts.googleapis.com/css2?family=Raleway";
+}

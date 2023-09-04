@@ -28,4 +28,5 @@ Voici l'index des versions :
 - 1.1 Béta Build E - 8 - Déployée (29 mai 2021)
 - 1.1 Béta Build F - 9 - Déployée (24 août 2021)
 - 1.1 Béta Build G - 10 - Déployée (18 décembre 2021) - *__A partir d'ici, les versions de PHP inférieures à 7.4.0 ne sont plus suportées.__*
+- 2.0 Alpha Build A - 11 - Déployée (04 septembre 2023) 
 

@@ -1,5 +1,5 @@
 <?php
-$controleur_def->loadModel('hydratation/userhydrate.class');
+$controleur_def->loadModel('hydratation/userHydrate.class');
 
 if (empty($param[1]) && !isset($_SESSION['user']))
   header('Location: ' . LINK . 'connexion/');

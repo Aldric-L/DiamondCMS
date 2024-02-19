@@ -5,10 +5,14 @@
 //  .JP55555555555555555555555555555555555555555555555Y?Y55PY. 
 // .J55YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY5555555Y?55555PY:
 // :JYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYJ?555555JJ555555PY:        DiamondCMS - Version alpha gratuite
+<<<<<<< Updated upstream
 //  .JP555555555555555555555555555555555555JJ555555JY555555P?.         @version 2.0 (Build A) 01-09-2023
+=======
+//  .JP555555555555555555555555555555555555JJ555555JY555555P?.         @version 2.0 (Build A bis) 19-02-2024
+>>>>>>> Stashed changes
 //    !55555555555555555555555555555555555JY555555?Y5555555!           Développé et maintenu par Aldric L.
 //     ^5P555555555555555YYYYYYYYYYYYYYYY?Y55555Y?555555PY^            Début de la license 2016
-//      :JP5555557JYYYYYY?:             !555555JJ555555PJ.             @copyright 2016-2018-2020-2021-2022-2023
+//      :JP5555557JYYYYYY?:             !555555JJ555555PJ.             @copyright 2016-2018-2020-2021-2022-2023-2024
 //        7P555555?YP5555PY:           !555555JY555555P7       
 //         ~5P55555JJ55555P5!        .?P55555?Y55555P5~        
 //          :YP55555Y?555555P?.     .JP5555Y?555555PY:                 Version supportée de DiamondCore : 4.0
@@ -224,7 +228,7 @@
     if (isset($param[0]) && isset($param[1]) && !empty($param[0]) && !empty($param[1]) && $param[0] == "installation" && $param[1] == "testhtaccess"){
       die ('Htaccess fonctionnel');
     }
-    if (intval($Serveur_Config['install_step']) <= 4){
+    if (isset($Serveur_Config['install_step']) && !empty($Serveur_Config['install_step']) && intval($Serveur_Config['install_step']) <= 4){
       require_once(ROOT . 'installation/etape' . $Serveur_Config['install_step'] . '.php');
     }
     exit;

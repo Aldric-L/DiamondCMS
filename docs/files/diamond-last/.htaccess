@@ -1,0 +1,13 @@
+<IfModule rewrite_module>
+RewriteEngine on
+#RewriteRule ^([a-zA-Z0-9\-\_\~\ \/]*)$ index.php?p=$1 
+RewriteRule ^(\X+)$ index.php?p=$1 [END]
+
+SetEnv ENV_HTACCESS_ALLOWED true
+</IfModule>
+
+<IfModule !rewrite_module>
+SetEnv ENV_HTACCESS_ALLOWED false
+</IfModule>
+
+AddDefaultCharset UTF-8

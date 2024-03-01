@@ -5,11 +5,7 @@
 //  .JP55555555555555555555555555555555555555555555555Y?Y55PY. 
 // .J55YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY5555555Y?55555PY:
 // :JYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYJ?555555JJ555555PY:        DiamondCMS - Version alpha gratuite
-<<<<<<< Updated upstream
-//  .JP555555555555555555555555555555555555JJ555555JY555555P?.         @version 2.0 (Build A) 01-09-2023
-=======
-//  .JP555555555555555555555555555555555555JJ555555JY555555P?.         @version 2.0 (Build A bis) 19-02-2024
->>>>>>> Stashed changes
+//  .JP555555555555555555555555555555555555JJ555555JY555555P?.         @version 2.0 (Build A bis) 01-03-2024
 //    !55555555555555555555555555555555555JY555555?Y5555555!           Développé et maintenu par Aldric L.
 //     ^5P555555555555555YYYYYYYYYYYYYYYY?Y55555Y?555555PY^            Début de la license 2016
 //      :JP5555557JYYYYYY?:             !555555JJ555555PJ.             @copyright 2016-2018-2020-2021-2022-2023-2024
@@ -199,7 +195,7 @@
   $Serveur_Config = cleanIniTypes(parse_ini_file(ROOT . "config/config.ini", true));
 
   // On vérifie que le site n'a pas changé d'adresse, si c'est le cas on purge le cache par sécurité
-  if (isset($Serveur_Config['last_url']) && $Serveur_Config['last_url'] != "" && $Serveur_Config['last_url'] != null){
+  if (isset($Serveur_Config['is_install']) && $Serveur_Config['is_install'] == true && isset($Serveur_Config['last_url']) && $Serveur_Config['last_url'] != "" && $Serveur_Config['last_url'] != null){
     if ($Serveur_Config['last_url'] != LINK){
       if (file_exists(ROOT . 'tmp/') && $dir = opendir(ROOT . 'tmp/')) {
         while($file = readdir($dir)) {
@@ -214,7 +210,7 @@
         $ini = new ini (ROOT . "config/config.ini", 'Configuration DiamondCMS'); $ini->ajouter_array($SConfig); $ini->ecrire(true);
       }
     }
-  }else {
+  }else if (isset($Serveur_Config['is_install']) && $Serveur_Config['is_install'] == true) {
     if (!empty($SConfig = cleanIniTypes(parse_ini_file(ROOT . "config/config.ini", true)))){
       // On fait un array_merge pour insérer en haut du tableau à cause d'un bug sur certains systèmes de la classe INI
       $SConfig = array_merge(["last_url" => LINK], $SConfig);
@@ -228,8 +224,10 @@
     if (isset($param[0]) && isset($param[1]) && !empty($param[0]) && !empty($param[1]) && $param[0] == "installation" && $param[1] == "testhtaccess"){
       die ('Htaccess fonctionnel');
     }
-    if (isset($Serveur_Config['install_step']) && !empty($Serveur_Config['install_step']) && intval($Serveur_Config['install_step']) <= 4){
-      require_once(ROOT . 'installation/etape' . $Serveur_Config['install_step'] . '.php');
+    if (isset($Serveur_Config['install_step']) && !empty($Serveur_Config['install_step']) && intval($Serveur_Config['install_step']) <= 4 && intval($Serveur_Config['install_step']) > 0){
+      require_once(ROOT . 'installation/etape' . $Serveur_Config['install_step'] . '.php'); 
+    }else {
+        require_once(ROOT . 'installation/etape0.php'); 
     }
     exit;
   }else if (@file_exists(ROOT . "outdated.dcms")){
@@ -405,7 +403,7 @@
         //On charge celui du thème
         require_once(ROOT . 'views/themes/'. $Serveur_Config['theme'] . "/src/AdminBuilder/init.php");
 
-
+19-02
         //Nous somme bien en situation d'administration
         //Avant d'appeler la page d'administration, on verifie que l'utilisateur est bien admin
         if (isset($_SESSION['user']) && $_SESSION['user'] instanceof User && $_SESSION['user']->isAdmin()){

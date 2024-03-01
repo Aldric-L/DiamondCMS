@@ -1,8 +1,0 @@
-[
-    ["fas fa-fw fa-server","Serveurs de jeu",
-        [
-            ["","Assistant","{LINK}Diamond-ServerLink/assistant/"],
-            ["","Configuration générale","{LINK}Diamond-ServerLink/config/"]
-        ],
-    5]
-]

@@ -214,7 +214,10 @@ class theme extends DiamondAPI {
      * @access private
      */
     private function loadthemeconf(){
-        $theme_name = $this->getIniConfig(ROOT . "config/config.ini")['theme'];
+        $theme_name = $this->getIniConfig(ROOT . "config/config.ini");
+        if (empty($theme_name) OR !isset($theme_name['theme']))
+            throw new Exception("Unable to find current theme", 709);
+        $theme_name = $theme_name['theme'];
         if ($dir = opendir(ROOT . 'views/themes/')) {
             while($file = readdir($dir)) {
               //On ouvre les sous-dossiers

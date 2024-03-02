@@ -25,11 +25,16 @@ class DiamondImgChooser {
         this.format = "standard";
 
         if (typeof this.options.where_is_dic != "undefined" && typeof this.options.where_is_dic == "string"){
-            $( "body" ).append('<div id="dic_loader"></div>');
-            var DIC = this;
-            $( "#dic_loader" ).load( this.options.where_is_dic + "dic.html", function(e){
+            if ($("#dic_loader").length == 0){
+                $( "body" ).append('<div id="dic_loader"></div>');
+                var DIC = this;
+                $( "#dic_loader" ).load( this.options.where_is_dic + "dic.html", function(e){
+                    DIC.load();
+                } );
+            }else {
                 DIC.load();
-            } );
+            }
+                
         }else {
             DIC.load();
         }

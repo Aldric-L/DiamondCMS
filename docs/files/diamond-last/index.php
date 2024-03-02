@@ -404,7 +404,7 @@
         require_once(ROOT . 'views/themes/'. $Serveur_Config['theme'] . "/src/AdminBuilder/init.php");
 
 
-        //Nous somme bien en situation d'administration
+        //Nous sommes bien en situation d'administration
         //Avant d'appeler la page d'administration, on verifie que l'utilisateur est bien admin
         if (isset($_SESSION['user']) && $_SESSION['user'] instanceof User && $_SESSION['user']->isAdmin()){
           //l'utilisateur est bien admin

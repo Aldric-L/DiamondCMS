@@ -285,7 +285,7 @@ class comptes extends DiamondAPI {
                 //On place un cookie dans lequel on inscrit le salt, un underscore, et le pseudo de connexion, le tout est hashé pour protéger le système
                 //Le système de cookie est modernisé en 2022 pour intégrer l'attribut SameSite bien que la nouvelle syntaxe interdise php<7.4
                 $arr_cookie_options = array (
-                    'expires' => time() + 15*24*3600,
+                    'expires' => (int)time() + (int)15*24*3600,
                     'path' => WEBROOT,
                     'domain' => '.' . $_SERVER['HTTP_HOST'],
                     'secure' => false,    

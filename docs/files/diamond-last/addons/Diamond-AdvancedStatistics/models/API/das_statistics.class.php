@@ -19,7 +19,7 @@ class das_statistics extends DiamondAPI {
         }
         $this->das_config = cleanIniTypes(parse_ini_file(ROOT . 'addons/Diamond-AdvancedStatistics/config.ini', true));
         $this->params_needed = array(
-            "get_registerhit" => array("internal_path"),   
+            "get_registerhit" => array(),   
             "get_totalHitsByDay" => array(),
             "get_bestReferer" => array(),
             "get_bestPages" => array(),
@@ -30,6 +30,8 @@ class das_statistics extends DiamondAPI {
 
 
     public function get_registerhit(){
+        if (!isset($this->args['internal_path']))
+            $this->args['internal_path'] = "";
         try {
             DiamondAdvancedStatistics\CoreStats::newHit($this->getPDO(), $this->args['internal_path'], (isset($_SESSION['user']) && $_SESSION['user'] instanceof \User) ? $_SESSION['user']->getId() : null,
             isset($this->args['HTTP_USER_AGENT']) ? $this->args['HTTP_USER_AGENT'] : null, isset($this->args['HTTP_REFERER']) ? $this->args['HTTP_REFERER'] : null, isset($this->args['REQUEST_TIME']) ? $this->args['REQUEST_TIME'] : null);
